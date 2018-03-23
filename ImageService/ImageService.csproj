@@ -46,11 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\NewFileCommand.cs" />
     <Compile Include="Controller\Handlers\DirectoryHandler.cs" />
     <Compile Include="Controller\Handlers\IDirectoryHandler.cs" />
     <Compile Include="Controller\IImageController.cs" />
     <Compile Include="Controller\ImageController.cs" />
-    <Compile Include="Logging\ILoggingService.cs" />
     <Compile Include="ImageService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -82,6 +82,15 @@
       <DependentUpon>ImageServiceProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ImageService.Infrastructure\ImageService.Infrastructure.csproj">
+      <Project>{5662b5c6-023a-4c2c-a95a-1966b5fb0068}</Project>
+      <Name>ImageService.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageService.Logging\ImageService.Logging.csproj">
+      <Project>{b537e1b0-fa9b-4692-966f-765044f485d7}</Project>
+      <Name>ImageService.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

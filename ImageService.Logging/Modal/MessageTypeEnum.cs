@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService
+namespace ImageService.Logging.Modal
 {
-    public interface ILoggingService
+    public enum MessageTypeEnum : int
     {
-        //TODO: Fill
+        INFO,
+        WARNING,
+        FAIL
     }
 }

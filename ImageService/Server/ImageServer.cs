@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageService.Controller;
+using ImageService.Logging;
 using ImageService.Modal.Event;
 
 namespace ImageService.Server
