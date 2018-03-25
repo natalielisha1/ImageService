@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using ImageService.Controller;
 using ImageService.Modal;
 using ImageService.Server;
+using ImageService.Logging;
+using ImageService.Logging.Modal;
 
 namespace ImageService
 {
@@ -41,8 +43,6 @@ namespace ImageService
     {
         //The image server
         private ImageServer m_imageServer;
-        private IImageServiceModal modal;
-        private IImageController controller;
         private ILoggingService logging;
 
         [DllImport("advapi32.dll", SetLastError = true)]
@@ -63,6 +63,11 @@ namespace ImageService
             eventLog.Log = "ImageServiceLog";
         }
 
+        void Logging_MessageRecieved(object sender, MessageRecievedEventArgs e)
+        {
+            eventLog.WriteEntry(e.Message, (EventLogEntryType) e.Status);
+        }
+
         protected override void OnStart(string[] args)
         {
             eventLog.WriteEntry("Start Pending");
@@ -71,6 +76,10 @@ namespace ImageService
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
             serviceStatus.dwWaitHint = 100000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
+
+            logging = new LoggingService();
+            logging.MessageRecieved += Logging_MessageRecieved;
+            m_imageServer = new ImageServer(logging);
 
             // Update the service state to Running.  
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;
