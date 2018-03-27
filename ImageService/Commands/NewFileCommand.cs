@@ -20,7 +20,7 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            // The String Will Return the New Path if result = true, and will return the error message
+            // The string will return the new path if result = true, otherwise, will return the error message
             //TODO: Fill
             throw new NotImplementedException();
         }

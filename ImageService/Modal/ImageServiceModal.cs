@@ -13,8 +13,8 @@ namespace ImageService.Modal
         private string m_OutputFolder;
         //The size of the thumbnail
         private int m_thumbnailSize;
-
         #endregion
+
         public string AddFile(string path, out bool result)
         {
             //TODO: Fill
