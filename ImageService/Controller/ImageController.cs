@@ -14,7 +14,6 @@ namespace ImageService.Controller
     {
         //The modal object
         private IImageServiceModal m_modal;
-
         private Dictionary<int, ICommand> commands;
 
         public ImageController(IImageServiceModal modal)
@@ -23,15 +22,20 @@ namespace ImageService.Controller
             m_modal = modal;
             commands = new Dictionary<int, ICommand>()
             {
-                // For Now will contain NEW_FILE_COMMAND
-                //TODO: Fill
+                { 1, new NewFileCommand(m_modal)}
             };
         }
 
         public string ExecuteCommand(int commandID, string[] args, out bool result)
         {
-            //TODO: Fill
-            throw new NotImplementedException();
+            if (!commands.ContainsKey(commandID))
+            {
+                result = false;
+                return "Command not found";
+            }
+            ICommand command = commands[commandID];
+            result = true;
+            return command.Execute(args, out result);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ImageService.Modal
             {
                 try
                 {
-                    System.IO.Directory.CreateDirectory(@"c:\OutputDir");
+                    System.IO.Directory.CreateDirectory(@"C:\OutputDir");
                 }
                 catch(IOException)
                 {
