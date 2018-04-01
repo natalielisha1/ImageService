@@ -9,7 +9,12 @@ namespace ImageService.Commands
 {
     public interface ICommand
     {
-        //The function that will execute the command
+        /// <summary>
+        /// The Function Executes the command
+        /// </summary>
+        /// <param name="args">The arguments related to the command</param>
+        /// <param name="result">The boolean result of the action</param>
+        /// <returns>The string will return the new path if result = true, otherwise, will return the error message</returns>
         string Execute(string[] args, out bool result);
     }
 }

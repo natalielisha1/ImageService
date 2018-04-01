@@ -20,9 +20,10 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            // The string will return the new path if result = true, otherwise, will return the error message
-            //TODO: Fill
-            throw new NotImplementedException();
+            //my assumption is that the args parameter conatins only the path in this command's case
+            ImageServiceModal imgService = new ImageServiceModal();
+            string path = args[0];
+            return imgService.AddFile(path, out result);
         }
     }
 }
