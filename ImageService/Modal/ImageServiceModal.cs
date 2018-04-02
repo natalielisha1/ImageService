@@ -57,7 +57,7 @@ namespace ImageService.Modal
             if (!System.IO.Directory.Exists(outputDir + @"\" + year))
             {
                 //creating new folder for year and month
-                if (!(createFolder(year) && createFolder(year, month)))
+                if (!(CreateFolder(year) && CreateFolder(year, month)))
                 {
                     result = false;
                     msg = @"creating month/year folder failed";
@@ -69,7 +69,7 @@ namespace ImageService.Modal
                 if (!System.IO.Directory.Exists(outputDir + @"\" + year + @"\" + month))
                 {
                     //creating new folder for month
-                    if (!createFolder(year, month))
+                    if (!CreateFolder(year, month))
                     {
                         result = false;
                         msg = @"creating month folder failed";
@@ -91,8 +91,12 @@ namespace ImageService.Modal
             //creating a smaller copy in thumbnails
             try
             {
-                //TO-DO: create a thumbnail version and move in into Thumbnails
-                //Directory.Move(path, outputDir + @"\Thumbnails");
+                string strSize = System.Configuration.ConfigurationManager.AppSettings["ThumbnailSize"];
+                int size = Int32.Parse(strSize);
+                Image newImage = Image.FromFile(path);
+                Bitmap smallerImage = new Bitmap(newImage, new Size(size, size));
+                string fileName = Path.GetFileName(path);
+                smallerImage.Save(outputDir + @"\Thumbnails\" + fileName);
             }
             catch (IOException)
             {
@@ -106,7 +110,7 @@ namespace ImageService.Modal
             return msg;
         }
 
-        public bool createFolder(string year)
+        public bool CreateFolder(string year)
         {
             //create a folder of the specified year
             bool succeed = false;
@@ -122,7 +126,7 @@ namespace ImageService.Modal
             return succeed;
         }
 
-        public bool createFolder(string year, string month)
+        public bool CreateFolder(string year, string month)
         {
             //create a folder of the specified month in the folder of the specified year
             bool succeed = false;
