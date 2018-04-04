@@ -23,13 +23,15 @@ namespace ImageService.Modal
         public string AddFile(string path, out bool result)
         {
             string msg;
-            string outputDir = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
+            //string outputDir = System.Configuration.ConfigurationManager.AppSettings["OutputDir"]; //There is a member for that
+            m_OutputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
             ///check if outputdir exists, if not create one
-            if (!System.IO.Directory.Exists(outputDir))
+            if (!System.IO.Directory.Exists(m_OutputFolder))
             {
                 try
                 {
-                    System.IO.Directory.CreateDirectory(@"C:\OutputDir");
+                    //System.IO.Directory.CreateDirectory(@"C:\OutputDir"); //We need the outputdir to be the one from AppConfig (not C:\Outputdir)
+                    System.IO.Directory.CreateDirectory(m_OutputFolder);
                 }
                 catch(IOException)
                 {
@@ -38,11 +40,12 @@ namespace ImageService.Modal
                     return msg;
                 }
             }
-            if (!System.IO.Directory.Exists(outputDir + @"\Thumbnails"))
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\Thumbnails"))
             {
                 try
                 {
-                    System.IO.Directory.CreateDirectory(@"c:\OutputDir\Thumbnails");
+                    //System.IO.Directory.CreateDirectory(@"c:\OutputDir\Thumbnails");
+                    System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails"); //We need the outputdir to be the one from AppConfig (not C:\Outputdir)
                 }
                 catch (IOException)
                 {
@@ -54,7 +57,7 @@ namespace ImageService.Modal
             DateTime date = GetDateTakenFromImage(path);
             string year = date.Year.ToString();
             string month = date.Month.ToString();
-            if (!System.IO.Directory.Exists(outputDir + @"\" + year))
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\" + year))
             {
                 //creating new folder for year and month
                 if (!(CreateFolder(year) && CreateFolder(year, month)))
@@ -66,7 +69,7 @@ namespace ImageService.Modal
             }
             else
             {
-                if (!System.IO.Directory.Exists(outputDir + @"\" + year + @"\" + month))
+                if (!System.IO.Directory.Exists(m_OutputFolder + @"\" + year + @"\" + month))
                 {
                     //creating new folder for month
                     if (!CreateFolder(year, month))
@@ -80,7 +83,7 @@ namespace ImageService.Modal
             //moving the image into the file
             try
             {
-                Directory.Move(path, outputDir + @"\" + year + @"\" + month);
+                Directory.Move(path, m_OutputFolder + @"\" + year + @"\" + month);
             }
             catch(IOException)
             {
@@ -92,11 +95,12 @@ namespace ImageService.Modal
             try
             {
                 string strSize = System.Configuration.ConfigurationManager.AppSettings["ThumbnailSize"];
-                int size = Int32.Parse(strSize);
+                //int size = Int32.Parse(strSize); //There is a member for that
+                m_thumbnailSize = Int32.Parse(strSize);
                 Image newImage = Image.FromFile(path);
-                Bitmap smallerImage = new Bitmap(newImage, new Size(size, size));
+                Bitmap smallerImage = new Bitmap(newImage, new Size(m_thumbnailSize, m_thumbnailSize));
                 string fileName = Path.GetFileName(path);
-                smallerImage.Save(outputDir + @"\Thumbnails\" + fileName);
+                smallerImage.Save(m_OutputFolder + @"\Thumbnails\" + fileName);
             }
             catch (IOException)
             {
@@ -116,7 +120,7 @@ namespace ImageService.Modal
             bool succeed = false;
             try
             {
-                System.IO.Directory.CreateDirectory(@"c:\OutputDir\" + year);
+                System.IO.Directory.CreateDirectory(m_OutputFolder + @"\" + year);
                 succeed = true;
             }
             catch(IOException)
@@ -132,7 +136,7 @@ namespace ImageService.Modal
             bool succeed = false;
             try
             {
-                System.IO.Directory.CreateDirectory(@"c:\OutputDir\" + year + @"\" + month);
+                System.IO.Directory.CreateDirectory(m_OutputFolder + @"\" + year + @"\" + month);
                 succeed = true;
             }
             catch (IOException)

@@ -21,9 +21,9 @@ namespace ImageService.Commands
         public string Execute(string[] args, out bool result)
         {
             //my assumption is that the args parameter conatins only the path in this command's case
-            ImageServiceModal imgService = new ImageServiceModal();
+            //ImageServiceModal imgService = new ImageServiceModal(); //We got the modal already
             string path = args[0];
-            return imgService.AddFile(path, out result);
+            return m_modal.AddFile(path, out result);
         }
     }
 }

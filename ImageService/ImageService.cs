@@ -53,14 +53,16 @@ namespace ImageService
             InitializeComponent();
             eventLog = new System.Diagnostics.EventLog();
 
-            //TODO: Replace with AppConfig
-            if (!System.Diagnostics.EventLog.SourceExists("ImageServiceSource"))
+            string sourceName = System.Configuration.ConfigurationManager.AppSettings["SourceName"];
+            string logName = System.Configuration.ConfigurationManager.AppSettings["LogName"];
+            
+            if (!System.Diagnostics.EventLog.SourceExists(sourceName))
             {
                 System.Diagnostics.EventLog.CreateEventSource(
-                    "ImageServiceSource", "ImageServiceLog");
+                    sourceName, logName);
             }
-            eventLog.Source = "ImageServiceSource";
-            eventLog.Log = "ImageServiceLog";
+            eventLog.Source = sourceName;
+            eventLog.Log = logName;
         }
 
         void Logging_MessageRecieved(object sender, MessageRecievedEventArgs e)
@@ -79,7 +81,9 @@ namespace ImageService
 
             logging = new LoggingService();
             logging.MessageRecieved += Logging_MessageRecieved;
+
             m_imageServer = new ImageServer(logging);
+            m_imageServer.StartServer();
 
             // Update the service state to Running.  
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;

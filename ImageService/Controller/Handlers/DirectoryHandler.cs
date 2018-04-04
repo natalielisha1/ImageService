@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageService.Modal.Event;
 using ImageService.Logging;
+using ImageService.Logging.Modal;
 using ImageService.Infrastructure.Enums;
 
 namespace ImageService.Controller.Handlers
@@ -36,8 +37,11 @@ namespace ImageService.Controller.Handlers
 
         public void OnCommandRecieved(object sender, CommandRecievedEventArgs e)
         {
-            //TODO: Fill
-            throw new NotImplementedException();
+            //TODO: Check if that's correct
+            if (e.CommandID == (int) CommandEnum.CloseCommand)
+            {
+                CloseHandler(e.Args[0]);
+            }
         }
 
         public void StartHandleDirectory(string dirPath)
@@ -57,7 +61,11 @@ namespace ImageService.Controller.Handlers
             if (m_fileExtensions.Any(filePath.Contains))
             {
                 bool result;
-                m_controller.ExecuteCommand((int) CommandEnum.NewFileCommand, new string[]{ filePath }, out result);
+                string message = m_controller.ExecuteCommand((int) CommandEnum.NewFileCommand, new string[]{ filePath }, out result);
+                if (result == false)
+                {
+                    m_logging.Log(message, MessageTypeEnum.FAIL);
+                }
             }
         }
 

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using ImageService.Controller;
 using ImageService.Controller.Handlers;
 using ImageService.Logging;
+using ImageService.Logging.Modal;
 using ImageService.Modal.Event;
 using ImageService.Modal;
 using ImageService.Commands;
+using ImageService.Infrastructure.Enums;
 
 namespace ImageService.Server
 {
@@ -33,6 +35,16 @@ namespace ImageService.Server
             m_controller = new ImageController(modal);
         }
 
+        public void StartServer()
+        {
+            string paths = System.Configuration.ConfigurationManager.AppSettings["Handler"];
+            string[] pathArr = paths.Split(new char[] { ';' });
+            foreach (string path in pathArr)
+            {
+                CreateHandler(path);
+            }
+        }
+
         public void CreateHandler(string dir)
         {
             IDirectoryHandler handler = new DirectoryHandler(dir, m_controller, m_logging);
@@ -45,17 +57,17 @@ namespace ImageService.Server
         {
             if (sender is IDirectoryHandler)
             {
-                IDirectoryHandler handler = (IDirectoryHandler)sender;
+                IDirectoryHandler handler = (IDirectoryHandler) sender;
                 CommandRecieved -= handler.OnCommandRecieved;
                 handler.DirectoryClose -= OnDirectoryClose;
-                //TODO: Check if logger should be invoked here
+                m_logging.Log(e.DirectoryPath + @": " + e.Message, MessageTypeEnum.INFO);
             }
         }
 
         public void SendCommand()
         {
-            //TODO: Fill
-            //CommandRecieved.Invoke(this, )
+            //TODO: Maybe replace
+            CommandRecieved.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand, new string[] { "Server close request" }, "*"));
         }
     }
 }
