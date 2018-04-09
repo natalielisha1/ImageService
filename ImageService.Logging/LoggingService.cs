@@ -13,7 +13,12 @@ namespace ImageService.Logging
 
         public void Log(string message, MessageTypeEnum type)
         {
-            //TODO: Fill
+            MessageRecievedEventArgs log = new MessageRecievedEventArgs
+            {
+                Message = message,
+                Status = type
+            };
+            MessageRecieved.Invoke(this, log);
         }
     }
 }

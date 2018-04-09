@@ -11,7 +11,11 @@ namespace ImageService.Logging
     {
         event EventHandler<MessageRecievedEventArgs> MessageRecieved;
 
-        // Logging the message
+        /// <summary>
+        /// The Function is logging the given message
+        /// </summary>
+        /// <param name="message">The message we want to pass</param>
+        /// <param name="type">The type of message (enum)</param>
         void Log(string message, MessageTypeEnum type);
     }
 }
