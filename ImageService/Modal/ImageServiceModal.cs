@@ -81,9 +81,10 @@ namespace ImageService.Modal
                 }
             }
             //moving the image into the file
+            string newFileName = GetAvailableFileName(Path.GetFileName(path), m_OutputFolder + @"\" + year + @"\" + month);
             try
             {
-                Directory.Move(path, m_OutputFolder + @"\" + year + @"\" + month);
+                File.Move(path, m_OutputFolder + @"\" + year + @"\" + month + @"\" + newFileName);
             }
             catch(IOException)
             {
@@ -91,6 +92,8 @@ namespace ImageService.Modal
                 msg = @"moving image failed";
                 return msg;
             }
+            //if i'm here, path changed
+            path = m_OutputFolder + @"\" + year + @"\" + month + @"\" + newFileName;
             //creating a smaller copy in thumbnails
             try
             {
@@ -99,8 +102,7 @@ namespace ImageService.Modal
                 m_thumbnailSize = Int32.Parse(strSize);
                 Image newImage = Image.FromFile(path);
                 Bitmap smallerImage = new Bitmap(newImage, new Size(m_thumbnailSize, m_thumbnailSize));
-                string fileName = Path.GetFileName(path);
-                smallerImage.Save(m_OutputFolder + @"\Thumbnails\" + fileName);
+                smallerImage.Save(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + newFileName);
             }
             catch (IOException)
             {
@@ -114,6 +116,24 @@ namespace ImageService.Modal
             return msg;
         }
 
+        public string GetAvailableFileName(string original, string folder)
+        {
+            if (File.Exists(folder + @"\" + original))
+            {
+                int index = 0;
+                string name = Path.GetFileNameWithoutExtension(original);
+                string ext = Path.GetExtension(original);
+                while (File.Exists(folder + @"\" + name + @"_" + index.ToString() + ext))
+                {
+                    ++index;
+                }
+                return name + @"_" + index.ToString() + ext;
+            } else
+            {
+                return original;
+            }
+        }
+
         public bool CreateFolder(string year)
         {
             //create a folder of the specified year
@@ -121,6 +141,7 @@ namespace ImageService.Modal
             try
             {
                 System.IO.Directory.CreateDirectory(m_OutputFolder + @"\" + year);
+                System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails\" + year);
                 succeed = true;
             }
             catch(IOException)
@@ -137,6 +158,7 @@ namespace ImageService.Modal
             try
             {
                 System.IO.Directory.CreateDirectory(m_OutputFolder + @"\" + year + @"\" + month);
+                System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month);
                 succeed = true;
             }
             catch (IOException)
@@ -151,9 +173,17 @@ namespace ImageService.Modal
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (Image myImage = Image.FromStream(fs, false, false))
             {
-                PropertyItem propItem = myImage.GetPropertyItem(36867);
-                string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
-                return DateTime.Parse(dateTaken);
+                try
+                {
+                    PropertyItem propItem = myImage.GetPropertyItem(36867);
+                    string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                    return DateTime.Parse(dateTaken);
+                }
+                catch (ArgumentException)
+                {
+                    //There is no date taken, so we'll use last-modified date instead
+                    return System.IO.File.GetLastWriteTime(path);
+                }
             }
         }
     }
