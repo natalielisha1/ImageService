@@ -28,6 +28,10 @@ namespace ImageService.Server
         public event EventHandler<CommandRecievedEventArgs> CommandRecieved;
         #endregion
 
+        /// <summary>
+        /// Constructor for ImageServer class
+        /// </summary>
+        /// <param name="logging">the logging service that will be connected to the image service</param>
         public ImageServer(ILoggingService logging)
         {
             m_logging = logging;
@@ -35,6 +39,9 @@ namespace ImageService.Server
             m_controller = new ImageController(modal);
         }
 
+        /// <summary>
+        /// The Function starts the service
+        /// </summary>
         public void StartServer()
         {
             string paths = System.Configuration.ConfigurationManager.AppSettings["Handler"];
@@ -45,6 +52,10 @@ namespace ImageService.Server
             }
         }
 
+        /// <summary>
+        /// The Function creates a handler
+        /// </summary>
+        /// <param name="dir">The directory of the file we want to handle</param>
         public void CreateHandler(string dir)
         {
             IDirectoryHandler handler = new DirectoryHandler(dir, m_controller, m_logging);
@@ -53,6 +64,11 @@ namespace ImageService.Server
             handler.StartHandleDirectory(dir);
         }
 
+        /// <summary>
+        /// The Function closes the handler of a file
+        /// </summary>
+        /// <param name="sender">The sender of the close command</param>
+        /// <param name="e">The arguments that came with the command (close directory)</param>
         private void OnDirectoryClose(object sender, DirectoryCloseEventArgs e)
         {
             if (sender is IDirectoryHandler)
@@ -64,6 +80,9 @@ namespace ImageService.Server
             }
         }
 
+        /// <summary>
+        /// The Function sends CLOSE command (requesting to close the server)
+        /// </summary>
         public void SendCommand()
         {
             //TODO: Maybe replace

@@ -27,17 +27,21 @@ namespace ImageService.Controller.Handlers
 
         public event EventHandler<DirectoryCloseEventArgs> DirectoryClose;
 
+        /// <summary>
+        /// Constructor for Directory Handler class
+        /// </summary>
+        /// <param name="path">The path of the directory we would handle</param>
+        /// <param name="controller">The controller that will be conected to this handler</param>
+        /// <param name="logging">The looging service we will use for handling</param>
         public DirectoryHandler(string path, IImageController controller, ILoggingService logging)
         {
             m_path = path;
             m_controller = controller;
             m_logging = logging;
-            //TODO: Fill
         }
 
         public void OnCommandRecieved(object sender, CommandRecievedEventArgs e)
         {
-            //TODO: Check if that's correct
             if (e.CommandID == (int) CommandEnum.CloseCommand)
             {
                 CloseHandler(e.Args[0]);
@@ -53,6 +57,11 @@ namespace ImageService.Controller.Handlers
             m_dirWatcher.EnableRaisingEvents = true;
         }
 
+        /// <summary>
+        /// The function handles creating a new file
+        /// </summary>
+        /// <param name="sender">The sender of the command</param>
+        /// <param name="e">The arguments that are given with the command</param>
         private void OnFileCreated(object sender, FileSystemEventArgs e)
         {
             //Check file extension
@@ -71,6 +80,10 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        /// <summary>
+        /// The function closes the handler
+        /// </summary>
+        /// <param name="logMessage">the message that will be shown when closing the handler</param>
         public void CloseHandler(string logMessage)
         {
             m_dirWatcher.EnableRaisingEvents = false;
@@ -79,6 +92,10 @@ namespace ImageService.Controller.Handlers
             DirectoryClose.Invoke(this, new DirectoryCloseEventArgs(m_path, logMessage));
         }
 
+        /// <summary>
+        /// The function waits for the file to unlock
+        /// </summary>
+        /// <param name="file">the file we would like to wait for</param>
         public void WaitForFileUnlock(string file)
         {
             while (true)

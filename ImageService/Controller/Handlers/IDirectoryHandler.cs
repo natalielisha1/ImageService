@@ -12,10 +12,18 @@ namespace ImageService.Controller.Handlers
         //The event that notifies that the directory is being closed
         event EventHandler<DirectoryCloseEventArgs> DirectoryClose;
 
-        //The function recieves the directory to handle
+        /// <summary>
+        /// The function is handling the given directory 
+        /// </summary>
+        /// <param name="dirPath">The directory to handle</param>
         void StartHandleDirectory(string dirPath);
 
-        //The event that will be activated upon a new command
+        /// <summary>
+        /// The function is handling the command according to the
+        /// given sender and event arguments
+        /// </summary>
+        /// <param name="sender">The sender of the command</param>
+        /// <param name="e">The arguments that are given with the command</param>
         void OnCommandRecieved(object sender, CommandRecievedEventArgs e);
     }
 }

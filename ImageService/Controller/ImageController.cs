@@ -16,6 +16,10 @@ namespace ImageService.Controller
         private IImageServiceModal m_modal;
         private Dictionary<int, ICommand> commands;
 
+        /// <summary>
+        /// Constructor for ImageController class
+        /// </summary>
+        /// <param name="modal">The modal of the service</param>
         public ImageController(IImageServiceModal modal)
         {
             //Storing the modal of the system

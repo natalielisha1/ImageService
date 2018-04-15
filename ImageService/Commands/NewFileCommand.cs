@@ -12,6 +12,10 @@ namespace ImageService.Commands
     {
         private IImageServiceModal m_modal;
 
+        /// <summary>
+        /// Constructor for NewFileCommand class
+        /// </summary>
+        /// <param name="modal">an Image Service Modal instance</param>
         public NewFileCommand(IImageServiceModal modal)
         {
             //Storing the modal
@@ -20,8 +24,6 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            //my assumption is that the args parameter conatins only the path in this command's case
-            //ImageServiceModal imgService = new ImageServiceModal(); //We got the modal already
             string path = args[0];
             return m_modal.AddFile(path, out result);
         }

@@ -16,6 +16,12 @@ namespace ImageService.Modal.Event
         //The request's directory
         public string RequestDirPath { get; set; }
 
+        /// <summary>
+        /// Constructor for CommandRecievedEventArgs class
+        /// </summary>
+        /// <param name="id">The id of the command</param>
+        /// <param name="args">The arguments that came with the command</param>
+        /// <param name="path">The Path of the requested directory</param>
         public CommandRecievedEventArgs(int id, string[] args, string path)
         {
             CommandID = id;

@@ -116,6 +116,12 @@ namespace ImageService.Modal
             return msg;
         }
 
+        /// <summary>
+        /// The Function returns an available file name
+        /// </summary>
+        /// <param name="original">The original file name</param>
+        /// <param name="folder">The folder that will contain the file</param>
+        /// <returns>file name</returns>
         public string GetAvailableFileName(string original, string folder)
         {
             if (File.Exists(folder + @"\" + original))
@@ -168,6 +174,12 @@ namespace ImageService.Modal
             return succeed;
         }
 
+        /// <summary>
+        /// The function returns the date that the image was taken from
+        /// </summary>
+        /// <param name="path">The Path of the Image</param>
+        /// <returns>DateTime object</returns>
+        ///
         public static DateTime GetDateTakenFromImage(string path)
         {
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
