@@ -31,12 +31,14 @@ namespace ImageService.Modal
             {
                 try
                 {
+                    //create a hidden outputDir
                     DirectoryInfo dirInfo = System.IO.Directory.CreateDirectory(m_OutputFolder);
                     dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
                 }
                 catch(IOException)
                 {
+                    //if failed, return error message
                     result = false;
                     msg = @"creating OutputDir directory failed";
                     return msg;
@@ -46,6 +48,7 @@ namespace ImageService.Modal
             {
                 try
                 {
+                    //create thumbnails
                     System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails");
                 }
                 catch (IOException)
@@ -85,6 +88,7 @@ namespace ImageService.Modal
             string newFileName = GetAvailableFileName(Path.GetFileName(path), m_OutputFolder + @"\" + year + @"\" + month);
             try
             {
+                //move the file to the suitable directory
                 File.Move(path, m_OutputFolder + @"\" + year + @"\" + month + @"\" + newFileName);
             }
             catch(IOException)
@@ -98,12 +102,13 @@ namespace ImageService.Modal
             //creating a smaller copy in thumbnails
             try
             {
+                //creating a thumbnail version and moving it to it's suitable directory
                 string strSize = System.Configuration.ConfigurationManager.AppSettings["ThumbnailSize"];
-                //int size = Int32.Parse(strSize); //There is a member for that
                 m_thumbnailSize = Int32.Parse(strSize);
                 Image newImage = Image.FromFile(path);
                 Bitmap smallerImage = new Bitmap(newImage, new Size(m_thumbnailSize, m_thumbnailSize));
                 smallerImage.Save(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + newFileName);
+                //disposing irrelevnts
                 smallerImage.Dispose();
                 newImage.Dispose();
             }
@@ -132,6 +137,7 @@ namespace ImageService.Modal
                 int index = 0;
                 string name = Path.GetFileNameWithoutExtension(original);
                 string ext = Path.GetExtension(original);
+                //increase the number until you'll get an available one for an original name
                 while (File.Exists(folder + @"\" + name + @"_" + index.ToString() + ext))
                 {
                     ++index;
@@ -190,6 +196,7 @@ namespace ImageService.Modal
             {
                 try
                 {
+                    //in case there's a date taken - pull it off and return it
                     PropertyItem propItem = myImage.GetPropertyItem(36867);
                     string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
                     return DateTime.Parse(dateTaken);

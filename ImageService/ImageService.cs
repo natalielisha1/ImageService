@@ -49,7 +49,7 @@ namespace ImageService
         private static extern bool SetServiceStatus(IntPtr handle, ref ServiceStatus serviceStatus);
 
         /// <summary>
-        /// Constructor for ImageService
+        /// Constructor for ImageService, initializing image service components
         /// </summary>
         public ImageService()
         {
@@ -85,7 +85,7 @@ namespace ImageService
         protected override void OnStart(string[] args)
         {
             eventLog.WriteEntry("Start Pending");
-            // Update the service state to Start Pending.  
+            // Update the service state to Start Pending.
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
             serviceStatus.dwWaitHint = 100000;

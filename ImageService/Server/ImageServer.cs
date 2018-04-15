@@ -92,7 +92,6 @@ namespace ImageService.Server
         /// </summary>
         public void SendCommand()
         {
-            //TODO: Maybe replace
             CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand, new string[] { "Server close request" }, "*"));
         }
     }

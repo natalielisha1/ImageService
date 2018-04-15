@@ -32,6 +32,8 @@ namespace ImageService.Controller
 
         public string ExecuteCommand(int commandID, string[] args, out bool result)
         {
+            //check if the command's ID exists, and if exists execute it
+            //otherwise, send an error message
             if (!commands.ContainsKey(commandID))
             {
                 result = false;

@@ -42,6 +42,7 @@ namespace ImageService.Controller.Handlers
 
         public void OnCommandRecieved(object sender, CommandRecievedEventArgs e)
         {
+            //check if it's close command, and if so close the handler
             if (e.CommandID == (int) CommandEnum.CloseCommand)
             {
                 CloseHandler(e.Args[0]);

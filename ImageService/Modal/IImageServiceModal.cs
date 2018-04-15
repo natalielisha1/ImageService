@@ -15,6 +15,7 @@ namespace ImageService.Modal
         /// <param name="result">The boolean result of the action</param>
         /// <returns>Indication if the Addition Was Successful</returns>
         string AddFile(string path, out bool result);
+
         /// <summary>
         /// The Function creates a folder of a month in OutputDir
         /// </summary>
@@ -22,6 +23,7 @@ namespace ImageService.Modal
         /// <param name="month">The name of the month file</param>
         /// <returns>boolean indication of wether the creation sas successful</returns>
         bool CreateFolder(string year, string month);
+
         /// <summary>
         /// The Function creates a folder of a year in OutputDir
         /// </summary>
