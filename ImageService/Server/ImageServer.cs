@@ -58,10 +58,17 @@ namespace ImageService.Server
         /// <param name="dir">The directory of the file we want to handle</param>
         public void CreateHandler(string dir)
         {
-            IDirectoryHandler handler = new DirectoryHandler(dir, m_controller, m_logging);
-            CommandRecieved += handler.OnCommandRecieved;
-            handler.DirectoryClose += OnDirectoryClose;
-            handler.StartHandleDirectory(dir);
+            if (System.IO.Directory.Exists(dir))
+            {
+                IDirectoryHandler handler = new DirectoryHandler(dir, m_controller, m_logging);
+                CommandRecieved += handler.OnCommandRecieved;
+                handler.DirectoryClose += OnDirectoryClose;
+                handler.StartHandleDirectory(dir);
+                m_logging.Log("Created and started handler for: " + dir, MessageTypeEnum.INFO);
+            } else
+            {
+                m_logging.Log("Failed to create handler for: " + dir, MessageTypeEnum.FAIL);
+            }
         }
 
         /// <summary>
@@ -86,7 +93,7 @@ namespace ImageService.Server
         public void SendCommand()
         {
             //TODO: Maybe replace
-            CommandRecieved.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand, new string[] { "Server close request" }, "*"));
+            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand, new string[] { "Server close request" }, "*"));
         }
     }
 }

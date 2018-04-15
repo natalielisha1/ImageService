@@ -76,6 +76,9 @@ namespace ImageService.Controller.Handlers
                 if (result == false)
                 {
                     m_logging.Log(message, MessageTypeEnum.FAIL);
+                } else
+                {
+                    m_logging.Log(message, MessageTypeEnum.INFO);
                 }
             }
         }
@@ -107,7 +110,7 @@ namespace ImageService.Controller.Handlers
                 }
                 catch (IOException)
                 {
-                    //Not yet..
+                    //Nothing
                 }
                 if (fs != null)
                 {

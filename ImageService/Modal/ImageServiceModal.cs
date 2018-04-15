@@ -23,6 +23,8 @@ namespace ImageService.Modal
         public string AddFile(string path, out bool result)
         {
             string msg;
+            string oldPath = string.Copy(path);
+
             m_OutputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
             ///check if outputdir exists, if not create one
             if (!System.IO.Directory.Exists(m_OutputFolder))
@@ -102,6 +104,8 @@ namespace ImageService.Modal
                 Image newImage = Image.FromFile(path);
                 Bitmap smallerImage = new Bitmap(newImage, new Size(m_thumbnailSize, m_thumbnailSize));
                 smallerImage.Save(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + newFileName);
+                smallerImage.Dispose();
+                newImage.Dispose();
             }
             catch (IOException)
             {
@@ -111,7 +115,7 @@ namespace ImageService.Modal
             }
 
             result = true;
-            msg = @"operation succeeded";
+            msg = @"operation succeeded - AddFile of " + oldPath;
             return msg;
         }
 
