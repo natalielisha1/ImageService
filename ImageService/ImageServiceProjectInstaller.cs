@@ -11,6 +11,9 @@ namespace ImageService
     [RunInstaller(true)]
     public partial class ImageServiceProjectInstaller : System.Configuration.Install.Installer
     {
+        /// <summary>
+        /// Constructor for ImageServiceProjectInstaller
+        /// </summary>
         public ImageServiceProjectInstaller()
         {
             InitializeComponent();

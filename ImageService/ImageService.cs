@@ -48,6 +48,9 @@ namespace ImageService
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool SetServiceStatus(IntPtr handle, ref ServiceStatus serviceStatus);
 
+        /// <summary>
+        /// Constructor for ImageService
+        /// </summary>
         public ImageService()
         {
             InitializeComponent();
@@ -65,11 +68,20 @@ namespace ImageService
             eventLog.Log = logName;
         }
 
+        /// <summary>
+        /// The Function is passing the given message using the event log
+        /// </summary>
+        /// <param name="sender">The sender of the message</param>
+        /// <param name="e">The arguments of the message</param>
         void Logging_MessageRecieved(object sender, MessageRecievedEventArgs e)
         {
             eventLog.WriteEntry(e.Message, (EventLogEntryType) e.Status);
         }
 
+        /// <summary>
+        /// The Function starts the service
+        /// </summary>
+        /// <param name="args">The arguments that are given with the request of starting the service</param>
         protected override void OnStart(string[] args)
         {
             eventLog.WriteEntry("Start Pending");
@@ -91,16 +103,23 @@ namespace ImageService
             eventLog.WriteEntry("Running");
         }
 
+        /// <summary>
+        /// The Function stops the service
+        /// </summary>
         protected override void OnStop()
         {
             eventLog.WriteEntry("Stopping");
-            // Update the service state to Stopping.  
+            // Update the service state to Stopping.
+            m_imageServer.SendCommand(); //closing the server
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_STOPPED;
             serviceStatus.dwWaitHint = 100000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
         }
 
+        /// <summary>
+        /// The Function sends a log saying that the service is continuing
+        /// </summary>
         protected override void OnContinue()
         {
             eventLog.WriteEntry("Continuing");
