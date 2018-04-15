@@ -23,15 +23,15 @@ namespace ImageService.Modal
         public string AddFile(string path, out bool result)
         {
             string msg;
-            //string outputDir = System.Configuration.ConfigurationManager.AppSettings["OutputDir"]; //There is a member for that
             m_OutputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
             ///check if outputdir exists, if not create one
             if (!System.IO.Directory.Exists(m_OutputFolder))
             {
                 try
                 {
-                    //System.IO.Directory.CreateDirectory(@"C:\OutputDir"); //We need the outputdir to be the one from AppConfig (not C:\Outputdir)
-                    System.IO.Directory.CreateDirectory(m_OutputFolder);
+                    DirectoryInfo dirInfo = System.IO.Directory.CreateDirectory(m_OutputFolder);
+                    dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+
                 }
                 catch(IOException)
                 {
@@ -44,8 +44,7 @@ namespace ImageService.Modal
             {
                 try
                 {
-                    //System.IO.Directory.CreateDirectory(@"c:\OutputDir\Thumbnails");
-                    System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails"); //We need the outputdir to be the one from AppConfig (not C:\Outputdir)
+                    System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails");
                 }
                 catch (IOException)
                 {
