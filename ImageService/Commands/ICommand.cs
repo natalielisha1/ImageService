@@ -1,7 +1,7 @@
 ﻿/**
  * Names: Ofek Segal & Natalie Elisha
  * IDs: 315638288 & 209475458
- * Exercise: Ex1
+ * Exercise: Ex2
  */
 using ImageService.Infrastructure.Enums;
 using System;

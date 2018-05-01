@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace ImageService.Commands
 {
-    public class NewFileCommand : ICommand
+    public class LogCommand : ICommand
     {
         private IImageServiceModal m_modal;
 
         /// <summary>
-        /// Constructor for NewFileCommand class
+        /// Constructor for LogCommand class
         /// </summary>
         /// <param name="modal">an Image Service Modal instance</param>
-        public NewFileCommand(IImageServiceModal modal)
+        public LogCommand(IImageServiceModal modal)
         {
             //Storing the modal
             m_modal = modal;
@@ -29,8 +29,9 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            string path = args[0];
-            return m_modal.AddFile(path, out result);
+            //TODO: fiil
+            result = true;
+            return "";
         }
     }
 }

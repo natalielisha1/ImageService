@@ -9,11 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService.Logging.Modal
+namespace ImageService
 {
-    public class MessageRecievedEventArgs : EventArgs
+    static class Program
     {
-        public MessageTypeEnum Status { get; set; }
-        public string Message { get; set; }
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        static void Main()
+        {
+        }
     }
 }

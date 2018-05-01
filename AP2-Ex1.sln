@@ -5,9 +5,13 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService", "ImageService\ImageService.csproj", "{DE486AC7-25CA-4B52-93A5-22F2CA384A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Infrastructure", "ImageService.Infrastructure\ImageService.Infrastructure.csproj", "{5662B5C6-023A-4C2C-A95A-1966B5FB0068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService.Infrastructure", "ImageService.Infrastructure\ImageService.Infrastructure.csproj", "{5662B5C6-023A-4C2C-A95A-1966B5FB0068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Logging", "ImageService.Logging\ImageService.Logging.csproj", "{B537E1B0-FA9B-4692-966F-765044F485D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService.Logging", "ImageService.Logging\ImageService.Logging.csproj", "{B537E1B0-FA9B-4692-966F-765044F485D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Communication", "ConsoleApp1\ImageService.Communication.csproj", "{82A62E3D-9155-4A9F-BF6D-44CE72828385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceGUI", "WpfApp1\ImageServiceGUI.csproj", "{972E8D15-650B-4095-B5C2-B57DE3165033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{B537E1B0-FA9B-4692-966F-765044F485D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B537E1B0-FA9B-4692-966F-765044F485D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B537E1B0-FA9B-4692-966F-765044F485D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A62E3D-9155-4A9F-BF6D-44CE72828385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A62E3D-9155-4A9F-BF6D-44CE72828385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A62E3D-9155-4A9F-BF6D-44CE72828385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A62E3D-9155-4A9F-BF6D-44CE72828385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972E8D15-650B-4095-B5C2-B57DE3165033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972E8D15-650B-4095-B5C2-B57DE3165033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972E8D15-650B-4095-B5C2-B57DE3165033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972E8D15-650B-4095-B5C2-B57DE3165033}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
