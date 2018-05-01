@@ -13,35 +13,34 @@ using ImageServiceGUI.Model;
 
 namespace ImageServiceGUI.ViewModel
 {
-    class SettingsViewModel
+    public class SettingsViewModel
     {
         private ISettingsModel model;
         public SettingsViewModel(ISettingsModel model)
         {
             this.model = model;
         }
-        public string ServerIP
+
+        /*public string ServerIP
         {
-            //get { return model.ServerIP; }
+            get { return model.ServerIP; }
             set
             {
-                //model.ServerIP = value;
-                //NotifyPropertyChanged("ServerIP");
+                model.ServerIP = value;
             }
         }
         public int ServerPort
         {
-            //get { return model.ServerPort; }
+            get { return model.ServerPort; }
             set
             {
-                //model.ServerPort = value;
-                //NotifyPropertyChanged("ServerPort");
+                model.ServerPort = value;
             }
-        }
+        }*/
 
         public void SaveSettings()
         {
-            //model.SaveSettings();
+            model.SaveSettings();
         }
     }
 }

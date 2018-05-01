@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Converters
 {
-    class TypeToBrushConverter
+    public class TypeToBrushConverter
     {
     }
 }

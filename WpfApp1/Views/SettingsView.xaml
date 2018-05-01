@@ -6,9 +6,14 @@
       xmlns:local="clr-namespace:WpfApp1.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page2">
+      Title="Settings">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel Margin="6" Orientation="Vertical">
+        <TextBlock Text="Settings" FontSize="60" HorizontalAlignment="Center" Width="240" Foreground="#FF800404" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="285,0,263,0"/>
+        <TextBlock  Text="Output Directory:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
+        <TextBlock  Text="Source Name:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
+        <TextBlock  Text="Log Name:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
+        <TextBlock  Text="Thumbnail Size:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
+        <Button x:Name="RmvButton" Height="30" FontSize="19" FontWeight="Bold">Remove</Button>
+    </StackPanel>
 </Page>

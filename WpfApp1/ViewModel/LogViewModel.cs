@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.ViewModel
 {
-    class LogViewModel
+    public class LogViewModel
     {
     }
 }

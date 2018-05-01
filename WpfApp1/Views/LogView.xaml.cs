@@ -22,13 +22,14 @@ using System.Windows.Shapes;
 namespace ImageServiceGUI.Views
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// 
     /// </summary>
-    public partial class Page1 : Page
+    //TODO: partial class ":"
+    public partial class LogView
     {
-        public Page1()
+        public LogView()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
     }
 }

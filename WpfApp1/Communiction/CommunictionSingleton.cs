@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Communiction
 {
-    class CommunictionSingleton
+    public class CommunictionSingleton
     {
     }
 }

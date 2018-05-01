@@ -12,7 +12,14 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
-    class SettingsModel
+    public class SettingsModel : ISettingsModel
     {
+        private int ServerPort;
+        private int ServerIP;
+
+        public void SaveSettings()
+        {
+            //TODO: fill
+        }
     }
 }

@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
-    interface ISettingsModel
+    public interface ISettingsModel
     {
+        void SaveSettings();
     }
 }
