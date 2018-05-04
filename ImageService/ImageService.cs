@@ -18,6 +18,7 @@ using ImageService.Modal;
 using ImageService.Server;
 using ImageService.Logging;
 using ImageService.Logging.Modal;
+using ImageService.Infrastructure.Enums;
 
 namespace ImageService
 {
@@ -98,12 +99,12 @@ namespace ImageService
 
             logging = new LoggingService();
             logging.MessageRecieved += Logging_MessageRecieved;
-            eventLog.WriteEntry("LoggingService created.", (EventLogEntryType) MessageTypeEnum.INFO);
+            eventLog.WriteEntry("LoggingService created.", (EventLogEntryType) LogMessageTypeEnum.INFO);
 
             m_imageServer = new ImageServer(logging);
-            eventLog.WriteEntry("ImageServer created.", (EventLogEntryType)MessageTypeEnum.INFO);
+            eventLog.WriteEntry("ImageServer created.", (EventLogEntryType) LogMessageTypeEnum.INFO);
             m_imageServer.StartServer();
-            eventLog.WriteEntry("ImageServer started.", (EventLogEntryType)MessageTypeEnum.INFO);
+            eventLog.WriteEntry("ImageServer started.", (EventLogEntryType) LogMessageTypeEnum.INFO);
 
             // Update the service state to Running.  
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;

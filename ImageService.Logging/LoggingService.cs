@@ -4,6 +4,7 @@
  * Exercise: Ex2
  */
 using ImageService.Logging.Modal;
+using ImageService.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace ImageService.Logging
     {
         public event EventHandler<MessageRecievedEventArgs> MessageRecieved;
 
-        public void Log(string message, MessageTypeEnum type)
+        public void Log(string message, LogMessageTypeEnum type)
         {
             MessageRecievedEventArgs log = new MessageRecievedEventArgs
             {

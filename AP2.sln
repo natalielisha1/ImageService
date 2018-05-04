@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService.Logging", "ImageService.Logging\ImageService.Logging.csproj", "{B537E1B0-FA9B-4692-966F-765044F485D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Communication", "ConsoleApp1\ImageService.Communication.csproj", "{82A62E3D-9155-4A9F-BF6D-44CE72828385}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Communication", "ImageService.Communication\ImageService.Communication.csproj", "{82A62E3D-9155-4A9F-BF6D-44CE72828385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceGUI", "WpfApp1\ImageServiceGUI.csproj", "{972E8D15-650B-4095-B5C2-B57DE3165033}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceGUI", "ImageServiceGUI\ImageServiceGUI.csproj", "{972E8D15-650B-4095-B5C2-B57DE3165033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

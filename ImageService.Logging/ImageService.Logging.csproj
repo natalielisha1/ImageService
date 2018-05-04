@@ -4,4 +4,8 @@
     <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ImageService.Infrastructure\ImageService.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

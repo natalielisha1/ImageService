@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8422963-254A-40C7-A5E6-E12FED4BE771}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp2</RootNamespace>
-    <AssemblyName>ConsoleApp2</AssemblyName>
+    <ProjectGuid>{82A62E3D-9155-4A9F-BF6D-44CE72828385}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ImageService.Communication</RootNamespace>
+    <AssemblyName>ImageService.Communication</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,11 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ClientWrapper.cs" />
+    <Compile Include="Interfaces\IClientHandler.cs" />
+    <Compile Include="Interfaces\IClientWrapper.cs" />
+    <Compile Include="Interfaces\ITcpClient.cs" />
+    <Compile Include="Interfaces\ITcpServer.cs" />
+    <Compile Include="Model\CommandMessageTypeEnum.cs" />
+    <Compile Include="Model\LogMessage.cs" />
+    <Compile Include="Model\ServerMessageRecievedEventArgs.cs" />
+    <Compile Include="Model\ServerMessageTypeEnum.cs" />
+    <Compile Include="TcpServerChannel.cs" />
+    <Compile Include="TcpClientChannel.cs" />
+    <Compile Include="ClientHandler.cs" />
+    <Compile Include="Model\CommandMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

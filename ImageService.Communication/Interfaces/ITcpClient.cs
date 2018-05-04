@@ -3,21 +3,20 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService
+namespace ImageService.Communication.Interfaces
 {
-    static class Program
+    interface ITcpClient
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        static void Main()
-        {
-        }
+        void Connect(string ip, int port);
+        void Write(string command);
+        string Read();
+        void Disconnect();
     }
 }

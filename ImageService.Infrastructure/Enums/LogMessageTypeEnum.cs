@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace ImageService.Logging.Modal
+namespace ImageService.Infrastructure.Enums
 {
-    public enum MessageTypeEnum : int
+    public enum LogMessageTypeEnum : int
     {
         INFO = EventLogEntryType.Information,
         WARNING = EventLogEntryType.Warning,

@@ -4,15 +4,19 @@
  * Exercise: Ex2
  */
 
+using ImageService.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService.Communiction.Model
+namespace ImageService.Communication.Interfaces
 {
-    class CommandMessages
+    interface ITcpServer
     {
+        void Start();
+        void SendMessage(string message, ServerMessageTypeEnum type);
+        void Stop();
     }
 }

@@ -10,9 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService.Communication
+namespace ImageService.Communication.Model
 {
-    class TcpClientChannel
+    class CommandMessage
     {
+        public CommandMessageTypeEnum type { get; set; }
+        //TODO: Fill
     }
 }

@@ -69,10 +69,10 @@ namespace ImageService.Server
                 CommandRecieved += handler.OnCommandRecieved;
                 handler.DirectoryClose += OnDirectoryClose;
                 handler.StartHandleDirectory(dir);
-                m_logging.Log("Created and started handler for: " + dir, MessageTypeEnum.INFO);
+                m_logging.Log("Created and started handler for: " + dir, LogMessageTypeEnum.INFO);
             } else
             {
-                m_logging.Log("Failed to create handler for: " + dir, MessageTypeEnum.FAIL);
+                m_logging.Log("Failed to create handler for: " + dir, LogMessageTypeEnum.FAIL);
             }
         }
 
@@ -88,7 +88,7 @@ namespace ImageService.Server
                 IDirectoryHandler handler = (IDirectoryHandler) sender;
                 CommandRecieved -= handler.OnCommandRecieved;
                 handler.DirectoryClose -= OnDirectoryClose;
-                m_logging.Log(e.DirectoryPath + @": " + e.Message, MessageTypeEnum.INFO);
+                m_logging.Log(e.DirectoryPath + @": " + e.Message, LogMessageTypeEnum.INFO);
             }
         }
 

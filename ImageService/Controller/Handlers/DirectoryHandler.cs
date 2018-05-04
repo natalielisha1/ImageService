@@ -81,10 +81,10 @@ namespace ImageService.Controller.Handlers
                 string message = m_controller.ExecuteCommand((int) CommandEnum.NewFileCommand, new string[]{ filePath }, out result);
                 if (result == false)
                 {
-                    m_logging.Log(message, MessageTypeEnum.FAIL);
+                    m_logging.Log(message, LogMessageTypeEnum.FAIL);
                 } else
                 {
-                    m_logging.Log(message, MessageTypeEnum.INFO);
+                    m_logging.Log(message, LogMessageTypeEnum.INFO);
                 }
             }
         }

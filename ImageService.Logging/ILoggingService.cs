@@ -4,6 +4,7 @@
  * Exercise: Ex2
  */
 using ImageService.Logging.Modal;
+using ImageService.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,6 @@ namespace ImageService.Logging
         /// </summary>
         /// <param name="message">The message we want to pass</param>
         /// <param name="type">The type of message (enum)</param>
-        void Log(string message, MessageTypeEnum type);
+        void Log(string message, LogMessageTypeEnum type);
     }
 }
