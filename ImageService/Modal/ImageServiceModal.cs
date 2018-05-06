@@ -129,6 +129,21 @@ namespace ImageService.Modal
             return msg;
         }
 
+        //public string GetConfig()
+        //{
+        //    string[] config_args;
+        //    string thumbnailSizeStr, sourceNameStr, logNameStr, handlerStr;
+        //    handlerStr = System.Configuration.ConfigurationManager.AppSettings["Handler"];
+        //    m_OutputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
+        //    sourceNameStr = System.Configuration.ConfigurationManager.AppSettings["SourceName"];
+        //    logNameStr = System.Configuration.ConfigurationManager.AppSettings["LogName"];
+        //    thumbnailSizeStr = System.Configuration.ConfigurationManager.AppSettings["ThumbnailSize"];
+        //    config_args[0] = handlerStr;
+        //    ...
+        //    return config_args;
+        //
+        //}
+
         /// <summary>
         /// The Function returns an available file name
         /// </summary>
