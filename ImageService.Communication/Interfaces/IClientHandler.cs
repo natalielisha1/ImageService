@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication.Interfaces
 {
-    interface IClientHandler
+    public interface IClientHandler
     {
         void HandleClient(IClientWrapper client);
     }

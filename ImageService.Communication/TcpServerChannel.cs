@@ -42,14 +42,18 @@ namespace ImageService.Communication
                     {
                         TcpClient client = listener.AcceptTcpClient();
                         IClientWrapper clientWrapper = new ClientWrapper(client);
-                        MessageRecieved += delegate (object sender, ServerMessageRecievedEventArgs e)
+                        EventHandler<ServerMessageRecievedEventArgs> newEventHandler = null;
+                        newEventHandler = delegate (object sender, ServerMessageRecievedEventArgs e)
                         {
                             clientWrapper.Write(e.Message);
                             if (e.Type == ServerMessageTypeEnum.CloseMessage)
                             {
                                 clientWrapper.Close();
+                                MessageRecieved -= newEventHandler;
                             }
                         };
+                        MessageRecieved += newEventHandler;
+                        ch.HandleClient(clientWrapper);
                     }
                     catch (SocketException)
                     {

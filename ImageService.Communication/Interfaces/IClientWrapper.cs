@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication.Interfaces
 {
-    interface IClientWrapper
+    public interface IClientWrapper
     {
         string Read();
         void Write(string message);
