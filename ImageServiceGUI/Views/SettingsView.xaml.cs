@@ -4,6 +4,7 @@
  * Exercise: Ex2
  */
 
+using ImageServiceGUI.Model;
 using ImageServiceGUI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -32,8 +33,9 @@ namespace ImageServiceGUI.Views
         public SettingsView()
         {
             InitializeComponent();
-            //vm = new SettingsViewModel();
-            //this.DataContext = vm;
+            SettingsModel m = new SettingsModel();
+            vm = new SettingsViewModel(m);
+            this.DataContext = vm;
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {

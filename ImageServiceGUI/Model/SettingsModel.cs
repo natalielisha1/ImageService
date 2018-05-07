@@ -14,10 +14,7 @@ namespace ImageServiceGUI.Model
 {
     public class SettingsModel : ISettingsModel
     {
-        private int ServerPort;
-        private int ServerIP;
-
-        public void SaveSettings()
+        public void RemoveHandler(string path)
         {
             //TODO: fill
         }

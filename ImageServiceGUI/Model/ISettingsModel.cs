@@ -14,6 +14,6 @@ namespace ImageServiceGUI.Model
 {
     public interface ISettingsModel
     {
-        void SaveSettings();
+        void RemoveHandler(string path);
     }
 }

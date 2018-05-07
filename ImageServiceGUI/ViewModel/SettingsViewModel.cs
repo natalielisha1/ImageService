@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,34 +14,24 @@ using ImageServiceGUI.Model;
 
 namespace ImageServiceGUI.ViewModel
 {
-    public class SettingsViewModel
+    public class SettingsViewModel : INotifyPropertyChanged
     {
         private ISettingsModel model;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public SettingsViewModel(ISettingsModel model)
         {
             this.model = model;
         }
 
-        /*public string ServerIP
+        public void NotifyPropertyChanged(string handler)
         {
-            get { return model.ServerIP; }
-            set
-            {
-                model.ServerIP = value;
-            }
-        }
-        public int ServerPort
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(handler));
+        }
+        public void RemoveHandler(string handlerPath)
         {
-            get { return model.ServerPort; }
-            set
-            {
-                model.ServerPort = value;
-            }
-        }*/
-
-        public void SaveSettings()
-        {
-            model.SaveSettings();
+            model.RemoveHandler(handlerPath);
+            this.NotifyPropertyChanged(handlerPath);
         }
     }
 }
