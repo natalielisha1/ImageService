@@ -26,7 +26,6 @@ namespace ImageServiceGUI.Views
     /// <summary>
     /// 
     /// </summary>
-    //TODO: partial class ":"
     public partial class LogView
     {
         private SettingsViewModel vm;

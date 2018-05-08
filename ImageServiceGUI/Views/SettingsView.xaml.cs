@@ -26,7 +26,6 @@ namespace ImageServiceGUI.Views
     /// <summary>
     /// 
     /// </summary>
-    //TODO:fix, partial class
     public partial class SettingsView
     {
         private SettingsViewModel vm;
@@ -37,18 +36,11 @@ namespace ImageServiceGUI.Views
             vm = new SettingsViewModel(m);
             this.DataContext = vm;
         }
-        private void btnOK_Click(object sender, RoutedEventArgs e)
+        private void btnRemoveHandler_Click(object sender, RoutedEventArgs e)
         {
-            //vm.SaveSettings();
-            //MainWindow win = (MainWindow)Application.Current.MainWindow;
-            //win.Show();
-            //this.Close();
-        }
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            //MainWindow win = (MainWindow)Application.Current.MainWindow;
-            //win.Show();
-            //this.Close();
+            //vm.RemoveHandler(...);
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
         }
     }
 }
