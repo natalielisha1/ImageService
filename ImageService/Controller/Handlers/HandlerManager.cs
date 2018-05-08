@@ -11,9 +11,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageService.Server
+namespace ImageService.Controller.Handlers
 {
-    class HandlerManager
+    public class HandlerManager
     {
         #region Singleton_Members
         private static volatile HandlerManager instance;
@@ -79,7 +79,7 @@ namespace ImageService.Server
             CreateHandler(path);
         }
 
-        public void RemoveHandler(string path)
+        public bool RemoveHandler(string path)
         {
             string oldPaths = ConfigurationManager.AppSettings["Handler"];
             if (oldPaths.Contains(path))
@@ -90,9 +90,10 @@ namespace ImageService.Server
                 config.AppSettings.Settings["Handler"].Value = newPaths;
                 config.Save();
             }
-            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand,
+            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.RemoveHandler,
                                                                        new string[] { "Recieved remove handler request for " + path },
                                                                        path));
+            return true;
         }
 
         public string[] GetHandlers()

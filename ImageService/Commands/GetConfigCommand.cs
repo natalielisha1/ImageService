@@ -3,7 +3,10 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
+using ImageService.Communication.Model;
+using ImageService.Controller.Handlers;
 using ImageService.Infrastructure;
+using ImageService.Infrastructure.Enums;
 using ImageService.Modal;
 using System;
 using System.Collections.Generic;
@@ -15,7 +18,10 @@ namespace ImageService.Commands
 {
     public class GetConfigCommand : ICommand
     {
+        #region Members
         private IImageServiceModal m_modal;
+        private HandlerManager m_handlerManager;
+        #endregion
 
         /// <summary>
         /// Constructor for GetConfigCommand class
@@ -25,13 +31,25 @@ namespace ImageService.Commands
         {
             //Storing the modal
             m_modal = modal;
+            m_handlerManager = HandlerManager.Instance;
         }
 
         public string Execute(string[] args, out bool result)
         {
-            //TODO: fill
             result = true;
-            return "";
+            CommandMessage msg = new CommandMessage
+            {
+                Status = true,
+                Type = CommandEnum.ConfigMessage,
+                Message = @"Current config settings",
+
+                OutputDir = System.Configuration.ConfigurationManager.AppSettings["OutputDir"],
+                LogSource = System.Configuration.ConfigurationManager.AppSettings["SourceName"],
+                LogName = System.Configuration.ConfigurationManager.AppSettings["LogName"],
+                ThumbSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["ThumbnailSize"]),
+                Handlers = m_handlerManager.GetHandlers()
+            };
+            return msg.ToJSONString();
         }
     }
 }

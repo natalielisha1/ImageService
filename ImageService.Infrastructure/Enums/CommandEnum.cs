@@ -15,7 +15,12 @@ namespace ImageService.Infrastructure.Enums
     {
         NewFileCommand,
         GetConfigCommand,
-        LogCommand,
-        CloseCommand
+        CloseServer,
+        LogRequest,
+        LogAdded,
+        ConfigMessage,
+        ChangeConfig,
+        AddHandler,
+        RemoveHandler
     }
 }

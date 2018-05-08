@@ -52,7 +52,7 @@ namespace ImageService.Controller.Handlers
                 switch (e.CommandID)
                 {
                     //check if it's close command, and if so close the handler
-                    case (int)CommandEnum.CloseCommand:     CloseHandler(e.Args[0]);
+                    case (int)CommandEnum.CloseServer:      CloseHandler(e.Args[0]);
                                                             break;
                 }
             }

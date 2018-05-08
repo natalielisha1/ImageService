@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication.Interfaces
 {
-    interface ITcpServer
+    public interface ITcpServer
     {
         void Start();
         void SendMessage(string message, ServerMessageTypeEnum type);

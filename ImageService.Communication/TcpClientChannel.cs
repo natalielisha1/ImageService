@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication
 {
-    class TcpClientChannel : ITcpClient
+    public class TcpClientChannel : ITcpClient
     {
         private IClientWrapper client;
 

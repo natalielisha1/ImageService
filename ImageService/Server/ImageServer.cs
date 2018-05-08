@@ -16,6 +16,9 @@ using ImageService.Modal.Event;
 using ImageService.Modal;
 using ImageService.Commands;
 using ImageService.Infrastructure.Enums;
+using ImageService.Communication.Interfaces;
+using ImageService.Communication;
+using ImageService.Communication.Model;
 
 namespace ImageService.Server
 {
@@ -24,6 +27,10 @@ namespace ImageService.Server
         #region Members
         private IImageController m_controller;
         private ILoggingService m_logging;
+        private IClientHandler m_clientHandler;
+        private ITcpServer m_TCPServer;
+        private HandlerManager m_handlerManager;
+        private LogStorage m_logStorage;
 
         private Dictionary<int, ICommand> commands;
         #endregion
@@ -37,11 +44,16 @@ namespace ImageService.Server
         /// Constructor for ImageServer class
         /// </summary>
         /// <param name="logging">the logging service that will be connected to the image service</param>
-        public ImageServer(ILoggingService logging)
+        public ImageServer(ILoggingService logging, int port)
         {
             m_logging = logging;
             IImageServiceModal modal = new ImageServiceModal();
             m_controller = new ImageController(modal);
+            m_clientHandler = new ClientHandler(m_controller);
+            m_TCPServer = new TcpServerChannel(port, m_clientHandler);
+            m_handlerManager = HandlerManager.Instance;
+            m_logStorage = LogStorage.Instance;
+            m_logging.MessageRecieved += m_logStorage.AddLog;
         }
 
         /// <summary>
@@ -49,14 +61,41 @@ namespace ImageService.Server
         /// </summary>
         public void StartServer()
         {
+            m_TCPServer.Start();
+
+            m_logging.MessageRecieved += delegate (object sender, MessageRecievedEventArgs e)
+            {
+                LogMessage newLogMessage = new LogMessage
+                {
+                    Type = e.Status,
+                    Message = e.Message
+                };
+
+                List<LogMessage> newLogList = new List<LogMessage>();
+                newLogList.Add(newLogMessage);
+
+                CommandMessage msg = new CommandMessage
+                {
+                    Status = true,
+                    Type = CommandEnum.LogAdded,
+                    Message = @"A new log entry was made",
+                    LogMessages = newLogList
+                };
+
+                m_TCPServer.SendMessage(msg.ToJSONString(), ServerMessageTypeEnum.LogMessage);
+            };
+
             string paths = System.Configuration.ConfigurationManager.AppSettings["Handler"];
             string[] pathArr = paths.Split(new char[] { ';' });
             foreach (string path in pathArr)
             {
-                CreateHandler(path);
+                m_handlerManager.AddHandler(path);
+                //CreateHandler(path);
             }
         }
 
+        //TODO: Remove
+        /*
         /// <summary>
         /// The Function creates a handler
         /// </summary>
@@ -74,8 +113,10 @@ namespace ImageService.Server
             {
                 m_logging.Log("Failed to create handler for: " + dir, LogMessageTypeEnum.FAIL);
             }
-        }
+        }*/
 
+        //TODO: Remove
+        /*
         /// <summary>
         /// The Function closes the handler of a file
         /// </summary>
@@ -91,13 +132,14 @@ namespace ImageService.Server
                 m_logging.Log(e.DirectoryPath + @": " + e.Message, LogMessageTypeEnum.INFO);
             }
         }
+        */
 
         /// <summary>
         /// The Function sends CLOSE command (requesting to close the server)
         /// </summary>
         public void SendCommand()
         {
-            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseCommand, new string[] { "Server close request" }, "*"));
+            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseServer, new string[] { "Server close request" }, "*"));
         }
     }
 }

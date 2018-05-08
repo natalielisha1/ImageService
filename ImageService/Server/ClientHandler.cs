@@ -5,21 +5,52 @@
  */
 
 using ImageService.Communication.Interfaces;
+using ImageService.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
+using ImageService.Controller;
+using System.IO;
 
 namespace ImageService.Server
 {
     public class ClientHandler : IClientHandler
     {
+        #region Members
+        private IImageController m_controller;
+        #endregion
+
+        public ClientHandler(IImageController controller)
+        {
+            m_controller = controller;
+            //TODO: Maybe more stuff in here
+        }
+
         public void HandleClient(IClientWrapper client)
         {
-            //TODO: Fill
-            throw new NotImplementedException();
+            Task task = new Task(() => {
+                try
+                {
+                    while (true)
+                    {
+                        string message = client.Read();
+                        CommandMessage cmd = CommandMessage.FromJSONString(message);
+                        bool result;
+                        string newMessage = m_controller.ExecuteCommand((int)cmd.Type, cmd.Args, out result);
+                        if (result)
+                        {
+                            client.Write(newMessage);
+                        }
+                    }
+                } catch (IOException ex)
+                {
+                    client.Close();
+                }
+            });
+            task.Start();
         }
     }
 }

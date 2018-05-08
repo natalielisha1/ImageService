@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageService.Infrastructure.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication.Model
 {
-    class LogMessage
+    public class LogMessage
     {
+        public LogMessageTypeEnum Type { get; set; }
+        public string Message { get; set; }
     }
 }

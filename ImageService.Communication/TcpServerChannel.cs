@@ -16,7 +16,7 @@ using System.Net;
 
 namespace ImageService.Communication
 {
-    class TcpServerChannel : ITcpServer
+    public class TcpServerChannel : ITcpServer
     {
         private int port;
         private TcpListener listener;

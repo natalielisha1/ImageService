@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Communication.Interfaces
 {
-    interface ITcpClient
+    public interface ITcpClient
     {
         void Connect(string ip, int port);
         void Write(string command);
