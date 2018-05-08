@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Documents\מסמכים - נטלי\לימודים\בר אילן\שנה ב\תכנות מתקדם 2\Commands.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -57,7 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Communiction\CommunictionSingleton.cs" />
+    <Compile Include="Communiction\CommunicationSingleton.cs" />
     <Compile Include="Converters\TypeToBrushConverter.cs" />
     <Compile Include="Converters\ConnectedToBrushConverter.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
@@ -92,7 +96,7 @@
   <ItemGroup>
     <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="Model\LogModel.cs" />
-    <Compile Include="Model\ISettingsModel.cs" />
+    <Compile Include="Model\Interfaces\IModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +124,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageService.Communication\ImageService.Communication.csproj">
+      <Project>{82a62e3d-9155-4a9f-bf6d-44ce72828385}</Project>
+      <Name>ImageService.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageService.Infrastructure\ImageService.Infrastructure.csproj">
+      <Project>{5662b5c6-023a-4c2c-a95a-1966b5fb0068}</Project>
+      <Name>ImageService.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageService.Logging\ImageService.Logging.csproj">
+      <Project>{b537e1b0-fa9b-4692-966f-765044f485d7}</Project>
+      <Name>ImageService.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageService\ImageService.csproj">
       <Project>{de486ac7-25ca-4b52-93a5-22f2ca384a70}</Project>
       <Name>ImageService</Name>

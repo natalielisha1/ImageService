@@ -4,6 +4,7 @@
  * Exercise: Ex2
  */
 
+using ImageService.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
-    public interface ISettingsModel
+    public interface IModel
     {
-        void RemoveHandler(string path);
+        void ProcessMessage(object sender, CommandMessageEventArgs e);
     }
 }

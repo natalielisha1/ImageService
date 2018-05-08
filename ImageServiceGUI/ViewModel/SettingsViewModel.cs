@@ -18,44 +18,46 @@ using Microsoft.Practices.Prism.Commands;
 using ImageService.Controller.Handlers;
 using ImageService.Controller;
 using ImageService.Logging;
+using System.Collections.Specialized;
 
 namespace ImageServiceGUI.ViewModel
 {
     public class SettingsViewModel : INotifyPropertyChanged
     {
-        private ISettingsModel model;
+        private SettingsModel model;
         private DelegateCommand<object> removeHandler;
         public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<DirectoryHandler> handlers;
 
-        public SettingsViewModel(ISettingsModel model)
+        public ObservableCollection<string> Handlers { get; set; }
+
+        public SettingsViewModel(SettingsModel model)
         {
+            Handlers = new ObservableCollection<string>();
             this.model = model;
-            this.handlers = new ObservableCollection<DirectoryHandler>();
-            this.removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
-            this.AddHandlers();
-        }
-
-        private void AddHandlers()
-        {
-            //getting the configs and creating controller and model
-            bool result = true;
-            IImageServiceModal temp_model = new ImageServiceModal();
-            ILoggingService logging = new LoggingService();
-            GetConfigCommand configCommand = new GetConfigCommand(temp_model);
-            string[] args = null;
-            string configs = configCommand.Execute(args, out result);
-            IImageController controller = new ImageController(temp_model);
-
-            //splitting the paths of the handlers
-            string allHandlers = configs; //TODO: fix later, allHandlers sould have the value of the key "Handler"
-            string[] paths = allHandlers.Split(';');
-
-            //adding the directories to the observable collection
-            for (int i = 0; i < paths.Length; i++)
+            this.model.Handlers.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e)
             {
-                this.handlers.Add(new DirectoryHandler(paths[i], controller, logging));
-            }
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        foreach (string item in e.NewItems)
+                        {
+                            Handlers.Add(item);
+                        }
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Handlers"));
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (string item in e.OldItems)
+                        {
+                            Handlers.Remove(item);
+                        }
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Handlers"));
+                        break;
+                    default:
+                        break;
+                }
+            };
+            this.Handlers = this.model.Handlers;
+            this.removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
         }
 
         public void NotifyPropertyChanged(string handler)
@@ -65,7 +67,7 @@ namespace ImageServiceGUI.ViewModel
 
         private bool CanRemove(object obj)
         {
-            if (this.handlers.Count <= 0)
+            if (this.Handlers.Count <= 0)
             {
                 return false;
             }
@@ -77,25 +79,7 @@ namespace ImageServiceGUI.ViewModel
 
         private void OnRemove(object handlerPath)
         {
-            model.RemoveHandler((string)handlerPath); //dangerous?
-            //in remove handler, remove the handler from the app config
-            this.NotifyPropertyChanged((string)handlerPath);
-        }
-
-        public string ToJSON()
-        {
-            JObject settingsObj = new JObject();
-            bool result = true;
-            IImageServiceModal temp_model = new ImageServiceModal();
-            GetConfigCommand configCommand = new GetConfigCommand(temp_model);
-            string[] args = null;
-            string configs = configCommand.Execute(args, out result);
-            settingsObj["OutputDir"] = configs[1];
-            settingsObj["SourceName"] = configs[2];
-            settingsObj["LogName"] = configs[3];
-            settingsObj["ThumbnailSize"] = configs[4];
-            //TODO: fix later
-            return settingsObj.ToString();
+            this.Handlers = this.model.Handlers;
         }
     }
 }

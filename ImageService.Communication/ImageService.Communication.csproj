@@ -53,6 +53,7 @@
     <Compile Include="Interfaces\IClientWrapper.cs" />
     <Compile Include="Interfaces\ITcpClient.cs" />
     <Compile Include="Interfaces\ITcpServer.cs" />
+    <Compile Include="Model\CommandMessageEventArgs.cs" />
     <Compile Include="Model\LogMessage.cs" />
     <Compile Include="Model\ServerMessageRecievedEventArgs.cs" />
     <Compile Include="Model\ServerMessageTypeEnum.cs" />
