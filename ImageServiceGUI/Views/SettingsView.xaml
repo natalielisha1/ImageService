@@ -10,10 +10,30 @@
 
     <StackPanel Margin="6" Orientation="Vertical">
         <TextBlock Text="Settings" FontSize="60" HorizontalAlignment="Center" Width="240" Foreground="#FF800404" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="285,0,263,0"/>
-        <TextBlock  Text="Output Directory:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
-        <TextBlock  Text="Source Name:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
-        <TextBlock  Text="Log Name:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
-        <TextBlock  Text="Thumbnail Size:" FontSize="22" FontWeight="Bold" TextDecorations="{x:Null}" Margin="10,0,0,4" HorizontalAlignment="Left"/>
-        <Button x:Name="RmvButton" Height="30" FontSize="19" FontWeight="Bold">Remove</Button>
+        <Grid TextBlock.FontSize="22" TextBlock.FontWeight="Bold" TextBlock.FontFamily="Leelawadee UI">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Padding="3" Margin="3">Output Directory:</TextBlock>
+            <TextBlock Text="{Binding outputDir, Mode=OneWay}" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+            <TextBlock Grid.Row="1" Padding="3" Margin="3">Source Name:</TextBlock>
+            <TextBlock Text="{Binding sourceName, Mode=OneWay}" Grid.Row="1" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+            <TextBlock Grid.Row="2" Padding="3" Margin="3">Log Name:</TextBlock>
+            <TextBlock Text="{Binding logName, Mode=OneWay}" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+            <TextBlock Grid.Row="3" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
+            <TextBlock Text="{Binding thumbSize, Mode=OneWay}" Grid.Row="3" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+        </Grid>
+        <Button x:Name="RmvButton" Click="btnRemoveHandler_Click" Height="30" FontSize="19" FontWeight="Bold">Remove</Button>
+        <ScrollViewer>
+            <ListBox x:Name="handlersList" ItemsSource="{Binding handlers}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            </ListBox>
+        </ScrollViewer>
     </StackPanel>
 </Page>

@@ -27,6 +27,10 @@ namespace ImageServiceGUI.Model
 
         #region Members
         private CommunicationSingleton client;
+        public string outputDir { get; set; }
+        public string sourceName { get; set; }
+        public string logName { get; set; }
+        public string thumSize { get; set; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -58,6 +62,12 @@ namespace ImageServiceGUI.Model
                 case CommandEnum.RemoveHandler:
                     Handlers.Remove(msg.Args[0]);
                     OnPropertyChanged("Handlers");
+                    break;
+                case CommandEnum.GetConfigCommand:
+                    outputDir = msg.OutputDir;
+                    sourceName = msg.LogSource;
+                    logName = msg.LogName;
+                    thumSize = msg.ThumbSize.ToString();
                     break;
                 default:
                     break;

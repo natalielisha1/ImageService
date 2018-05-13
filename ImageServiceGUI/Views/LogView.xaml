@@ -8,14 +8,21 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Logs">
 
-    <Grid>
-        <TextBlock Text="Logs" FontSize="70" HorizontalAlignment="Center" Width="162" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="310,0,328,380">
-            <TextBlock.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF042080" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Foreground>
-        </TextBlock>
-    </Grid>
+    <StackPanel Margin="6" Orientation="Vertical">
+        <TextBlock Text="Logs" FontSize="72" HorizontalAlignment="Center" Width="171" Foreground="#FF011A36" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="305,0,312,0"/>
+        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Width="100" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Message" Width="700" Binding="{Binding messageContexts}"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Lavender"/>
+                    <Setter Property="FontWeight" Value="DemiBold"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+    </StackPanel>
 </Page>

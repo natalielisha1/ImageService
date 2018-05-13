@@ -21,7 +21,6 @@ namespace ImageServiceGUI.ViewModel
     public class LogViewModel
     {
         private LogModel model;
-        //private DelegateCommand<object> removeHandler;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<LogMessage> Logs { get; set; }
@@ -41,13 +40,6 @@ namespace ImageServiceGUI.ViewModel
                         }
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Logs"));
                         break;
-                    //case NotifyCollectionChangedAction.Remove:
-                      //  foreach (string item in e.OldItems)
-                       // {
-                        //    Logs.Remove(item);
-                        //}
-                        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Logs"));
-                        //break;
                     default:
                         break;
                 }

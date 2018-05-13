@@ -1,7 +1,9 @@
-﻿using ImageServiceGUI.Model;
+﻿using ImageService.Communication.Model;
+using ImageServiceGUI.Model;
 using ImageServiceGUI.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,13 +30,22 @@ namespace ImageServiceGUI.Views
     /// </summary>
     public partial class LogView
     {
-        private SettingsViewModel vm;
+        private LogViewModel vm;
+        public ObservableCollection<LogMessage> Logs { get; set; }
+
         public LogView()
         {
             InitializeComponent();
-            SettingsModel m = new SettingsModel();
-            vm = new SettingsViewModel(m);
+            LogModel m = new LogModel();
+            vm = new LogViewModel(m);
             this.DataContext = vm;
+            Logs = vm.Logs;
+            //handlersList.ItemsSource = this.Handlers;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

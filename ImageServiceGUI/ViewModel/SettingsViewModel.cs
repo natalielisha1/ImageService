@@ -27,13 +27,20 @@ namespace ImageServiceGUI.ViewModel
         private SettingsModel model;
         private DelegateCommand<object> removeHandler;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public string outputDir { get; set; }
+        public string sourceName { get; set; }
+        public string logName { get; set; }
+        public string thumSize { get; set; }
         public ObservableCollection<string> Handlers { get; set; }
 
         public SettingsViewModel(SettingsModel model)
         {
             Handlers = new ObservableCollection<string>();
             this.model = model;
+            this.outputDir = model.outputDir;
+            this.sourceName = model.sourceName;
+            this.logName = model.logName;
+            this.thumSize = model.thumSize;
             this.model.Handlers.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e)
             {
                 switch (e.Action)
@@ -79,7 +86,7 @@ namespace ImageServiceGUI.ViewModel
 
         private void OnRemove(object handlerPath)
         {
-            this.Handlers = this.model.Handlers;
+            //TODO:fill
         }
     }
 }
