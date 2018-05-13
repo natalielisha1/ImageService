@@ -13,6 +13,7 @@ using ImageService.Communication.Model;
 using ImageService.Communication;
 using ImageService.Communication.Interfaces;
 using System.IO;
+using ImageService.Infrastructure.Enums;
 
 namespace ImageServiceGUI.Communication
 {
@@ -79,6 +80,20 @@ namespace ImageServiceGUI.Communication
                     }
                 }
             });
+        }
+
+        public void SendCommandToServer(CommandEnum commandID, string[] args,
+                                        string message = "Command to server",
+                                        bool status = true)
+        {
+            CommandMessage cmd = new CommandMessage
+            {
+                Status = status,
+                Type = commandID,
+                Message = message,
+                Args = args
+            };
+            m_client.Write(cmd.ToJSONString());
         }
     }
 }
