@@ -83,9 +83,13 @@ namespace ImageServiceGUI.Communication
         }
 
         public void SendCommandToServer(CommandEnum commandID, string[] args,
-                                        string message = "Command to server",
+                                        string message = null,
                                         bool status = true)
         {
+            if (message == null)
+            {
+                message = "Command to server - " + commandID.ToString();
+            }
             CommandMessage cmd = new CommandMessage
             {
                 Status = status,
