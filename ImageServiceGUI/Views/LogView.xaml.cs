@@ -31,7 +31,6 @@ namespace ImageServiceGUI.Views
     public partial class LogView
     {
         private LogViewModel vm;
-        public ObservableCollection<LogMessage> Logs { get; set; }
 
         public LogView()
         {
@@ -39,13 +38,11 @@ namespace ImageServiceGUI.Views
             LogModel m = new LogModel();
             vm = new LogViewModel(m);
             this.DataContext = vm;
-            Logs = vm.Logs;
-            //handlersList.ItemsSource = this.Handlers;
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Grid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
-            
+
         }
     }
 }

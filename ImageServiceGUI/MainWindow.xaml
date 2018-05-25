@@ -4,9 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageServiceGUI"
+        xmlns:tabData="clr-namespace:ImageServiceGUI.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame x:Name="Main"/>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Settings" Foreground="#FF63051E" FontWeight="Bold" />
+                    </StackPanel>
+                </TabItem.Header>
+                <tabData:SettingsView x:Name="settingsTab"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Logs" Foreground="#FF00786D" FontWeight="Bold" />
+                    </StackPanel>
+                </TabItem.Header>
+                <tabData:LogView x:Name="logsTab"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

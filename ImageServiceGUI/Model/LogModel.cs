@@ -26,6 +26,7 @@ namespace ImageServiceGUI.Model
 
         #region Members
         private CommunicationSingleton client;
+        static private int index = 0;
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,13 +51,28 @@ namespace ImageServiceGUI.Model
                 case CommandEnum.LogAdded:
                     foreach (LogMessage log in msg.LogMessages)
                     {
-                        Logs.Add(log);
-                        OnPropertyChanged("Logs");
+                        if (Logs.Count >= 2048)
+                        {
+                            Logs.Remove(Logs[index]); //remove the oldest one in the collection
+                            index++;
+                            Logs.Add(log);
+                            OnPropertyChanged("Logs");
+                        }
+                        else
+                        {
+                            Logs.Add(log);
+                            OnPropertyChanged("Logs");
+                        }
                     }
                     break;
                 default:
                     break;
             }
+        }
+
+        public void SendMessage(string command, string[] args)
+        {
+            //empty, the log view doesn't request anything.
         }
     }
 }

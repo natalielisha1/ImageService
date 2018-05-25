@@ -15,18 +15,26 @@ using Microsoft.Practices.Prism.Commands;
 using System.Collections.Specialized;
 using ImageServiceGUI.Model;
 using ImageService.Communication.Model;
+using ImageService.Infrastructure.Enums;
+using ImageServiceGUI.Converters;
 
 namespace ImageServiceGUI.ViewModel
 {
     public class LogViewModel
     {
         private LogModel model;
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Properties
         public ObservableCollection<LogMessage> Logs { get; set; }
+        public LogMessageTypeEnum Type { get; set; }
+        public string Message { get; set; }
+        #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public LogViewModel(LogModel model)
         {
+            TypeToBrushConverter converter = new TypeToBrushConverter();
             Logs = new ObservableCollection<LogMessage>();
             this.model = model;
             this.model.Logs.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e)
@@ -37,6 +45,8 @@ namespace ImageServiceGUI.ViewModel
                         foreach (LogMessage item in e.NewItems)
                         {
                             Logs.Add(item);
+                            DataGridXAML.Items.Add(item);
+
                         }
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Logs"));
                         break;
@@ -44,8 +54,6 @@ namespace ImageServiceGUI.ViewModel
                         break;
                 }
             };
-            this.Logs = this.model.Logs;
-            //this.removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
         }
 
         public void NotifyPropertyChanged(string handler)

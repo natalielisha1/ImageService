@@ -73,5 +73,17 @@ namespace ImageServiceGUI.Model
                     break;
             }
         }
+
+        public void SendMessage(string command, string[] args)
+        {
+            switch(command)
+            {
+                case "removeHandler":
+                    client.SendCommandToServer(CommandEnum.RemoveHandler, args, null, false);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

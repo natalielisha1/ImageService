@@ -30,9 +30,9 @@
             <TextBlock Grid.Row="3" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
             <TextBlock Text="{Binding thumbSize, Mode=OneWay}" Grid.Row="3" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
         </Grid>
-        <Button x:Name="RmvButton" Click="btnRemoveHandler_Click" Height="30" FontSize="19" FontWeight="Bold">Remove</Button>
+        <Button x:Name="RmvButton" Command="{Binding removeHandler}" Height="30" FontSize="19" FontWeight="Bold">Remove</Button>
         <ScrollViewer>
-            <ListBox x:Name="handlersList" ItemsSource="{Binding handlers}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <ListBox x:Name="handlersList" ItemsSource="{Binding Path=Handlers}" SelectedItem="{Binding Path=SelectedHandler, Mode=TwoWay}">
             </ListBox>
         </ScrollViewer>
     </StackPanel>

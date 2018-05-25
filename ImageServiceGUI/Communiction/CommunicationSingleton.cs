@@ -99,5 +99,10 @@ namespace ImageServiceGUI.Communication
             };
             m_client.Write(cmd.ToJSONString());
         }
+
+        internal void SendCommandToServer(object removeHandler, object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

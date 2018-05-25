@@ -11,13 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageServiceGUI.Model;
-using Newtonsoft.Json.Linq;
-using ImageService.Commands;
-using ImageService.Modal;
 using Microsoft.Practices.Prism.Commands;
-using ImageService.Controller.Handlers;
-using ImageService.Controller;
-using ImageService.Logging;
 using System.Collections.Specialized;
 
 namespace ImageServiceGUI.ViewModel
@@ -31,16 +25,18 @@ namespace ImageServiceGUI.ViewModel
         public string sourceName { get; set; }
         public string logName { get; set; }
         public string thumSize { get; set; }
+ 
         public ObservableCollection<string> Handlers { get; set; }
+        public string SelectedHandler { get; set; }
 
         public SettingsViewModel(SettingsModel model)
         {
             Handlers = new ObservableCollection<string>();
             this.model = model;
-            this.outputDir = model.outputDir;
-            this.sourceName = model.sourceName;
-            this.logName = model.logName;
-            this.thumSize = model.thumSize;
+            outputDir = model.outputDir;
+            sourceName = model.sourceName;
+            logName = model.logName;
+            thumSize = model.thumSize;
             this.model.Handlers.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e)
             {
                 switch (e.Action)
@@ -63,8 +59,8 @@ namespace ImageServiceGUI.ViewModel
                         break;
                 }
             };
-            this.Handlers = this.model.Handlers;
-            this.removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
+            Handlers = this.model.Handlers;
+            removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
         }
 
         public void NotifyPropertyChanged(string handler)
@@ -74,7 +70,7 @@ namespace ImageServiceGUI.ViewModel
 
         private bool CanRemove(object obj)
         {
-            if (this.Handlers.Count <= 0)
+            if (Handlers.Count <= 0)
             {
                 return false;
             }
@@ -84,9 +80,12 @@ namespace ImageServiceGUI.ViewModel
             }
         }
 
-        private void OnRemove(object handlerPath)
+        private void OnRemove(object obj)
         {
-            //TODO:fill
+            string[] args = new string[1];
+            string handlerPath = SelectedHandler.ToString();
+            args[0] = handlerPath;
+            model.SendMessage("removeHandler", args);
         }
     }
 }
