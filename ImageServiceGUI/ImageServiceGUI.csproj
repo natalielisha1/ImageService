@@ -33,13 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ImageServiceGUI.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Documents\מסמכים - נטלי\לימודים\בר אילן\שנה ב\תכנות מתקדם 2\Commands.dll</HintPath>
+    <Reference Include="Commands">
+      <HintPath>..\packages\Commands\Commands.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -130,14 +132,6 @@
     <ProjectReference Include="..\ImageService.Infrastructure\ImageService.Infrastructure.csproj">
       <Project>{5662b5c6-023a-4c2c-a95a-1966b5fb0068}</Project>
       <Name>ImageService.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ImageService.Logging\ImageService.Logging.csproj">
-      <Project>{b537e1b0-fa9b-4692-966f-765044f485d7}</Project>
-      <Name>ImageService.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ImageService\ImageService.csproj">
-      <Project>{de486ac7-25ca-4b52-93a5-22f2ca384a70}</Project>
-      <Name>ImageService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

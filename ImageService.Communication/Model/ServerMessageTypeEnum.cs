@@ -10,6 +10,7 @@ namespace ImageService.Communication.Model
     {
         LogMessage,
         ConfigMessage,
-        CloseMessage
+        CloseMessage,
+        CloseHandlerMessage
     }
 }

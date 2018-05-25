@@ -75,6 +75,7 @@ namespace ImageService.Controller.Handlers
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetEntryAssembly().Location);
                 config.AppSettings.Settings["Handler"].Value = newPaths;
                 config.Save();
+                ConfigurationManager.RefreshSection("appSettings");
             }
             CreateHandler(path);
         }
@@ -89,6 +90,7 @@ namespace ImageService.Controller.Handlers
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetEntryAssembly().Location);
                 config.AppSettings.Settings["Handler"].Value = newPaths;
                 config.Save();
+                ConfigurationManager.RefreshSection("appSettings");
             }
             CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.RemoveHandler,
                                                                        new string[] { "Recieved remove handler request for " + path },

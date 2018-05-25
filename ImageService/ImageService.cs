@@ -101,7 +101,7 @@ namespace ImageService
             logging.MessageRecieved += Logging_MessageRecieved;
             eventLog.WriteEntry("LoggingService created.", (EventLogEntryType) LogMessageTypeEnum.INFO);
 
-            m_imageServer = new ImageServer(logging);
+            m_imageServer = new ImageServer(logging, 5432);
             eventLog.WriteEntry("ImageServer created.", (EventLogEntryType) LogMessageTypeEnum.INFO);
             m_imageServer.StartServer();
             eventLog.WriteEntry("ImageServer started.", (EventLogEntryType) LogMessageTypeEnum.INFO);

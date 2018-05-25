@@ -13,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageService.Communication.Model;
-using ImageService.Controller.Handlers;
 using ImageService.Infrastructure.Enums;
 using ImageServiceGUI.Communication;
 
@@ -22,22 +21,58 @@ namespace ImageServiceGUI.Model
     public class SettingsModel : IModel, INotifyPropertyChanged
     {
         #region Properties
-        public ObservableCollection<string> Handlers { get; set; }
+        private CommunicationSingleton client;
+        private string outputDir;
+        private string sourceName;
+        private string logName;
+        private string thumSize;
         #endregion
 
         #region Members
-        private CommunicationSingleton client;
-        public string outputDir { get; set; }
-        public string sourceName { get; set; }
-        public string logName { get; set; }
-        public string thumSize { get; set; }
+        public ObservableCollection<string> Handlers { get; set; }
+        public string OutputDir
+        {
+            get { return outputDir; }
+            set
+            {
+                outputDir = value;
+                NotifyPropertyChanged("OutputDir");
+            }
+        }
+        public string SourceName
+        {
+            get { return sourceName; }
+            set
+            {
+                sourceName = value;
+                NotifyPropertyChanged("SourceName");
+            }
+        }
+        public string LogName
+        {
+            get { return logName; }
+            set
+            {
+                logName = value;
+                NotifyPropertyChanged("LogName");
+            }
+        }
+        public string ThumSize
+        {
+            get { return thumSize; }
+            set
+            {
+                thumSize = value;
+                NotifyPropertyChanged("ThumSize");
+            }
+        }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string handler)
+        public void NotifyPropertyChanged(string prop)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(handler));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         public SettingsModel()
@@ -45,6 +80,7 @@ namespace ImageServiceGUI.Model
             Handlers = new ObservableCollection<string>();
             client = CommunicationSingleton.Instance;
             client.MessageArrived += ProcessMessage;
+            client.SendCommandToServer(CommandEnum.GetConfigCommand, new string[] { });
         }
 
         public void ProcessMessage(object sender, CommandMessageEventArgs e)
@@ -53,21 +89,29 @@ namespace ImageServiceGUI.Model
             switch (msg.Type)
             {
                 case CommandEnum.AddHandler:
-                    Handlers.Add(msg.Handlers[0]);
-                    OnPropertyChanged("Handlers");
-                    break;
-                case CommandEnum.ConfigMessage:
-                    //fill
+                    foreach (string handler in msg.Handlers)
+                    {
+                        Handlers.Add(handler);
+                    }
+                    NotifyPropertyChanged("Handlers");
                     break;
                 case CommandEnum.RemoveHandler:
-                    Handlers.Remove(msg.Args[0]);
-                    OnPropertyChanged("Handlers");
+                    foreach (string handler in msg.Handlers)
+                    {
+                        Handlers.Remove(handler);
+                    }
+                    NotifyPropertyChanged("Handlers");
                     break;
-                case CommandEnum.GetConfigCommand:
-                    outputDir = msg.OutputDir;
-                    sourceName = msg.LogSource;
-                    logName = msg.LogName;
-                    thumSize = msg.ThumbSize.ToString();
+                case CommandEnum.ConfigMessage:
+                    OutputDir = msg.OutputDir;
+                    SourceName = msg.LogSource;
+                    LogName = msg.LogName;
+                    ThumSize = msg.ThumbSize.ToString();
+                    foreach (string handler in msg.Handlers)
+                    {
+                        Handlers.Add(handler);
+                    }
+                    NotifyPropertyChanged("Handlers");
                     break;
                 default:
                     break;
@@ -79,7 +123,7 @@ namespace ImageServiceGUI.Model
             switch(command)
             {
                 case "removeHandler":
-                    client.SendCommandToServer(CommandEnum.RemoveHandler, args, null, false);
+                    client.SendCommandToServer(CommandEnum.RemoveHandler, args);
                     break;
                 default:
                     break;

@@ -44,11 +44,24 @@ namespace ImageServiceGUI.ViewModel
                     case NotifyCollectionChangedAction.Add:
                         foreach (LogMessage item in e.NewItems)
                         {
-                            Logs.Add(item);
-                            DataGridXAML.Items.Add(item);
+                            App.Current.Dispatcher.Invoke(delegate
+                            {
+                                Logs.Add(item);
+                            });
+                            //DataGridXAML.Items.Add(item);
 
                         }
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Logs"));
+                        NotifyPropertyChanged("Logs");
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (LogMessage item in e.OldItems)
+                        {
+                            App.Current.Dispatcher.Invoke(delegate
+                            {
+                                Logs.Remove(item);
+                            });
+                        }
+                        NotifyPropertyChanged("Logs");
                         break;
                     default:
                         break;
@@ -56,9 +69,9 @@ namespace ImageServiceGUI.ViewModel
             };
         }
 
-        public void NotifyPropertyChanged(string handler)
+        public void NotifyPropertyChanged(string prop)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(handler));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

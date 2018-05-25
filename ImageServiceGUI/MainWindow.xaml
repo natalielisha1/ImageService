@@ -16,7 +16,9 @@
                         <TextBlock Text="Settings" Foreground="#FF63051E" FontWeight="Bold" />
                     </StackPanel>
                 </TabItem.Header>
-                <tabData:SettingsView x:Name="settingsTab"/>
+                <TabItem.Content>
+                    <tabData:SettingsView x:Name="settingsTab"/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -24,7 +26,9 @@
                         <TextBlock Text="Logs" Foreground="#FF00786D" FontWeight="Bold" />
                     </StackPanel>
                 </TabItem.Header>
-                <tabData:LogView x:Name="logsTab"/>
+                <TabItem.Content>
+                    <tabData:LogView x:Name="logsTab"/>
+                </TabItem.Content>
             </TabItem>
         </TabControl>
     </Grid>

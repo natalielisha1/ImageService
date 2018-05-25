@@ -31,10 +31,17 @@ namespace ImageService.Commands
         public string Execute(string[] args, out bool result)
         {
             result = m_handlerManager.RemoveHandler(args[0]);
+            //CommandMessage msg = new CommandMessage
+            //{
+            //    Status = result,
+            //    Type = CommandEnum.RemoveHandler,
+            //    Message = @"Sent remove handler request",
+            //    Handlers = new string[] { args[0] }
+            //};
             CommandMessage msg = new CommandMessage
             {
                 Status = result,
-                Type = CommandEnum.RemoveHandler,
+                Type = CommandEnum.OK,
                 Message = @"Sent remove handler request"
             };
             return msg.ToJSONString();

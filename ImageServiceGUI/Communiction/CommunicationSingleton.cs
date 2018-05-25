@@ -38,6 +38,7 @@ namespace ImageServiceGUI.Communication
         #endregion
 
         private CommunicationSingleton() {
+            m_client = new TcpClientChannel();
             m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
             Start();
         }
@@ -80,6 +81,7 @@ namespace ImageServiceGUI.Communication
                     }
                 }
             });
+            task.Start();
         }
 
         public void SendCommandToServer(CommandEnum commandID, string[] args,
@@ -98,11 +100,6 @@ namespace ImageServiceGUI.Communication
                 Args = args
             };
             m_client.Write(cmd.ToJSONString());
-        }
-
-        internal void SendCommandToServer(object removeHandler, object obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

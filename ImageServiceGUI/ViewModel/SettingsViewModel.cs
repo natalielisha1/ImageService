@@ -19,12 +19,25 @@ namespace ImageServiceGUI.ViewModel
     public class SettingsViewModel : INotifyPropertyChanged
     {
         private SettingsModel model;
-        private DelegateCommand<object> removeHandler;
+        public DelegateCommand<object> RemoveHandler { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
-        public string outputDir { get; set; }
-        public string sourceName { get; set; }
-        public string logName { get; set; }
-        public string thumSize { get; set; }
+        public string OutputDir
+        {
+            get { return model.OutputDir; }
+        }
+        public string SourceName
+        {
+            get { return model.SourceName; }
+        }
+        public string LogName
+        {
+            get { return model.LogName; }
+        }
+        public string ThumSize
+        {
+            get { return model.ThumSize; }
+        }
  
         public ObservableCollection<string> Handlers { get; set; }
         public string SelectedHandler { get; set; }
@@ -33,10 +46,11 @@ namespace ImageServiceGUI.ViewModel
         {
             Handlers = new ObservableCollection<string>();
             this.model = model;
-            outputDir = model.outputDir;
-            sourceName = model.sourceName;
-            logName = model.logName;
-            thumSize = model.thumSize;
+            model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            {
+                NotifyPropertyChanged(e.PropertyName);
+            };
+
             this.model.Handlers.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e)
             {
                 switch (e.Action)
@@ -44,28 +58,36 @@ namespace ImageServiceGUI.ViewModel
                     case NotifyCollectionChangedAction.Add:
                         foreach (string item in e.NewItems)
                         {
-                            Handlers.Add(item);
+                            App.Current.Dispatcher.Invoke(delegate
+                            {
+                                Handlers.Add(item);
+                            });
                         }
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Handlers"));
+                        NotifyPropertyChanged("Handlers");
+                        RemoveHandler.RaiseCanExecuteChanged();
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         foreach (string item in e.OldItems)
                         {
-                            Handlers.Remove(item);
+                            App.Current.Dispatcher.Invoke(delegate
+                            {
+                                Handlers.Remove(item);
+                            });
                         }
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Handlers"));
+                        NotifyPropertyChanged("Handlers");
+                        RemoveHandler.RaiseCanExecuteChanged();
                         break;
                     default:
                         break;
                 }
             };
-            Handlers = this.model.Handlers;
-            removeHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
+            Handlers = new ObservableCollection<string>();
+            RemoveHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
         }
 
-        public void NotifyPropertyChanged(string handler)
+        public void NotifyPropertyChanged(string prop)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(handler));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         private bool CanRemove(object obj)

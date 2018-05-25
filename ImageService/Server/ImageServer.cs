@@ -46,12 +46,34 @@ namespace ImageService.Server
         /// <param name="logging">the logging service that will be connected to the image service</param>
         public ImageServer(ILoggingService logging, int port)
         {
+            //while (!System.Diagnostics.Debugger.IsAttached) { }
             m_logging = logging;
             IImageServiceModal modal = new ImageServiceModal();
             m_controller = new ImageController(modal);
             m_clientHandler = new ClientHandler(m_controller);
             m_TCPServer = new TcpServerChannel(port, m_clientHandler);
             m_handlerManager = HandlerManager.Instance;
+            m_handlerManager.Logging = m_logging;
+            m_handlerManager.Controller = m_controller;
+            m_handlerManager.CommandRecieved += delegate (object sender, CommandRecievedEventArgs e)
+            {
+                switch (e.CommandID)
+                {
+                    case (int)CommandEnum.RemoveHandler:
+                        CommandMessage message = new CommandMessage
+                        {
+                            Status = true,
+                            Type = CommandEnum.RemoveHandler,
+                            Message = @"Removed handler " + e.RequestDirPath,
+                            Handlers = new string[] { e.RequestDirPath }
+                        };
+                        m_logging.Log(message.Message, LogMessageTypeEnum.INFO);
+                        m_TCPServer.SendMessage(message.ToJSONString(), ServerMessageTypeEnum.CloseHandlerMessage);
+                        break;
+                    default:
+                        break;
+                }
+            };
             m_logStorage = LogStorage.Instance;
             m_logging.MessageRecieved += m_logStorage.AddLog;
         }
@@ -140,6 +162,7 @@ namespace ImageService.Server
         public void SendCommand()
         {
             CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseServer, new string[] { "Server close request" }, "*"));
+            m_TCPServer.Stop();
         }
     }
 }

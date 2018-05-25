@@ -59,7 +59,6 @@
     <Compile Include="Model\ServerMessageTypeEnum.cs" />
     <Compile Include="TcpServerChannel.cs" />
     <Compile Include="TcpClientChannel.cs" />
-    <Compile Include="ClientHandler.cs" />
     <Compile Include="Model\CommandMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

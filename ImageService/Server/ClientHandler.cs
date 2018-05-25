@@ -37,6 +37,10 @@ namespace ImageService.Server
                     while (true)
                     {
                         string message = client.Read();
+                        if (message == null)
+                        {
+                            continue;
+                        }
                         CommandMessage cmd = CommandMessage.FromJSONString(message);
                         bool result;
                         string newMessage = m_controller.ExecuteCommand((int)cmd.Type, cmd.Args, out result);

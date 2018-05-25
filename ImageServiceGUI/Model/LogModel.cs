@@ -26,14 +26,14 @@ namespace ImageServiceGUI.Model
 
         #region Members
         private CommunicationSingleton client;
-        static private int index = 0;
+        //static private int index = 0;
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string log)
+        public void NotifyPropertyChanged(string prop)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(log));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         public LogModel()
@@ -41,6 +41,7 @@ namespace ImageServiceGUI.Model
             Logs = new ObservableCollection<LogMessage>();
             client = CommunicationSingleton.Instance;
             client.MessageArrived += ProcessMessage;
+            client.SendCommandToServer(CommandEnum.LogRequest, new string[] { });
         }
 
         public void ProcessMessage(object sender, CommandMessageEventArgs e)
@@ -53,16 +54,12 @@ namespace ImageServiceGUI.Model
                     {
                         if (Logs.Count >= 2048)
                         {
-                            Logs.Remove(Logs[index]); //remove the oldest one in the collection
-                            index++;
-                            Logs.Add(log);
-                            OnPropertyChanged("Logs");
+                            //Logs.Remove(Logs[index]); //remove the oldest one in the collection
+                            //index++;
+                            Logs.RemoveAt(0);
                         }
-                        else
-                        {
-                            Logs.Add(log);
-                            OnPropertyChanged("Logs");
-                        }
+                        Logs.Add(log);
+                        NotifyPropertyChanged("Logs");
                     }
                     break;
                 default:

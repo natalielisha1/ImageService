@@ -15,9 +15,17 @@ namespace ImageService.Communication
         private readonly object readLock = new object();
         private readonly object writeLock = new object();
 
+        private NetworkStream stream;
+        private StreamReader reader;
+        private StreamWriter writer;
+
         public ClientWrapper(TcpClient client)
         {
             this.client = client;
+            this.stream = client.GetStream();
+            this.reader = new StreamReader(this.stream);
+            this.writer = new StreamWriter(this.stream);
+            this.writer.AutoFlush = true;
         }
 
         public string Read()
@@ -25,11 +33,16 @@ namespace ImageService.Communication
             //Allow only one task to read at a time
             lock (readLock)
             {
-                using (NetworkStream stream = client.GetStream())
-                using (TextReader reader = new StreamReader(stream))
+                string message = reader.ReadLine();
+                if (message == null)
                 {
-                    return reader.ReadLine();
+                    return null;
                 }
+                string lenStr = message.Split('\r')[0];
+                int len = int.Parse(lenStr);
+                char[] buffer = new char[len];
+                reader.Read(buffer, 0, len);
+                return new string(buffer);
             }
         }
 
@@ -38,17 +51,23 @@ namespace ImageService.Communication
             //Allow only one task to write at a time
             lock (writeLock)
             {
-                using (NetworkStream stream = client.GetStream())
-                using (TextWriter writer = new StreamWriter(stream))
-                {
-                    writer.WriteLine(message);
-                }
+                writer.WriteLine(message.Length);
+                writer.Write(message);
             }
         }
 
         public void Close()
         {
-            client.Close();
+            lock (readLock)
+            {
+                lock (writeLock)
+                {
+                    writer.Dispose();
+                    reader.Dispose();
+                    stream.Dispose();
+                    client.Close();
+                }
+            }
         }
     }
 }
