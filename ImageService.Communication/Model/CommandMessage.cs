@@ -3,7 +3,6 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +32,10 @@ namespace ImageService.Communication.Model
         //Log member
         public List<LogMessage> LogMessages { get; set; }
 
+        /// <summary>
+        /// The function converts a JSON message to a string
+        /// </summary>
+        /// <returns>a string message</returns>
         public string ToJSONString()
         {
             JObject jsonMessage = new JObject();
@@ -52,6 +55,11 @@ namespace ImageService.Communication.Model
             return jsonMessage.ToString();
         }
 
+        /// <summary>
+        /// The function converts a string message to a JSON message
+        /// </summary>
+        /// <param name="str">the string message</param>
+        /// <returns>a JSON message</returns>
         public static CommandMessage FromJSONString(string str)
         {
             JObject jsonMessage = JObject.Parse(str);

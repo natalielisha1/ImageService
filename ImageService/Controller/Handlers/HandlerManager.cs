@@ -1,4 +1,9 @@
-﻿using ImageService.Controller;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex2
+ */
+using ImageService.Controller;
 using ImageService.Controller.Handlers;
 using ImageService.Infrastructure.Enums;
 using ImageService.Logging;
@@ -32,6 +37,7 @@ namespace ImageService.Controller.Handlers
 
         private HandlerManager() { }
 
+        //Returning an instance of HandlerManager
         public static HandlerManager Instance
         {
             get
@@ -50,6 +56,7 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        //Setter for ILoggingService
         public ILoggingService Logging
         {
             set
@@ -58,6 +65,7 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        //Setter for IImageController
         public IImageController Controller
         {
             set
@@ -66,6 +74,11 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        /// <summary>
+        /// The function creates a new handler with the given path
+        /// and updates all related sources.
+        /// </summary>
+        /// <param name="path">The path of the handler we want to add</param>
         public void AddHandler(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -84,6 +97,11 @@ namespace ImageService.Controller.Handlers
             CreateHandler(path);
         }
 
+        /// <summary>
+        /// The function removes the handler responsible to the
+        /// given path and updates all related sources
+        /// </summary>
+        /// <param name="path">The path of the handler we want to remove</param>
         public bool RemoveHandler(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -110,6 +128,10 @@ namespace ImageService.Controller.Handlers
             return true;
         }
 
+        /// <summary>
+        /// The function returns the current handlers
+        /// </summary>
+        /// <return>string array of the handlers</return>
         public string[] GetHandlers()
         {
             string paths = System.Configuration.ConfigurationManager.AppSettings["Handler"];
@@ -152,6 +174,9 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        /// <summary>
+        /// The function invokes closing the server
+        /// </summary>
         public void ServerClosing()
         {
             CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int)CommandEnum.CloseServer, new string[] { "Server close request" }, "*"));

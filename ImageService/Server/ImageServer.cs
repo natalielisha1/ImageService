@@ -44,9 +44,9 @@ namespace ImageService.Server
         /// Constructor for ImageServer class
         /// </summary>
         /// <param name="logging">the logging service that will be connected to the image service</param>
+        /// <param name="port">the port of the tcp server the constructor creates</param>
         public ImageServer(ILoggingService logging, int port)
         {
-            //while (!System.Diagnostics.Debugger.IsAttached) { }
             m_logging = logging;
             IImageServiceModal modal = new ImageServiceModal();
             m_controller = new ImageController(modal);
@@ -112,49 +112,8 @@ namespace ImageService.Server
             foreach (string path in pathArr)
             {
                 m_handlerManager.AddHandler(path);
-                //CreateHandler(path);
             }
         }
-
-        //TODO: Remove
-        /*
-        /// <summary>
-        /// The Function creates a handler
-        /// </summary>
-        /// <param name="dir">The directory of the file we want to handle</param>
-        public void CreateHandler(string dir)
-        {
-            if (System.IO.Directory.Exists(dir))
-            {
-                IDirectoryHandler handler = new DirectoryHandler(dir, m_controller, m_logging);
-                CommandRecieved += handler.OnCommandRecieved;
-                handler.DirectoryClose += OnDirectoryClose;
-                handler.StartHandleDirectory(dir);
-                m_logging.Log("Created and started handler for: " + dir, LogMessageTypeEnum.INFO);
-            } else
-            {
-                m_logging.Log("Failed to create handler for: " + dir, LogMessageTypeEnum.FAIL);
-            }
-        }*/
-
-        //TODO: Remove
-        /*
-        /// <summary>
-        /// The Function closes the handler of a file
-        /// </summary>
-        /// <param name="sender">The sender of the close command</param>
-        /// <param name="e">The arguments that came with the command (close directory)</param>
-        private void OnDirectoryClose(object sender, DirectoryCloseEventArgs e)
-        {
-            if (sender is IDirectoryHandler)
-            {
-                IDirectoryHandler handler = (IDirectoryHandler) sender;
-                CommandRecieved -= handler.OnCommandRecieved;
-                handler.DirectoryClose -= OnDirectoryClose;
-                m_logging.Log(e.DirectoryPath + @": " + e.Message, LogMessageTypeEnum.INFO);
-            }
-        }
-        */
 
         /// <summary>
         /// The Function sends CLOSE command (requesting to close the server)

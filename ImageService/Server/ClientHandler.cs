@@ -23,6 +23,10 @@ namespace ImageService.Server
         private IImageController m_controller;
         #endregion
 
+        /// <summary>
+        /// Constructor for ClientHandler class
+        /// </summary>
+        /// <param name="controller">an image controller</param>
         public ClientHandler(IImageController controller)
         {
             m_controller = controller;

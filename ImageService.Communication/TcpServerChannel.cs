@@ -3,7 +3,6 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +22,11 @@ namespace ImageService.Communication
         private IClientHandler ch;
         private event EventHandler<ServerMessageRecievedEventArgs> MessageRecieved;
 
+        /// <summary>
+        /// Constructor for TcpServerChannel
+        /// </summary>
+        /// <param name="port">the server's port</param>
+        /// <param name="ch">the server's channel</param>
         public TcpServerChannel(int port, IClientHandler ch)
         {
             this.port = port;

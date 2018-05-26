@@ -1,4 +1,9 @@
-﻿using ImageService.Communication.Model;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex2
+ */
+using ImageService.Communication.Model;
 using ImageService.Controller.Handlers;
 using ImageService.Infrastructure.Enums;
 using ImageService.Modal;
@@ -31,13 +36,6 @@ namespace ImageService.Commands
         public string Execute(string[] args, out bool result)
         {
             result = m_handlerManager.RemoveHandler(args[0]);
-            //CommandMessage msg = new CommandMessage
-            //{
-            //    Status = result,
-            //    Type = CommandEnum.RemoveHandler,
-            //    Message = @"Sent remove handler request",
-            //    Handlers = new string[] { args[0] }
-            //};
             CommandMessage msg = new CommandMessage
             {
                 Status = result,

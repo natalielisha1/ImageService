@@ -1,4 +1,9 @@
-﻿using ImageServiceGUI.Model;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex2
+ */
+using ImageServiceGUI.Model;
 using ImageServiceGUI.ViewModel;
 using System;
 using System.Collections.Generic;

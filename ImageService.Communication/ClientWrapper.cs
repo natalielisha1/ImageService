@@ -19,6 +19,11 @@ namespace ImageService.Communication
         private StreamReader reader;
         private StreamWriter writer;
 
+        /// <summary>
+        /// Constructor for the ClientWrapper class
+        /// </summary>
+        /// <param name="client">a Client instance,
+        /// the client we want to activate</param>
         public ClientWrapper(TcpClient client)
         {
             this.client = client;

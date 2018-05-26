@@ -1,4 +1,9 @@
-﻿using ImageService.Communication.Model;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex2
+ */
+using ImageService.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +26,7 @@ namespace ImageService.Server
 
         private LogStorage() { }
 
+        //Returning an instance of LogStorage
         public static LogStorage Instance
         {
             get
@@ -39,6 +45,11 @@ namespace ImageService.Server
             }
         }
 
+        /// <summary>
+        /// The function adds a log to the stored logs
+        /// </summary>
+        /// <param name="sender">The sender of the command</param>
+        /// <param name="e">The arguments that are given with the command</param>
         public void AddLog(object sender, MessageRecievedEventArgs e)
         {
             LogMessage newLog = new LogMessage

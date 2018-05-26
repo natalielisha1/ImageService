@@ -3,7 +3,6 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
-
 using ImageService.Communication.Model;
 using ImageService.Infrastructure.Enums;
 using ImageServiceGUI.Communication;
@@ -31,11 +30,20 @@ namespace ImageServiceGUI.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// The function is responsible of notifying in case
+        /// the property has changed
+        /// </summary>
+        /// <param name="prop">a property</param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
+        /// <summary>
+        /// Constructor for the LogModel class
+        /// </summary>
+        /// <returns>bool value</returns>
         public LogModel()
         {
             Logs = new ObservableCollection<LogMessage>();

@@ -3,7 +3,6 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,12 +37,16 @@ namespace ImageServiceGUI.Communication
         private ITcpClient m_client;
         #endregion
 
+        /// <summary>
+        /// Constructs the communication singleton
+        /// </summary>
         private CommunicationSingleton() {
             m_client = new TcpClientChannel();
             Connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
             Start();
         }
 
+        //Returning a communication singleton
         public static CommunicationSingleton Instance
         {
             get
@@ -62,6 +65,10 @@ namespace ImageServiceGUI.Communication
             }
         }
 
+        /// <summary>
+        /// The function starts the the communication
+        /// between the GUI and the server
+        /// </summary>
         private void Start()
         {
             if (!Connected)
@@ -89,6 +96,10 @@ namespace ImageServiceGUI.Communication
             task.Start();
         }
 
+        /// <summary>
+        /// The function sends commands (messages)
+        /// from the GUI to the server
+        /// </summary>
         public void SendCommandToServer(CommandEnum commandID, string[] args,
                                         string message = null,
                                         bool status = true)
