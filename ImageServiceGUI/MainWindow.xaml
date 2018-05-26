@@ -4,10 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageServiceGUI"
+        xmlns:local1="clr-namespace:ImageServiceGUI.Communication"
         xmlns:tabData="clr-namespace:ImageServiceGUI.Views"
+        xmlns:local11="clr-namespace:ImageServiceGUI.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding CommunicationSingleton}">
+    
+    <Window.Resources>
+        <local11:ConnectedToBrushConverter x:Key="converter"/>
+    </Window.Resources>
+
     <Grid>
+        <Border Background="{Binding Connected, Converter={StaticResource converter}}"></Border>
         <Frame x:Name="Main"/>
         <TabControl>
             <TabItem>

@@ -64,6 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Communiction\CommunicationSingleton.cs" />
+    <Compile Include="Converters\ConnectedToBrushConverter.cs" />
     <Compile Include="Converters\TypeToBrushConverter.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
