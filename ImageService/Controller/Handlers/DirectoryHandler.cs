@@ -54,6 +54,8 @@ namespace ImageService.Controller.Handlers
                     //check if it's close command, and if so close the handler
                     case (int)CommandEnum.CloseServer:      CloseHandler(e.Args[0]);
                                                             break;
+                    case (int)CommandEnum.RemoveHandler:    CloseHandler(e.Args[0]);
+                                                            break;
                 }
             }
         }

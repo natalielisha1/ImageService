@@ -161,7 +161,7 @@ namespace ImageService.Server
         /// </summary>
         public void SendCommand()
         {
-            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int) CommandEnum.CloseServer, new string[] { "Server close request" }, "*"));
+            m_handlerManager.ServerClosing();
             m_TCPServer.Stop();
         }
     }

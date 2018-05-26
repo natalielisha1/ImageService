@@ -58,6 +58,10 @@ namespace ImageServiceGUI.ViewModel
                     case NotifyCollectionChangedAction.Add:
                         foreach (string item in e.NewItems)
                         {
+                            if (string.IsNullOrWhiteSpace(item))
+                            {
+                                continue;
+                            }
                             App.Current.Dispatcher.Invoke(delegate
                             {
                                 Handlers.Add(item);

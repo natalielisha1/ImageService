@@ -68,6 +68,10 @@ namespace ImageService.Controller.Handlers
 
         public void AddHandler(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
             string oldPaths = ConfigurationManager.AppSettings["Handler"];
             if (!oldPaths.Contains(path))
             {
@@ -82,11 +86,19 @@ namespace ImageService.Controller.Handlers
 
         public bool RemoveHandler(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return false;
+            }
             string oldPaths = ConfigurationManager.AppSettings["Handler"];
             if (oldPaths.Contains(path))
             {
                 string newPaths = oldPaths.Replace(path, "");
                 newPaths = newPaths.Replace(";;", ";");
+                if (newPaths.EndsWith(";"))
+                {
+                    newPaths = newPaths.Substring(0, newPaths.Length - 1);
+                }
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetEntryAssembly().Location);
                 config.AppSettings.Settings["Handler"].Value = newPaths;
                 config.Save();
@@ -138,6 +150,11 @@ namespace ImageService.Controller.Handlers
                 handler.DirectoryClose -= OnDirectoryClose;
                 m_logging.Log(e.DirectoryPath + @": " + e.Message, LogMessageTypeEnum.INFO);
             }
+        }
+
+        public void ServerClosing()
+        {
+            CommandRecieved?.Invoke(this, new CommandRecievedEventArgs((int)CommandEnum.CloseServer, new string[] { "Server close request" }, "*"));
         }
     }
 }

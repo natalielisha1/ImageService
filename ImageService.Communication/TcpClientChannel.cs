@@ -20,12 +20,19 @@ namespace ImageService.Communication
     {
         private IClientWrapper client;
 
-        public void Connect(string ip, int port)
+        public bool Connect(string ip, int port)
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
-            TcpClient tcpClient = new TcpClient();
-            tcpClient.Connect(ep);
-            client = new ClientWrapper(tcpClient);
+            try
+            {
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
+                TcpClient tcpClient = new TcpClient();
+                tcpClient.Connect(ep);
+                client = new ClientWrapper(tcpClient);
+                return true;
+            } catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public void Disconnect()

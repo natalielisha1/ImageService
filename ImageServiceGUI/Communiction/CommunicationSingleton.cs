@@ -31,6 +31,7 @@ namespace ImageServiceGUI.Communication
 
         #region Properties
         public EventHandler<CommandMessageEventArgs> MessageArrived;
+        public bool Connected { get; private set; }
         #endregion
 
         #region Members
@@ -39,7 +40,7 @@ namespace ImageServiceGUI.Communication
 
         private CommunicationSingleton() {
             m_client = new TcpClientChannel();
-            m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
+            Connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
             Start();
         }
 
@@ -63,6 +64,10 @@ namespace ImageServiceGUI.Communication
 
         private void Start()
         {
+            if (!Connected)
+            {
+                return;
+            }
             Task task = new Task(() =>
             {
                 while (true)
@@ -88,6 +93,10 @@ namespace ImageServiceGUI.Communication
                                         string message = null,
                                         bool status = true)
         {
+            if (!Connected)
+            {
+                return;
+            }
             if (message == null)
             {
                 message = "Command to server - " + commandID.ToString();

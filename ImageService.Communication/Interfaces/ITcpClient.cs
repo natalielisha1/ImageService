@@ -14,7 +14,7 @@ namespace ImageService.Communication.Interfaces
 {
     public interface ITcpClient
     {
-        void Connect(string ip, int port);
+        bool Connect(string ip, int port);
         void Write(string command);
         string Read();
         void Disconnect();
