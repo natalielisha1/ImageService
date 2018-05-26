@@ -9,7 +9,7 @@
         xmlns:local11="clr-namespace:ImageServiceGUI.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        DataContext="{Binding CommunicationSingleton}">
+        DataContext="{StaticResource ConnectionChecker}">
     
     <Window.Resources>
         <local11:ConnectedToBrushConverter x:Key="converter"/>

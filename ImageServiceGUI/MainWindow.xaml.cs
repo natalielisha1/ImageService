@@ -29,10 +29,5 @@ namespace ImageServiceGUI
         {
             InitializeComponent();
         }
-
-        private void WindowStyle_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-        {
-
-        }
     }
 }
