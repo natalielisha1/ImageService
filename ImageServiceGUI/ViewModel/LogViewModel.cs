@@ -27,9 +27,8 @@ namespace ImageServiceGUI.ViewModel
         public ObservableCollection<LogMessage> Logs { get; set; }
         public LogMessageTypeEnum Type { get; set; }
         public string Message { get; set; }
-        #endregion
-
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         /// <summary>
         /// Constructor for LogViewModel class
@@ -51,7 +50,6 @@ namespace ImageServiceGUI.ViewModel
                             {
                                 Logs.Add(item);
                             });
-                            //DataGridXAML.Items.Add(item);
 
                         }
                         NotifyPropertyChanged("Logs");

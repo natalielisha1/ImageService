@@ -65,9 +65,9 @@ namespace ImageServiceGUI.Model
                 NotifyPropertyChanged("ThumSize");
             }
         }
-        #endregion
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         /// <summary>
         /// The function is responsible of notifying in case
@@ -89,12 +89,14 @@ namespace ImageServiceGUI.Model
             client.MessageArrived += ProcessMessage;
             client.SendCommandToServer(CommandEnum.GetConfigCommand, new string[] { });
         }
-
+        
         public void ProcessMessage(object sender, CommandMessageEventArgs e)
         {
+            //Extract the message from the EventArgs
             CommandMessage msg = e.Message;
             switch (msg.Type)
             {
+                //Checking if the message is interesting to the Settings
                 case CommandEnum.AddHandler:
                     foreach (string handler in msg.Handlers)
                     {
@@ -124,17 +126,10 @@ namespace ImageServiceGUI.Model
                     break;
             }
         }
-
-        public void SendMessage(string command, string[] args)
+        
+        public void SendMessage(CommandEnum command, string[] args)
         {
-            switch(command)
-            {
-                case "removeHandler":
-                    client.SendCommandToServer(CommandEnum.RemoveHandler, args);
-                    break;
-                default:
-                    break;
-            }
+            client.SendCommandToServer(command, args);
         }
     }
 }

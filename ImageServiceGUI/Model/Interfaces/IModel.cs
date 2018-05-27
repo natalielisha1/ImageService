@@ -4,6 +4,7 @@
  * Exercise: Ex2
  */
 using ImageService.Communication.Model;
+using ImageService.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,6 @@ namespace ImageServiceGUI.Model
         /// </summary>
         /// <param name="command">The type of message, by command</param>
         /// <param name="args">Arguments related to the command</param>
-        void SendMessage(string command, string[] args);
+        void SendMessage(CommandEnum command, string[] args);
     }
 }

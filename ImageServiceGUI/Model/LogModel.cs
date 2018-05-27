@@ -21,14 +21,12 @@ namespace ImageServiceGUI.Model
     {
         #region Properties
         public ObservableCollection<LogMessage> Logs { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Members
         private CommunicationSingleton client;
-        //static private int index = 0;
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// The function is responsible of notifying in case
@@ -50,19 +48,19 @@ namespace ImageServiceGUI.Model
             client.MessageArrived += ProcessMessage;
             client.SendCommandToServer(CommandEnum.LogRequest, new string[] { });
         }
-
+        
         public void ProcessMessage(object sender, CommandMessageEventArgs e)
         {
+            //Extract the message from the EventArgs
             CommandMessage msg = e.Message;
             switch (msg.Type)
             {
+                //Checking if the message is interesting to the Logs
                 case CommandEnum.LogAdded:
                     foreach (LogMessage log in msg.LogMessages)
                     {
                         if (Logs.Count >= 2048)
                         {
-                            //Logs.Remove(Logs[index]); //remove the oldest one in the collection
-                            //index++;
                             Logs.RemoveAt(0);
                         }
                         Logs.Add(log);
@@ -73,8 +71,8 @@ namespace ImageServiceGUI.Model
                     break;
             }
         }
-
-        public void SendMessage(string command, string[] args)
+        
+        public void SendMessage(CommandEnum command, string[] args)
         {
             //empty, the log view doesn't request anything.
         }

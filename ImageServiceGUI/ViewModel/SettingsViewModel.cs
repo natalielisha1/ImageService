@@ -12,12 +12,17 @@ using System.Threading.Tasks;
 using ImageServiceGUI.Model;
 using Microsoft.Practices.Prism.Commands;
 using System.Collections.Specialized;
+using ImageService.Infrastructure.Enums;
 
 namespace ImageServiceGUI.ViewModel
 {
     public class SettingsViewModel : INotifyPropertyChanged
     {
+        #region Members
         private SettingsModel model;
+        #endregion
+
+        #region Properties
         public DelegateCommand<object> RemoveHandler { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,6 +45,7 @@ namespace ImageServiceGUI.ViewModel
  
         public ObservableCollection<string> Handlers { get; set; }
         public string SelectedHandler { get; set; }
+        #endregion
 
         /// <summary>
         /// Constructor for SettingsViewModel class
@@ -130,7 +136,7 @@ namespace ImageServiceGUI.ViewModel
             string[] args = new string[1];
             string handlerPath = SelectedHandler.ToString();
             args[0] = handlerPath;
-            model.SendMessage("removeHandler", args);
+            model.SendMessage(CommandEnum.RemoveHandler, args);
         }
     }
 }
