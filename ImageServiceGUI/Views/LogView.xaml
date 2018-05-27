@@ -12,30 +12,33 @@
         <local1:TypeToBrushConverter x:Key="converter"/>
     </UserControl.Resources>
 
-    <StackPanel>
-        <TextBlock Text="Logs" FontSize="72" HorizontalAlignment="Center" Width="171" Foreground="#FF011A36" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="305,0,312,0"/>
-        <Grid Margin="3">
-            <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" ItemsSource="{Binding Logs}" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Type" Width="100" Binding="{Binding Type}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Background" Value="{Binding Type, Converter={StaticResource converter}}"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Message" Width="650" Binding="{Binding Message}"/>
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="Lavender"/>
-                        <Setter Property="FontWeight" Value="DemiBold"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
-                        <Setter Property="FontSize" Value="20"/>
-                    </Style>
-                </DataGrid.Resources>
-            </DataGrid>
-        </Grid>
-    </StackPanel>
+    <Grid Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Logs" FontSize="72" HorizontalAlignment="Center" Width="171" Foreground="#FF011A36" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="AR DELANEY" Margin="305,0,312,0"/>
+
+        <DataGrid Grid.Row="1" x:Name="DataGridXAML" HorizontalAlignment="Left" ItemsSource="{Binding Logs}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Width="100" Binding="{Binding Type}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="{Binding Type, Converter={StaticResource converter}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Message" Width="650" Binding="{Binding Message}"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Lavender"/>
+                    <Setter Property="FontWeight" Value="DemiBold"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+    </Grid>
 
 </UserControl>

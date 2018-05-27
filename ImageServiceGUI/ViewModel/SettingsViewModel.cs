@@ -77,7 +77,10 @@ namespace ImageServiceGUI.ViewModel
                             });
                         }
                         NotifyPropertyChanged("Handlers");
-                        RemoveHandler.RaiseCanExecuteChanged();
+                        App.Current.Dispatcher.Invoke(delegate
+                        {
+                            RemoveHandler.RaiseCanExecuteChanged();
+                        });
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         foreach (string item in e.OldItems)
@@ -88,7 +91,10 @@ namespace ImageServiceGUI.ViewModel
                             });
                         }
                         NotifyPropertyChanged("Handlers");
-                        RemoveHandler.RaiseCanExecuteChanged();
+                        App.Current.Dispatcher.Invoke(delegate
+                        {
+                            RemoveHandler.RaiseCanExecuteChanged();
+                        });
                         break;
                     default:
                         break;
