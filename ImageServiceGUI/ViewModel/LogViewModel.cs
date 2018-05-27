@@ -31,6 +31,10 @@ namespace ImageServiceGUI.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Constructor for LogViewModel class
+        /// </summary>
+        /// <param name="model">an instance of a LogModel</param>
         public LogViewModel(LogModel model)
         {
             TypeToBrushConverter converter = new TypeToBrushConverter();
@@ -68,6 +72,11 @@ namespace ImageServiceGUI.ViewModel
             };
         }
 
+        /// <summary>
+        /// The function is responsible of notifying in case
+        /// the property has changed
+        /// </summary>
+        /// <param name="prop">a property, as a string</param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

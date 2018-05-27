@@ -69,11 +69,19 @@ namespace ImageServiceGUI.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// The function is responsible of notifying in case
+        /// the property has changed
+        /// </summary>
+        /// <param name="prop">a property, as a string</param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
+        /// <summary>
+        /// Constructor for SettingsModel class
+        /// </summary>
         public SettingsModel()
         {
             Handlers = new ObservableCollection<string>();

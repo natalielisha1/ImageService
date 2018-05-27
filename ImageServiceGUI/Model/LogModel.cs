@@ -34,7 +34,7 @@ namespace ImageServiceGUI.Model
         /// The function is responsible of notifying in case
         /// the property has changed
         /// </summary>
-        /// <param name="prop">a property</param>
+        /// <param name="prop">a property, as a string</param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
@@ -43,7 +43,6 @@ namespace ImageServiceGUI.Model
         /// <summary>
         /// Constructor for the LogModel class
         /// </summary>
-        /// <returns>bool value</returns>
         public LogModel()
         {
             Logs = new ObservableCollection<LogMessage>();

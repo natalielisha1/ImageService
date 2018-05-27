@@ -29,6 +29,9 @@ namespace ImageServiceGUI.Views
     {
         private LogViewModel vm;
 
+        /// <summary>
+        /// Constructor for LogView class
+        /// </summary>
         public LogView()
         {
             InitializeComponent();

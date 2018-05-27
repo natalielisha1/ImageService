@@ -29,6 +29,9 @@ namespace ImageServiceGUI.Views
     {
         private SettingsViewModel vm;
 
+        /// <summary>
+        /// Constructor for SettingsView class
+        /// </summary>
         public SettingsView()
         {
             InitializeComponent();

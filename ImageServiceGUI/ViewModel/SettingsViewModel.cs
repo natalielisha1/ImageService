@@ -41,6 +41,10 @@ namespace ImageServiceGUI.ViewModel
         public ObservableCollection<string> Handlers { get; set; }
         public string SelectedHandler { get; set; }
 
+        /// <summary>
+        /// Constructor for SettingsViewModel class
+        /// </summary>
+        /// <param name="model">an instance of SettingsModel</param>
         public SettingsViewModel(SettingsModel model)
         {
             Handlers = new ObservableCollection<string>();
@@ -88,11 +92,22 @@ namespace ImageServiceGUI.ViewModel
             RemoveHandler = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
         }
 
+        /// <summary>
+        /// The function is responsible of notifying in case
+        /// the property has changed
+        /// </summary>
+        /// <param name="prop">a property, as a string</param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
+        /// <summary>
+        /// The function is responsible of telling if a chosen handler
+        /// can be removed.
+        /// </summary>
+        /// <param name="obj">unused</param>
+        /// <returns>boolean value, true or false</returns>
         private bool CanRemove(object obj)
         {
             if (Handlers.Count <= 0)
@@ -105,6 +120,11 @@ namespace ImageServiceGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// The function is responsible of telling what is done
+        /// when removing a handler.
+        /// </summary>
+        /// <param name="obj">unused</param>
         private void OnRemove(object obj)
         {
             string[] args = new string[1];
