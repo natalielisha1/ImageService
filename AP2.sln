@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService", "ImageService\ImageService.csproj", "{DE486AC7-25CA-4B52-93A5-22F2CA384A70}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Communication", "ImageService.Communication\ImageService.Communication.csproj", "{82A62E3D-9155-4A9F-BF6D-44CE72828385}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceGUI", "ImageServiceGUI\ImageServiceGUI.csproj", "{972E8D15-650B-4095-B5C2-B57DE3165033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceWEB", "ImageServiceWEB\ImageServiceWEB.csproj", "{60C197B9-50AF-4963-B8BA-9F933405A7F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{972E8D15-650B-4095-B5C2-B57DE3165033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{972E8D15-650B-4095-B5C2-B57DE3165033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{972E8D15-650B-4095-B5C2-B57DE3165033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C197B9-50AF-4963-B8BA-9F933405A7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C197B9-50AF-4963-B8BA-9F933405A7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C197B9-50AF-4963-B8BA-9F933405A7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C197B9-50AF-4963-B8BA-9F933405A7F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
