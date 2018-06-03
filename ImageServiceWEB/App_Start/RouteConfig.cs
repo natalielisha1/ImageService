@@ -15,8 +15,14 @@ namespace ImageServiceWEB
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "",
+                defaults: new { controller = "ImageWeb", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "Secondary",
+                url: "{controller}/{action}",
+                defaults: new { controller = "ImageWeb", action = "Index" }
             );
         }
     }
