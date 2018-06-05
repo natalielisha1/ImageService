@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageServiceWEB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,10 @@ namespace ImageServiceWEB.Controllers
 {
     public class ImageWebController : Controller
     {
+        private static StudentDetailsDbContext db = new StudentDetailsDbContext();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Students.ToList());
         }
     }
 }
