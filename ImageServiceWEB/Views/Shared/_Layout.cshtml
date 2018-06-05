@@ -48,41 +48,51 @@
 
     <!-- Page Content -->
     <div class="container">
-    @RenderBody()
+        @RenderBody()
 
-    <table class="table">
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                First Name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th></th>
-        </tr>
+        <div class="row" style="margin-top:50px">
+            <div class="col">
+                Service status: @ViewBag.Connected
+            </div>
+            <div class="col"/>
+            <div class="col">
+                Image amount: @ViewBag.ImageAmount
+            </div>
+        </div>
 
-        @foreach (var item in Model)
-        {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsrID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+                <th>
+                    ID
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th></th>
             </tr>
-        }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsrID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <!-- /.container -->
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark" style="margin-bottom:0">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; N&O 2018</p>
         </div>

@@ -157,6 +157,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Communication\Communicator.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\ImageWebController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Models\StudentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -210,6 +212,16 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageService.Communication\ImageService.Communication.csproj">
+      <Project>{82a62e3d-9155-4a9f-bf6d-44ce72828385}</Project>
+      <Name>ImageService.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageService.Infrastructure\ImageService.Infrastructure.csproj">
+      <Project>{5662b5c6-023a-4c2c-a95a-1966b5fb0068}</Project>
+      <Name>ImageService.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
