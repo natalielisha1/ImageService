@@ -19,6 +19,8 @@ namespace ImageService.Communication
     {
         private IClientWrapper client;
 
+        public bool Connected { get; private set; }
+
         public bool Connect(string ip, int port)
         {
             try
@@ -27,9 +29,11 @@ namespace ImageService.Communication
                 TcpClient tcpClient = new TcpClient();
                 tcpClient.Connect(ep);
                 client = new ClientWrapper(tcpClient);
+                Connected = true;
                 return true;
             } catch (Exception ex)
             {
+                Connected = false;
                 return false;
             }
         }
@@ -37,11 +41,17 @@ namespace ImageService.Communication
         public void Disconnect()
         {
             client.Close();
+            Connected = false;
         }
 
         public string Read()
         {
-            return client.Read();
+            string read = client.Read();
+            if (read == null)
+            {
+                Connected = false;
+            }
+            return read;
         }
 
         public void Write(string command)

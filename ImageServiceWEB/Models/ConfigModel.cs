@@ -72,6 +72,15 @@ namespace ImageServiceWEB.Models
 
         public void UpdateConfig()
         {
+            if (!comm.Connected)
+            {
+                OutputDir = "";
+                SourceName = "";
+                LogName = "";
+                ThumbSize = "";
+                Handlers = new List<string>();
+                return;
+            }
             comm.SendCommandToServer(CommandEnum.GetConfigCommand, new string[] { });
             lock (waitForUpdateLock)
             {

@@ -10,7 +10,7 @@ namespace ImageServiceWEB.Controllers
 {
     public class ImageWebController : Controller
     {
-        private static StudentDetailsDbContext db = new StudentDetailsDbContext();
+        //private static StudentDetailsDbContext db = new StudentDetailsDbContext();
         private static Communicator comm = Communicator.Instance;
 
         public ActionResult Index()
@@ -18,7 +18,12 @@ namespace ImageServiceWEB.Controllers
             ViewBag.Connected = comm.Connected ? "Connected" : "Not Connected";
             //TODO: Add real number
             ViewBag.ImageAmount = 0;
-            return View(db.Students.ToList());
+            List<StudentDetails> students = new List<StudentDetails>();
+            using (StudentDetailsDbContext db = new StudentDetailsDbContext())
+            {
+                students = db.Students.ToList();
+            }
+            return View(students);
         }
     }
 }

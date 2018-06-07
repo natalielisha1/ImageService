@@ -89,7 +89,9 @@
             <div class="col">
                 @foreach (var item in Model)
                 {
-                    <a>@Html.DisplayFor(modelItem => item)</a>
+                    @Html.ActionLink(item, "Index", "RemoveHandler", new { handler = item}, null)
+                    <hr />
+                    <!--<a>@Html.DisplayFor(modelItem => item)</a>-->
                 }
             </div>
         </div>

@@ -21,15 +21,31 @@ namespace ImageServiceWEB.Communication
         private const string DEFAULT_IP = "127.0.0.1";
         private const int DEFAULT_PORT = 5432;
         #endregion
+        
+        #region Members
+        private ITcpClient m_client = null;
+        private bool connected = false;
+        #endregion
 
         #region Properties
         public EventHandler<CommandMessageEventArgs> MessageArrived;
-        public bool Connected { get; private set; }
+        public bool Connected {
+            get
+            {
+                if (!connected)
+                {
+                    if (m_client == null)
+                    {
+                        return false;
+                    }
+                    connected = m_client.Connected;
+                }
+                return connected;
+            }
+        }
         #endregion
 
-        #region Members
-        private ITcpClient m_client;
-        #endregion
+        
 
         /// <summary>
         /// Constructs the communication singleton
@@ -37,7 +53,7 @@ namespace ImageServiceWEB.Communication
         private Communicator()
         {
             m_client = new TcpClientChannel();
-            Connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
+            connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
             Start();
         }
 
@@ -65,7 +81,7 @@ namespace ImageServiceWEB.Communication
                     }
                     catch (IOException ex)
                     {
-                        Connected = false;
+                        connected = false;
                         break;
                     }
                 }

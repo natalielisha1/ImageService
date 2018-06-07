@@ -13,6 +13,8 @@ namespace ImageService.Communication.Interfaces
 {
     public interface ITcpClient
     {
+
+        bool Connected { get; }
         /// <summary>
         /// The function is responsible of
         /// connecting the client to the server

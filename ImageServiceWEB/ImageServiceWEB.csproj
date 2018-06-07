@@ -162,6 +162,7 @@
     <Compile Include="Controllers\ImageWebController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\RemoveHandlerController.cs" />
     <Compile Include="Controllers\StudentDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +198,7 @@
     <Content Include="Views\StudentDetails\Details.cshtml" />
     <Content Include="Views\StudentDetails\Edit.cshtml" />
     <Content Include="Views\StudentDetails\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutRemoveHandler.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -206,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Output\" />
+    <Folder Include="Views\RemoveHandler\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
