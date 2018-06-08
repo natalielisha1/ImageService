@@ -62,6 +62,14 @@ namespace ImageService.Communication.Model
         /// <returns>a JSON message</returns>
         public static CommandMessage FromJSONString(string str)
         {
+            if (str == null)
+            {
+                return new CommandMessage
+                {
+                    Status = false,
+                    Message = "Error while parsing JSON"
+                };
+            }
             JObject jsonMessage = JObject.Parse(str);
             return new CommandMessage
             {

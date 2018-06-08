@@ -35,29 +35,45 @@ namespace ImageService.Communication
 
         public string Read()
         {
-            //Allow only one task to read at a time
-            lock (readLock)
+            try
             {
-                string message = reader.ReadLine();
-                if (message == null)
+                //Allow only one task to read at a time
+                lock (readLock)
                 {
-                    return null;
+                    string message = reader.ReadLine();
+                    if (message == null)
+                    {
+                        return null;
+                    }
+                    string lenStr = message.Split('\r')[0];
+                    int len = int.Parse(lenStr);
+                    char[] buffer = new char[len];
+                    reader.Read(buffer, 0, len);
+                    return new string(buffer);
                 }
-                string lenStr = message.Split('\r')[0];
-                int len = int.Parse(lenStr);
-                char[] buffer = new char[len];
-                reader.Read(buffer, 0, len);
-                return new string(buffer);
+            }
+            catch (Exception e)
+            {
+                //Maybe close the connection
+                return null;
             }
         }
 
         public void Write(string message)
         {
-            //Allow only one task to write at a time
-            lock (writeLock)
+            try
             {
-                writer.WriteLine(message.Length);
-                writer.Write(message);
+                //Allow only one task to write at a time
+                lock (writeLock)
+                {
+                    writer.WriteLine(message.Length);
+                    writer.Write(message);
+                }
+            }
+            catch (Exception e)
+            {
+                //Maybe close the connection
+                return;
             }
         }
 

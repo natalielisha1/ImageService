@@ -1,6 +1,4 @@
-﻿@model IEnumerable<string>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,19 +50,17 @@
         
         <div class="row" style="margin-top:50px">
             <div class="col">
-                Handler
+                Are you sure you want to close the handler:
             </div>
             <div class="col">
                 @ViewBag.Handler
-                <hr />
-                <!--TODO: Add the removing-->
-                <button id="remove_handler_btn">
-                    OK
-                </button>
-                <button id="cancel">
-                    Cancel
-                </button>
             </div>
+        </div>
+
+        <div class="text-center" style="margin-top:20px">
+            <!--TODO: Add the removing-->
+            <input type="button" value="OK" id="remove_handler_btn"/>
+            <input type="button" value="Cancel" id="cancel"/>
         </div>
 
     </div>
@@ -77,10 +73,31 @@
         <!-- /.container -->
     </footer>
 
+    
+
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $('#cancel').click(function () {
+            document.location = '@Url.Action("Index", "Config")';
+        });
+        $('#remove_handler_btn').click(function () {
+            $('#cancel').attr("disabled", true);
+            $('#remove_handler_btn').attr("disabled", true);
+            var apiUrl = "/RemoveHandler/RemoveHandler"
+            var array = @Html.Raw(Json.Encode(ViewBag.SplittedHandler));
+            var jsArr = [];
+            for (var i = 0; i < array.length; i++) {
+                jsArr[i] = array[i];
+            }
+            $.post(apiUrl, { splittedHandler: jsArr }, function () {
+                    document.location = '@Url.Action("Index", "Config")';
+                });
+        });
+    </script>
 
 </body>
 

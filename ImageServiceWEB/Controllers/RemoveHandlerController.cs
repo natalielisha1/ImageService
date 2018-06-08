@@ -15,6 +15,7 @@ namespace ImageServiceWEB.Controllers
         private static Communicator comm = Communicator.Instance;
         private static object waitForUpdateLock = new object();
         private static List<string> removedHandlers = new List<string>();
+        private static bool addedProcessor = false;
 
         // GET: RemoveHandler
         //public ActionResult Index()
@@ -23,34 +24,29 @@ namespace ImageServiceWEB.Controllers
         //}
         public ActionResult Index(string handler)
         {
+            if (!addedProcessor)
+            {
+                comm.MessageArrived += ProcessMessage;
+                addedProcessor = true;
+            }
             ViewBag.Handler = handler;
+            ViewBag.SplittedHandler = handler.Split('\\');
             return View();
         }
 
         [HttpPost]
-        public bool RemoveHandler(string handler)
+        public bool RemoveHandler(string[] splittedHandler)
         {
+            string handler = "";
+            foreach (string splitted in splittedHandler)
+            {
+                handler += splitted + "\\";
+            }
+            handler = handler.Substring(0, handler.Length - 1);
             if (!comm.Connected)
             {
                 return false;
             }
-            comm.MessageArrived += delegate (object sender, CommandMessageEventArgs e)
-            {
-                CommandMessage msg = e.Message;
-                switch (msg.Type)
-                {
-                    case CommandEnum.RemoveHandler:
-                        if (msg.Handlers.Contains(handler))
-                        {
-                            removedHandlers.Add(handler);
-                            lock (waitForUpdateLock)
-                            {
-                                Monitor.PulseAll(waitForUpdateLock);
-                            }
-                        }
-                        break;
-                }
-            };
             if (removedHandlers.Contains(handler))
             {
                 return true;
@@ -64,6 +60,26 @@ namespace ImageServiceWEB.Controllers
                 }
             }
             return true;
+        }
+
+        public void ProcessMessage(object sender, CommandMessageEventArgs e)
+        {
+            //Extract the message from the EventArgs
+            CommandMessage msg = e.Message;
+            switch (msg.Type)
+            {
+                //Checking if the message is interesting to RemoveHandler
+                case CommandEnum.RemoveHandler:
+                    foreach (string handler in msg.Handlers)
+                    {
+                        removedHandlers.Add(handler);
+                    }
+                    lock (waitForUpdateLock)
+                    {
+                        Monitor.PulseAll(waitForUpdateLock);
+                    }
+                    break;
+            }
         }
     }
 }
