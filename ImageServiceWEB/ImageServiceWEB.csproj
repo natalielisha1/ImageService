@@ -159,7 +159,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Communication\Communicator.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\ViewPhotoController.cs" />
     <Compile Include="Controllers\ImageWebController.cs" />
+    <Compile Include="Controllers\DeletePhotoController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\RemoveHandlerController.cs" />
@@ -167,6 +169,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewPhotoModel.cs" />
+    <Compile Include="Models\DeletePhotoModel.cs" />
+    <Compile Include="Models\PhotoCommunicationModel.cs" />
+    <Compile Include="Models\PhotoModel.cs" />
     <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Models\StudentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,6 +205,8 @@
     <Content Include="Views\StudentDetails\Edit.cshtml" />
     <Content Include="Views\StudentDetails\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutRemoveHandler.cshtml" />
+    <Content Include="Views\Shared\_LayoutDeletePhoto.cshtml" />
+    <Content Include="Views\Shared\_LayoutViewPhoto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -238,7 +246,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60933</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
