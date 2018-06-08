@@ -10,6 +10,6 @@ namespace ImageServiceWEB.Models
 {
     public class DeletePhotoModel
     {
-
+        //deleting photo from output dir according to it's path
     }
 }

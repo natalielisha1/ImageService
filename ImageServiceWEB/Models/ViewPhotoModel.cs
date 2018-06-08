@@ -10,6 +10,6 @@ namespace ImageServiceWEB.Models
 {
     public class ViewPhotoModel
     {
-
+        //information of a specific photo
     }
 }

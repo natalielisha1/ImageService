@@ -10,10 +10,12 @@ namespace ImageServiceWEB.Models
 {
     public class PhotoModel
     {
-        public List<String> Images { get; set; }
-        public PhotoModel()
+        public PhotoModel() {}
+
+        public List<String> Images
         {
-            Images = CreateListOfImages();
+            get { return GetListOfImages(); }
+            set { Images = value; }
         }
 
         /// <summary>
@@ -21,7 +23,7 @@ namespace ImageServiceWEB.Models
         /// in the output file.
         /// </summary>
         /// <returns>list of images(paths)</returns>
-        public List<String> CreateListOfImages()
+        public List<String> GetListOfImages()
         {
             String outputDirPath = System.IO.Directory.GetCurrentDirectory() + "/App_Data/Output";
             String currentDirPath;
