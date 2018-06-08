@@ -10,6 +10,6 @@ namespace ImageServiceWEB.Models
 {
     public class PhotoCommunicationModel
     {
-
+        //when deleting a photo
     }
 }

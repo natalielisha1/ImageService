@@ -123,10 +123,10 @@
                             </div>
 							<div>
 								<button type="button">
-									@Html.ActionLink("View", "Index", "ViewPhoto", null, new { @class = "nav-link" })
+									@Html.ActionLink("View", "Index", "ViewPhoto", null, null)
 								</button>
 								<button type="button">
-									@Html.ActionLink("Delete", "Index", "DeletePhoto", null, new{ @class = "nav-link" })
+									@Html.ActionLink("Delete", "Index", "DeletePhoto", null, null)
 								</button>
 							</div>
                         </div>
@@ -142,14 +142,6 @@
         <!-- /.row -->
 
     </div>
-    <!-- /.container -->
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-        </div>
-        <!-- /.container -->
-    </footer>
 
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")
