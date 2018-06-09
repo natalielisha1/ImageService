@@ -158,6 +158,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\LogModel.cs" />
+    <Compile Include="Photo.cs" />
     <Compile Include="Communication\Communicator.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\ViewPhotoController.cs" />
