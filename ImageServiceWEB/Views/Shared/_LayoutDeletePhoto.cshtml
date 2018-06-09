@@ -49,31 +49,30 @@
         @RenderBody()
         
         <div class="row" style="margin-top:50px">
-            <div class="col">
-                Handler
-            </div>
-            <div class="col">
-                @ViewBag.Handler
-                <hr />
-                <!--TODO: Add the removing-->
-                <button id="remove_handler_btn">
-                    OK
-                </button>
-                <button id="cancel">
-                    Cancel
-                </button>
-            </div>
+			<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card h-100">
+					<a href="#"><img class="card-img-top" src=@ViewBag.ThumbnailPath alt=""></a>
+					<div class="card-body">
+						<h3 class="card-title">
+							<a href="#">@ViewBag.Title</a>
+						</h3>
+					</div>
+					<div>
+						<h6 class="card-title" style="red">
+							<a href="#">Are you sure you want to delete the picture?</a>
+						</h6>
+						<button type="button">
+							@Html.ActionLink("Ok", "OnDelete", "DeletePhoto", {photo = @ViewBag.Photo}, null)
+						</button>
+						<button type="button">
+							@Html.ActionLink("Cancle", "Index", "Photos", null, null)
+						</button>
+					</div>
+				</div>
+			</div>
         </div>
 
     </div>
-    <!-- /.container -->
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; N&O 2018</p>
-        </div>
-        <!-- /.container -->
-    </footer>
 
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")

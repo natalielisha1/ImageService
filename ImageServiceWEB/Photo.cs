@@ -13,20 +13,20 @@ namespace ImageServiceWEB
 {
     public class Photo
     {
-        #region Members
-        public String thumbnailPath { get; set; }
-        public String name { get; set; }
-        public String year { get; set; }
-        public String month { get; set; }
+        #region Properties
+        public string ThumbnailPath { get; set; }
+        public string Name { get; set; }
+        public string Year { get; set; }
+        public string Month { get; set; }
         #endregion
 
-        public Photo(String path)
+        public Photo(string path)
         {
-            String[] arr = path.Split('\\');
-            year = arr[1];
-            month = arr[2];
-            name = arr[3];
-            thumbnailPath = @"Output\thumbnails\" + name + @".thumbnail"; //maybe correct later
+            string[] arr = path.Split('\\');
+            Year = arr[1];
+            Month = arr[2];
+            Name = arr[3];
+            ThumbnailPath = @"Output\Thumbnails\" + Name;
         }
     }
 }

@@ -50,15 +50,30 @@
         <div class="row">
             <div class="col-lg-9">
 				<div class="row" style="margin-top:50px">
-
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item One</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
+							<a href="#"><img class="card-img-top" src=@ViewBag.Path alt=""></a>
+							<div class="card-body">
+								<h3 class="card-title">
+									<a href="#">@ViewBag.Name</a>
+								</h3>
+								<h5>
+									Year:
+								</h5>
+								<h5>
+									@ViewBag.Year
+								</h5>
+								<h5>
+									Month:
+								</h5>
+								<h5>
+									@ViewBag.Month
+								</h5>
+							</div>
+							<div>
+								<button type="button">
+									@Html.ActionLink("Delete", "Index", "DeletePhoto", {photo = @ViewBag.Photo}, null)
+								</button>
                             </div>
                         </div>
                     </div>

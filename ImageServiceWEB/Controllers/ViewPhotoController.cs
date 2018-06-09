@@ -8,8 +8,13 @@ namespace ImageServiceWEB.Controllers
 {
     public class ViewPhotoController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(Photo photo)
         {
+            ViewBag.Photo = photo;
+            ViewBag.Year = photo.Year;
+            ViewBag.Month = photo.Month;
+            ViewBag.Name = photo.Name;
+            ViewBag.Path = @"App_Data\Output\" + photo.Year + @"\" + photo.Month + @"\" + photo.Name;
             return View();
         }
     }

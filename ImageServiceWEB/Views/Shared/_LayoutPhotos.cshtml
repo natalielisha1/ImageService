@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<Photo>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,85 +54,37 @@
             <div class="col-lg-12">
                 <div class="row" style="margin-top:50px">
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item One</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Two</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Three</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Four</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Five</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Six</a>
-                                </h4>
-                                <p class="card-text">year, month</p>
-                            </div>
-							<div>
-								<button type="button">
-									@Html.ActionLink("View", "Index", "ViewPhoto", null, null)
-								</button>
-								<button type="button">
-									@Html.ActionLink("Delete", "Index", "DeletePhoto", null, null)
-								</button>
-							</div>
-                        </div>
-                    </div>
+				@foreach (var photo in Model)
+				{
+					<div>
+						<div>
+							<image></image>
+							<h4>
+								@Html.DisplayFor(modelItem => photo.Name)
+							</h4>
+							<h6>
+								Month:
+							</h6>
+							<h6>
+								@Html.DisplayFor(modelItem => photo.Month)
+							</h6>
+							<h6>
+								Year:
+							</h6>
+							<h6>
+								@Html.DisplayFor(modelItem => photo.Year)
+							</h6>
+						</div>
+						<div>
+							<button type="button">
+								@Html.ActionLink("View", "Index", "ViewPhoto", new { photo = item }, null)
+							</button>
+							<button type="button">
+								@Html.ActionLink("Delete", "Index", "DeletePhoto", new { photo = item }, null)
+							</button>
+						</div>
+					</div>
+				}
 
                 </div>
                 <!-- /.row -->

@@ -15,13 +15,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageServiceWEB.Communication;
 
-namespace ImageServiceGUI.Model
+namespace ImageServiceWEB.Models
 {
     public class LogModel
     {
         #region Properties
-        public ObservableCollection<LogMessage> Logs { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
+        public List<LogMessage> Logs { get; set; }
         #endregion
 
         #region Members
@@ -33,7 +32,7 @@ namespace ImageServiceGUI.Model
         /// </summary>
         public LogModel()
         {
-            Logs = new ObservableCollection<LogMessage>();
+            Logs = new List<LogMessage>();
             client = Communicator.Instance;
             client.MessageArrived += ProcessMessage;
             client.SendCommandToServer(CommandEnum.LogRequest, new string[] { });
