@@ -22,6 +22,16 @@ namespace ImageService.Modal
         string AddFile(string path, out bool result);
 
         /// <summary>
+        /// This function removes an image from the output folder
+        /// </summary>
+        /// <param name="year">The year of the image</param>
+        /// <param name="month">The month of the image</param>
+        /// <param name="fileName">The file name</param>
+        /// <param name="result">The boolean result of the action</param>
+        /// <returns>Indication if the Addition Was Successful</returns>
+        string RemoveImage(string year, string month, string fileName, out bool result);
+
+        /// <summary>
         /// The Function creates a folder of a month in OutputDir
         /// </summary>
         /// <param name="year">The year of the file will's create the month file in</param>

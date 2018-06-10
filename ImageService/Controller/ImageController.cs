@@ -34,7 +34,8 @@ namespace ImageService.Controller
                 { (int) CommandEnum.NewFileCommand, new NewFileCommand(m_modal)},
                 { (int) CommandEnum.GetConfigCommand, new GetConfigCommand(m_modal)},
                 { (int) CommandEnum.LogRequest, new LogCommand(m_modal)},
-                { (int) CommandEnum.RemoveHandler, new RemoveHandlerCommand(m_modal) }
+                { (int) CommandEnum.RemoveHandler, new RemoveHandlerCommand(m_modal) },
+                { (int) CommandEnum.RemoveImage, new RemoveImageCommand(m_modal) }
             };
         }
 

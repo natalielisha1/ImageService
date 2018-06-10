@@ -41,7 +41,7 @@ namespace ImageService.Modal
                     dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
                 }
-                catch(IOException)
+                catch (IOException)
                 {
                     //if failed, return error message
                     result = false;
@@ -96,7 +96,7 @@ namespace ImageService.Modal
                 //move the file to the suitable directory
                 File.Move(path, m_OutputFolder + @"\" + year + @"\" + month + @"\" + newFileName);
             }
-            catch(IOException)
+            catch (IOException)
             {
                 result = false;
                 msg = @"moving image failed";
@@ -148,7 +148,8 @@ namespace ImageService.Modal
                     ++index;
                 }
                 return name + @"_" + index.ToString() + ext;
-            } else
+            }
+            else
             {
                 return original;
             }
@@ -164,7 +165,7 @@ namespace ImageService.Modal
                 System.IO.Directory.CreateDirectory(m_OutputFolder + @"\Thumbnails\" + year);
                 succeed = true;
             }
-            catch(IOException)
+            catch (IOException)
             {
                 succeed = false;
             }
@@ -212,6 +213,69 @@ namespace ImageService.Modal
                     return System.IO.File.GetLastWriteTime(path);
                 }
             }
+        }
+
+        public string RemoveImage(string year, string month, string fileName, out bool result)
+        {
+            string msg;
+            m_OutputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputDir"];
+            ///Deleting the full-sized image file
+            if (!System.IO.Directory.Exists(m_OutputFolder))
+            {
+                msg = @"Output doesn't exist, no image should exist.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\" + year))
+            {
+                msg = @"Year folder doens't exist, no image should exist here.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\" + year + @"\" + month))
+            {
+                msg = @"Month folder doesn't exist, no image should exist here.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.File.Exists(m_OutputFolder + @"\" + year + @"\" + month + @"\" + fileName))
+            {
+                msg = @"Image file doesn't exist.";
+                result = false;
+                return msg;
+            }
+            System.IO.File.Delete(m_OutputFolder + @"\" + year + @"\" + month + @"\" + fileName);
+
+            //Deleting the thumbnail image file
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\Thumbnails"))
+            {
+                msg = @"Thumbnails doesn't exist, no image should exist.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\Thumbnails\" + year))
+            {
+                msg = @"Year folder doens't exist, no image should exist here.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.Directory.Exists(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month))
+            {
+                msg = @"Month folder doesn't exist, no image should exist here.";
+                result = false;
+                return msg;
+            }
+            if (!System.IO.File.Exists(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + fileName))
+            {
+                msg = @"Image file doesn't exist.";
+                result = false;
+                return msg;
+            }
+            System.IO.File.Delete(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + fileName);
+
+            msg = @"Image " + fileName + " deleted successfully.";
+            result = true;
+            return msg;
         }
     }
 }

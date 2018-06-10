@@ -22,6 +22,7 @@ namespace ImageService.Infrastructure.Enums
         ChangeConfig,
         AddHandler,
         RemoveHandler,
+        RemoveImage,
         OK
     }
 }
