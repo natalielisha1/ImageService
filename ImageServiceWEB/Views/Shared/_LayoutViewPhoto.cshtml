@@ -52,27 +52,27 @@
 				<div class="row" style="margin-top:50px">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-							<a href="#"><img class="card-img-top" src=@ViewBag.Path alt=""></a>
-							<div class="card-body">
-								<h3 class="card-title">
+							<img src=@ViewBag.Path alt="">
+							<div>
+								<h3>
 									<a href="#">@ViewBag.Name</a>
 								</h3>
 								<h5>
-									Year:
+									Year: @ViewBag.Year
 								</h5>
 								<h5>
-									@ViewBag.Year
-								</h5>
-								<h5>
-									Month:
-								</h5>
-								<h5>
-									@ViewBag.Month
+									Month: @ViewBag.Month
 								</h5>
 							</div>
 							<div>
 								<button type="button">
-									@Html.ActionLink("Delete", "Index", "DeletePhoto", {photo = @ViewBag.Photo}, null)
+									@Html.ActionLink("Delete", "Index", "DeletePhoto", new {
+										ThumbnailPath = @ViewBag.ThumbnailPath,
+										Path = @ViewBag.Path,
+										Name = @ViewBag.Name,
+										Year = @ViewBag.Year,
+										Month = @ViewBag.Month
+									}, null)
 								</button>
                             </div>
                         </div>

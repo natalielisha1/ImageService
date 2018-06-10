@@ -12,12 +12,13 @@ namespace ImageServiceWEB.Controllers
     {
         //private static StudentDetailsDbContext db = new StudentDetailsDbContext();
         private static Communicator comm = Communicator.Instance;
+        private static PhotoModel photos = new PhotoModel();
 
         public ActionResult Index()
         {
             ViewBag.Connected = comm.Connected ? "Connected" : "Not Connected";
             //TODO: Add real number
-            ViewBag.ImageAmount = 0;
+            ViewBag.ImageAmount = photos.NumOfImages;
             List<StudentDetails> students = new List<StudentDetails>();
             using (StudentDetailsDbContext db = new StudentDetailsDbContext())
             {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Photo>
+﻿@model IEnumerable<ImageServiceWEB.Models.Instances.Photo>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,41 +51,47 @@
         @RenderBody()
         <div class="row">
 
-            <div class="col-lg-12">
+            <div>
                 <div class="row" style="margin-top:50px">
-
 				@foreach (var photo in Model)
 				{
-					<div>
-						<div>
-							<image></image>
-							<h4>
-								@Html.DisplayFor(modelItem => photo.Name)
-							</h4>
-							<h6>
-								Month:
-							</h6>
-							<h6>
-								@Html.DisplayFor(modelItem => photo.Month)
-							</h6>
-							<h6>
-								Year:
-							</h6>
-							<h6>
-								@Html.DisplayFor(modelItem => photo.Year)
-							</h6>
-						</div>
-						<div>
-							<button type="button">
-								@Html.ActionLink("View", "Index", "ViewPhoto", new { photo = item }, null)
-							</button>
-							<button type="button">
-								@Html.ActionLink("Delete", "Index", "DeletePhoto", new { photo = item }, null)
-							</button>
+					<div class="col-sm-2">
+						<div class="card" style="margin-bottom:20px">
+							<img class="card-img-top rounded-circle" src=@photo.ThumbnailPath alt="">
+							<div class="card-body">
+								<h5 class="card-title">
+									<a href="#">@photo.Name</a>
+								</h5>
+								<h5>
+									Year: @photo.Year
+								</h5>
+								<h5>
+									Month: @photo.Month
+								</h5>
+							</div>
+							<div>
+								<button type="button">
+									@Html.ActionLink("View", "Index", "ViewPhoto", new {
+										ThumbnailPath = @photo.ThumbnailPath,
+										Path = @photo.Path,
+										Name = @photo.Name,
+										Year = @photo.Year,
+										Month = @photo.Month
+									}, null)
+								</button>
+								<button type="button">
+									@Html.ActionLink("Delete", "Index", "DeletePhoto", new {
+										ThumbnailPath = @photo.ThumbnailPath,
+										Path = @photo.Path,
+										Name = @photo.Name,
+										Year = @photo.Year,
+										Month = @photo.Month
+									}, null)
+								</button>
+							</div>
 						</div>
 					</div>
-				}
-
+					}
                 </div>
                 <!-- /.row -->
 

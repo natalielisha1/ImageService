@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ImageService.Infrastructure.Enums;
+using ImageServiceWEB.Communication;
+using ImageServiceWEB.Models.Instances;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,20 +11,24 @@ namespace ImageServiceWEB.Controllers
 {
     public class DeletePhotoController : Controller
     {
+        private static Communicator comm = Communicator.Instance;
+
+        public DeletePhotoController() { }
         public ActionResult Index(Photo photo)
         {
-            ViewBag.Title = photo.Name;
+            ViewBag.Name = photo.Name;
             ViewBag.ThumbnailPath = photo.ThumbnailPath;
             ViewBag.Photo = photo;
+            ViewBag.Year = photo.Year;
+            ViewBag.Month = photo.Month;
             return View();
         }
 
-        public ActionResult OnDelete(Photo photo)
+        [HttpPost]
+        public bool DeletePhoto(string year, string month, string name)
         {
-            string path;
-            path = @"App_Data\Output\" + photo.Year + @"\" + photo.Month + @"\" + photo.Name;
-            System.IO.File.Delete(path);
-            return View();
+            comm.SendCommandToServer(CommandEnum.RemoveImage, new string[] { year, month, name });
+            return true;
         }
     }
 }

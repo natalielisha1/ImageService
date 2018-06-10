@@ -4,22 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ImageServiceWEB.Models;
+using ImageServiceWEB.Models.Instances;
 
 namespace ImageServiceWEB.Controllers
 {
     public class PhotosController : Controller
     {
-        public List<Photo> images { get; set; }
+        public List<Photo> Images { get; set; }
 
         public ActionResult Index()
         {
+            Images = new List<Photo>();
             PhotoModel model = new PhotoModel();
             List<string> imagePaths = model.GetListOfImages();
             foreach (string path in imagePaths)
             {
-                images.Add(new Photo(path));
+                Images.Add(new Photo(path));
             }
-            return View(images);
+            return View(Images);
         }
     }
 }

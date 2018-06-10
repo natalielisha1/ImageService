@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ImageServiceWEB.Models
 {
@@ -16,10 +17,9 @@ namespace ImageServiceWEB.Models
             set { Images = value; }
         }
 
-        public int numOfImages
+        public int NumOfImages
         {
             get { return Images.Count; }
-            set { numOfImages = value; }
         }
 
         public PhotoModel() { }
@@ -31,30 +31,43 @@ namespace ImageServiceWEB.Models
         /// <returns>list of images(paths)</returns>
         public List<String> GetListOfImages()
         {
-            String outputDirPath = System.IO.Directory.GetCurrentDirectory() + @"\App_Data\Output";
-            String currentDirPath;
+            string outputDirPath = @"~\Images\Output";
+            string currentDirPath;
+            string physicalCurrentDirPath;
             DirectoryInfo folder, yearFolder, monthFolder;
-            FileInfo[] images, years, months;
-            List<String> imagesList = new List<String>();
-
-            folder = new DirectoryInfo(outputDirPath);
-            years = folder.GetFiles();
+            DirectoryInfo[] years, months;
+            FileInfo[] images;
+            List<string> imagesList = new List<string>();
+            physicalCurrentDirPath = HttpContext.Current.Server.MapPath(outputDirPath);
+            folder = new DirectoryInfo(physicalCurrentDirPath);
+            years = folder.GetDirectories();
 
             for (int i = 0; i < years.Length; i++)
             {
+                if (years[i].Name.Equals("Thumbnails"))
+                {
+                    continue;
+                }
                 currentDirPath = outputDirPath + @"\" + years[i].Name;
-                yearFolder = new DirectoryInfo(currentDirPath);
-                months = yearFolder.GetFiles();
+                physicalCurrentDirPath = HttpContext.Current.Server.MapPath(currentDirPath);
+                yearFolder = new DirectoryInfo(physicalCurrentDirPath);
+                months = yearFolder.GetDirectories();
 
                 for (int k = 0; k < months.Length; k++)
                 {
+                    currentDirPath = outputDirPath + @"\" + years[i].Name;
                     currentDirPath = currentDirPath + @"\" + months[k].Name;
-                    monthFolder = new DirectoryInfo(currentDirPath);
+                    physicalCurrentDirPath = HttpContext.Current.Server.MapPath(currentDirPath);
+                    monthFolder = new DirectoryInfo(physicalCurrentDirPath);
                     images = monthFolder.GetFiles();
 
                     for (int j = 0; j < images.Length; j++)
                     {
-                        imagesList.Add(currentDirPath + @"\" + images[j].Name);
+                        currentDirPath = outputDirPath + @"\" + years[i].Name;
+                        currentDirPath = currentDirPath + @"\" + months[k].Name;
+                        currentDirPath = currentDirPath + @"\" + images[j].Name;
+                        currentDirPath = currentDirPath.Substring(1);
+                        imagesList.Add(currentDirPath);
                     }
                 }
             }

@@ -11,12 +11,12 @@ namespace ImageServiceWEB.Models
 {
     public class ConfigModel
     {
-        #region Properties
+        #region Members
         private static Communicator comm = Communicator.Instance;
         private static object waitForUpdateLock = new object();
         #endregion
 
-        #region Members
+        #region Properties
         public List<string> Handlers { get; set; }
         public string OutputDir { get; set; }
         public string SourceName { get; set; }

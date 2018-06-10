@@ -36,7 +36,11 @@ namespace ImageServiceWEB.Communication
                 {
                     if (m_client == null)
                     {
-                        return false;
+                        Reconnect();
+                        if (m_client == null)
+                        {
+                            return false;
+                        }
                     }
                     connected = m_client.Connected;
                 }
@@ -54,12 +58,29 @@ namespace ImageServiceWEB.Communication
         {
             m_client = new TcpClientChannel();
             connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
+            if (!connected)
+            {
+                m_client = null;
+                return;
+            }
+            Start();
+        }
+
+        private void Reconnect()
+        {
+            m_client = new TcpClientChannel();
+            connected = m_client.Connect(DEFAULT_IP, DEFAULT_PORT);
+            if (!connected)
+            {
+                m_client = null;
+                return;
+            }
             Start();
         }
 
         /// <summary>
         /// The function starts the the communication
-        /// between the GUI and the server
+        /// between the WEB and the server
         /// </summary>
         private void Start()
         {
@@ -74,6 +95,12 @@ namespace ImageServiceWEB.Communication
                     try
                     {
                         string strMessage = m_client.Read();
+                        if (strMessage == null)
+                        {
+                            connected = false;
+                            m_client = null;
+                            break;
+                        }
                         MessageArrived?.Invoke(this, new CommandMessageEventArgs
                         {
                             Message = CommandMessage.FromJSONString(strMessage)
@@ -82,6 +109,7 @@ namespace ImageServiceWEB.Communication
                     catch (IOException ex)
                     {
                         connected = false;
+                        m_client = null;
                         break;
                     }
                 }

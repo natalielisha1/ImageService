@@ -58,7 +58,6 @@
         </div>
 
         <div class="text-center" style="margin-top:20px">
-            <!--TODO: Add the removing-->
             <input type="button" value="OK" id="remove_handler_btn"/>
             <input type="button" value="Cancel" id="cancel"/>
         </div>
@@ -87,15 +86,15 @@
         $('#remove_handler_btn').click(function () {
             $('#cancel').attr("disabled", true);
             $('#remove_handler_btn').attr("disabled", true);
-            var apiUrl = "/RemoveHandler/RemoveHandler"
+            var apiUrl = "/RemoveHandler/RemoveHandler";
             var array = @Html.Raw(Json.Encode(ViewBag.SplittedHandler));
             var jsArr = [];
             for (var i = 0; i < array.length; i++) {
                 jsArr[i] = array[i];
             }
             $.post(apiUrl, { splittedHandler: jsArr }, function () {
-                    document.location = '@Url.Action("Index", "Config")';
-                });
+                document.location = '@Url.Action("Index", "Config")';
+            });
         });
     </script>
 

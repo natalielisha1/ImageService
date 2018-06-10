@@ -59,13 +59,13 @@
 					</div>
 					<div>
 						<h6 class="card-title" style="red">
-							<a href="#">Are you sure you want to delete the picture?</a>
+							Are you sure you want to delete the picture?
 						</h6>
-						<button type="button">
-							@Html.ActionLink("Ok", "OnDelete", "DeletePhoto", {photo = @ViewBag.Photo}, null)
+						<button type="button" id="delete_pic_btn">
+							OK
 						</button>
 						<button type="button">
-							@Html.ActionLink("Cancle", "Index", "Photos", null, null)
+							@Html.ActionLink("Cancel", "Index", "Photos", null, null)
 						</button>
 					</div>
 				</div>
@@ -78,6 +78,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+	<script type="text/javascript">
+		$('#delete_pic_btn').click(function() {
+			var apiUrl = "/DeletePhoto/DeletePhoto";
+			$.post(apiUrl, { year:	'@ViewBag.Year',
+							 month: '@ViewBag.Month',
+							 name:	'@ViewBag.Name' },
+				   function() {
+				       document.location = '@Url.Action("Index", "Photos")';
+				   });
+		});
+	</script>
 
 </body>
 

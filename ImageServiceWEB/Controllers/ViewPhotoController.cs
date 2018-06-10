@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageServiceWEB.Models.Instances;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +9,14 @@ namespace ImageServiceWEB.Controllers
 {
     public class ViewPhotoController : Controller
     {
+        public ViewPhotoController() { }
         public ActionResult Index(Photo photo)
         {
-            ViewBag.Photo = photo;
+            ViewBag.ThumbnailPath = photo.ThumbnailPath;
             ViewBag.Year = photo.Year;
             ViewBag.Month = photo.Month;
             ViewBag.Name = photo.Name;
-            ViewBag.Path = @"App_Data\Output\" + photo.Year + @"\" + photo.Month + @"\" + photo.Name;
+            ViewBag.Path = photo.Path;
             return View();
         }
     }

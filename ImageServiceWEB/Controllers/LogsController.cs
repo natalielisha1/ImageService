@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ImageServiceWEB.Models;
 using ImageService.Communication.Model;
+using ImageServiceWEB.Models.Instances;
 
 namespace ImageServiceWEB.Controllers
 {

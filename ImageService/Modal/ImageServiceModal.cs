@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ImageService.Modal
@@ -244,7 +245,7 @@ namespace ImageService.Modal
                 result = false;
                 return msg;
             }
-            System.IO.File.Delete(m_OutputFolder + @"\" + year + @"\" + month + @"\" + fileName);
+            DeleteFile(m_OutputFolder + @"\" + year + @"\" + month + @"\" + fileName);
 
             //Deleting the thumbnail image file
             if (!System.IO.Directory.Exists(m_OutputFolder + @"\Thumbnails"))
@@ -271,11 +272,28 @@ namespace ImageService.Modal
                 result = false;
                 return msg;
             }
-            System.IO.File.Delete(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + fileName);
+            DeleteFile(m_OutputFolder + @"\Thumbnails\" + year + @"\" + month + @"\" + fileName);
 
             msg = @"Image " + fileName + " deleted successfully.";
             result = true;
             return msg;
+        }
+
+        private void DeleteFile(string pathToFile)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.Delete(pathToFile);
+                    return;
+                } catch (Exception ex)
+                {
+                    Thread.Sleep(500);
+                    System.GC.Collect();
+                    System.GC.WaitForPendingFinalizers();
+                }
+            }
         }
     }
 }

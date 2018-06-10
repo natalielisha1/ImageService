@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageServiceWEB.Communication;
+using System.Threading;
 
 namespace ImageServiceWEB.Models
 {
@@ -24,7 +25,8 @@ namespace ImageServiceWEB.Models
         #endregion
 
         #region Members
-        private Communicator client;
+        private static Communicator client = Communicator.Instance;
+        private static object waitForUpdateLock = new object();
         #endregion
 
         /// <summary>
@@ -33,9 +35,12 @@ namespace ImageServiceWEB.Models
         public LogModel()
         {
             Logs = new List<LogMessage>();
-            client = Communicator.Instance;
             client.MessageArrived += ProcessMessage;
             client.SendCommandToServer(CommandEnum.LogRequest, new string[] { });
+            lock (waitForUpdateLock)
+            {
+                Monitor.Wait(waitForUpdateLock);
+            }
         }
 
         /// <summary>
@@ -59,6 +64,10 @@ namespace ImageServiceWEB.Models
                             Logs.RemoveAt(0);
                         }
                         Logs.Add(log);
+                    }
+                    lock (waitForUpdateLock)
+                    {
+                        Monitor.PulseAll(waitForUpdateLock);
                     }
                     break;
                 default:

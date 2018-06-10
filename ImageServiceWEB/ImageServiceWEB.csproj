@@ -111,8 +111,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Output\2013\March\ohStopIt.jpg" />
-    <Content Include="App_Data\Output\2018\September\Okay.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -160,9 +158,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Models\Instances\Log.cs" />
     <Compile Include="Models\LogModel.cs" />
-    <Compile Include="Photo.cs" />
+    <Compile Include="Models\Instances\Photo.cs" />
     <Compile Include="Communication\Communicator.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\ViewPhotoController.cs" />
@@ -220,6 +218,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\Output\" />
     <Folder Include="Views\RemoveHandler\" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,9 @@
  * IDs: 315638288 & 209475458
  * Exercise: Ex2
  */
+using ImageService.Communication.Model;
 using ImageService.Infrastructure;
+using ImageService.Infrastructure.Enums;
 using ImageService.Modal;
 using System;
 using System.Collections.Generic;
@@ -29,8 +31,16 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            string path = args[0];
-            return m_modal.AddFile(path, out result);
+            //string path = args[0];
+            //return m_modal.AddFile(path, out result);
+            string msgStr = m_modal.RemoveImage(args[0], args[1], args[2], out result);
+            CommandMessage msg = new CommandMessage
+            {
+                Status = result,
+                Type = CommandEnum.OK,
+                Message = msgStr
+            };
+            return msg.ToJSONString();
         }
     }
 }
