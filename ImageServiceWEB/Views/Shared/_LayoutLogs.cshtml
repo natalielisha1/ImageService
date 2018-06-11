@@ -48,37 +48,65 @@
     <!-- Page Content -->
     <div class="container" style="margin-top:70px">
         @RenderBody()
-		<table class="table">
-			<tr>
-				<th>
-					TYPE
-				</th>
-				<th>
-					MESSAGE
-				</th>
-				<th></th>
-			</tr>
+		<div class="container" style="margin-top:20px">
+			<input type="text" id="input_box"></input>
+			<button id="search_log_btn">Search</button>
+		</div>
+		<div class="container" style="margin-top:20px">
+			<table class="table">
+				<tr>
+					<th>
+						TYPE
+					</th>
+					<th>
+						MESSAGE
+					</th>
+					<th></th>
+				</tr>
 
-		@foreach (var log in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => log.Type)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => log.Message)
-				</td>
-			</tr>
-		}
-		</table>
+			@foreach (var log in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => log.Type)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => log.Message)
+					</td>
+				</tr>
+			}
+			</table>
+		</div>
     </div>
-
+	<!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; N&O 2018</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-</body>
+	<script type="text/javascript">
+        $('#search_log_btn').click(function () {
+            $('#search_log_btn').attr("disabled", true);
+			var str = document.getElementById("input_box");
+			$('#input_box').on(str.value.includes("INFO"),function() {
+				Url.Action("Search", "Logs", type = str.value);
+			});
+			$('#input_box').on(str.value.includes("FAIL"),function() {
+			});
+			$('#input_box').on(str.value.includes("WARNING"),function() {
+			});
+			$('#input_box').on(str.value.includes(""),function() {
+			});
+        });
+    </script>
 
+</body>
 </html>

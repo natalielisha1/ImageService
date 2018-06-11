@@ -23,5 +23,18 @@ namespace ImageServiceWEB.Controllers
             }
             return View(logs);
         }
+
+        public ActionResult Search(string type)
+        {
+            List<Log> newLogs = new List<Log>();
+            foreach (Log log in logs)
+            {
+                if (log.Type == type)
+                {
+                    newLogs.Add(log);
+                }
+            }
+            return View(newLogs);
+        }
     }
 }

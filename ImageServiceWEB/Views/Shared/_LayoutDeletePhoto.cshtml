@@ -54,7 +54,7 @@
 					<a href="#"><img class="card-img-top" src=@ViewBag.ThumbnailPath alt=""></a>
 					<div class="card-body">
 						<h3 class="card-title">
-							<a href="#">@ViewBag.Title</a>
+							<a href="#">@ViewBag.Name</a>
 						</h3>
 					</div>
 					<div>
@@ -64,15 +64,22 @@
 						<button type="button" id="delete_pic_btn">
 							OK
 						</button>
-						<button type="button">
-							@Html.ActionLink("Cancel", "Index", "Photos", null, null)
+						<button type="button" id="cancel_btn">
+							Cancel
 						</button>
 					</div>
 				</div>
 			</div>
         </div>
-
     </div>
+	<!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; N&O 2018</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")
@@ -81,6 +88,7 @@
 
 	<script type="text/javascript">
 		$('#delete_pic_btn').click(function() {
+			$('#delete_pic_btn').attr("disabled", true);
 			var apiUrl = "/DeletePhoto/DeletePhoto";
 			$.post(apiUrl, { year:	'@ViewBag.Year',
 							 month: '@ViewBag.Month',
@@ -88,6 +96,10 @@
 				   function() {
 				       document.location = '@Url.Action("Index", "Photos")';
 				   });
+		});
+		$('#cancel_btn').click(function() {
+			$('#cancel_btn').attr("disabled", true);
+			document.location = '@Url.Action("Index", "Photos")';
 		});
 	</script>
 
