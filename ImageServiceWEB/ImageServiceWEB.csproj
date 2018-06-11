@@ -169,7 +169,6 @@
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\RemoveHandlerController.cs" />
-    <Compile Include="Controllers\StudentDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,11 +199,6 @@
     <Content Include="Views\Shared\_LayoutConfig.cshtml" />
     <Content Include="Views\Shared\_LayoutPhotos.cshtml" />
     <Content Include="Views\Shared\_LayoutLogs.cshtml" />
-    <Content Include="Views\StudentDetails\Create.cshtml" />
-    <Content Include="Views\StudentDetails\Delete.cshtml" />
-    <Content Include="Views\StudentDetails\Details.cshtml" />
-    <Content Include="Views\StudentDetails\Edit.cshtml" />
-    <Content Include="Views\StudentDetails\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutRemoveHandler.cshtml" />
     <Content Include="Views\Shared\_LayoutDeletePhoto.cshtml" />
     <Content Include="Views\Shared\_LayoutViewPhoto.cshtml" />
