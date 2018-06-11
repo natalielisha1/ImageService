@@ -1,4 +1,9 @@
-﻿using ImageServiceWEB.Models;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using ImageServiceWEB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +19,10 @@ namespace ImageServiceWEB.Controllers
         private static Communicator comm = Communicator.Instance;
         private static PhotoModel photos = new PhotoModel();
 
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         public ActionResult Index()
         {
             ViewBag.Connected = comm.Connected ? "Connected" : "Not Connected";

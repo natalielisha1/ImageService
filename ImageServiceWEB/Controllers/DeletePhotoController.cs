@@ -1,4 +1,9 @@
-﻿using ImageService.Infrastructure.Enums;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using ImageService.Infrastructure.Enums;
 using ImageServiceWEB.Communication;
 using ImageServiceWEB.Models.Instances;
 using System;
@@ -7,13 +12,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+/// <summary>
+/// The Controllers namespace.
+/// </summary>
 namespace ImageServiceWEB.Controllers
 {
     public class DeletePhotoController : Controller
     {
         private static Communicator comm = Communicator.Instance;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeletePhotoController"/> class.
+        /// </summary>
         public DeletePhotoController() { }
+
+
+        /// <summary>
+        /// Indexes the specified photo.
+        /// </summary>
+        /// <param name="photo">The photo.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult Index(Photo photo)
         {
             ViewBag.Name = photo.Name;
@@ -24,6 +42,13 @@ namespace ImageServiceWEB.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Deletes the given photo.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>an indicator for wether of not the function has succeed</returns>
         [HttpPost]
         public bool DeletePhoto(string year, string month, string name)
         {

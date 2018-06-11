@@ -54,13 +54,8 @@
 		<div class="container" style="margin-top:20px">
 			<table class="table" id="logs_table">
 				<tr>
-					<th>
-						Type
-					</th>
-					<th>
-						Message
-					</th>
-					<th></th>
+					<th style="width:30%;">Type</th>
+					<th style="width:70%;">Message</th>
 				</tr>
 
 			@foreach (var log in Model)
@@ -92,23 +87,22 @@
     @RenderSection("scripts", required: false)
 
 	<script type="text/javascript">
+		includes = function(check_in, check_what) {
+			return check_in.indexOf(check_what) >= 0;
+		}
         $('#input_box').on('change keydown paste input', function () {
             $('#logs_table').empty()
-            var table_body = "<tr> \
-                                  <th>Type</th> \
-                                  <th> \
-                                      Message \
-					              </th> \
-                                  <th></th> \
-				              </tr>";
+            var table_body = '<tr> \
+                                  <th style="width:30%;">Type</th> \
+                                  <th style="width:70%;">Message</th> \
+				              </tr>';
             var log_type = '';
             var log_message = '';
             @foreach (var log in Model)
             {
                 <text>
                 log_type = '@log.Type';
-                log_message = '@Html.DisplayFor(modelItem => log.Message)';
-                if (log_type.includes($('#input_box').val())) {
+                if (includes(log_type, $('#input_box').val())) {
                     table_body += "<tr>";
                     table_body += "<td>";
                     table_body += "@log.Type";

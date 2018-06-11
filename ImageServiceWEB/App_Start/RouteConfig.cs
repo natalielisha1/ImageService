@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,8 +12,16 @@ using System.Web.Routing;
 
 namespace ImageServiceWEB
 {
+    /// <summary>
+    /// Class RouteConfig.
+    /// </summary>
     public class RouteConfig
     {
+        /// <summary>
+        /// The function registeing the routes that are given as
+        /// arguments.
+        /// </summary>
+        /// <param name="routes">collection of rountes</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

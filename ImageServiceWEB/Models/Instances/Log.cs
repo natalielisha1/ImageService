@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +21,15 @@ namespace ImageServiceWEB.Models.Instances
         public string DoubleSlashedMessage { get; set; }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the Log class.
+        /// </summary>
         public Log() { }
 
+        /// <summary>
+        /// Initializes a new instance of the Log class.
+        /// </summary>
+        /// <param name="logMessage">The log message.</param>
         public Log(LogMessage logMessage)
         {
             Message = logMessage.Message;

@@ -1,4 +1,9 @@
-﻿using ImageService.Communication;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using ImageService.Communication;
 using ImageService.Communication.Interfaces;
 using ImageService.Communication.Model;
 using ImageService.Infrastructure.Enums;
@@ -29,6 +34,10 @@ namespace ImageServiceWEB.Communication
 
         #region Properties
         public EventHandler<CommandMessageEventArgs> MessageArrived;
+        /// <summary>
+        /// Gets a value indicating whether the communicator is connected.
+        /// </summary>
+        /// <value>true if connected; otherwise, false.</value>
         public bool Connected {
             get
             {
@@ -66,6 +75,9 @@ namespace ImageServiceWEB.Communication
             Start();
         }
 
+        /// <summary>
+        /// Reconnects this instance.
+        /// </summary>
         private void Reconnect()
         {
             m_client = new TcpClientChannel();
@@ -121,6 +133,10 @@ namespace ImageServiceWEB.Communication
         /// The function sends commands (messages)
         /// from the WEB to the server
         /// </summary>
+        /// <param name="commandID">The command identifier.</param>
+        /// <param name="args">The arguments.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="status">indicates if status is online or offline</param>
         public void SendCommandToServer(CommandEnum commandID, string[] args,
                                         string message = null,
                                         bool status = true)

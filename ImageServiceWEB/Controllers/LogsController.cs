@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +18,10 @@ namespace ImageServiceWEB.Controllers
     {
         public List<Log> Logs { get; set; }
 
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         public ActionResult Index()
         {
             Logs = new List<Log>();

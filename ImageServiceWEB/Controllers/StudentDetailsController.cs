@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,30 +15,29 @@ using ImageServiceWEB.Models;
 
 namespace ImageServiceWEB.Controllers
 {
+    /// <summary>
+    /// Class StudentDetailsController.
+    /// </summary>
     public class StudentDetailsController : Controller
     {
         private StudentDetailsDbContext db = new StudentDetailsDbContext();
 
         // GET: StudentDetails
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         public ActionResult Index()
         {
-            //db.Students.Add(new StudentDetails
-            //{
-            //    IsrID = 315638288,
-            //    FirstName = "Ofek",
-            //    LastName = "Segal"
-            //});
-            //db.Students.Add(new StudentDetails
-            //{
-            //    IsrID = 209475458,
-            //    FirstName = "Natalie",
-            //    LastName = "Elisha"
-            //});
-            //db.SaveChanges();
             return View(db.Students.ToList());
         }
 
         // GET: StudentDetails/Details/5
+        /// <summary>
+        /// Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -49,14 +53,21 @@ namespace ImageServiceWEB.Controllers
         }
 
         // GET: StudentDetails/Create
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: StudentDetails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified student details.
+        /// </summary>
+        /// <param name="studentDetails">The student details.</param>
+        /// <returns>ActionResult.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName")] StudentDetails studentDetails)
@@ -72,6 +83,11 @@ namespace ImageServiceWEB.Controllers
         }
 
         // GET: StudentDetails/Edit/5
+        /// <summary>
+        /// Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,8 +103,11 @@ namespace ImageServiceWEB.Controllers
         }
 
         // POST: StudentDetails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the specified student details.
+        /// </summary>
+        /// <param name="studentDetails">The student details.</param>
+        /// <returns>ActionResult.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName")] StudentDetails studentDetails)
@@ -103,6 +122,12 @@ namespace ImageServiceWEB.Controllers
         }
 
         // GET: StudentDetails/Delete/5
+        /// <summary>
+        /// Deletes the object that is identified by the
+        /// given id.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +143,11 @@ namespace ImageServiceWEB.Controllers
         }
 
         // POST: StudentDetails/Delete/5
+        /// <summary>
+        /// Deletes the confirmed object.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -128,6 +158,11 @@ namespace ImageServiceWEB.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources;
+        ///                         false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

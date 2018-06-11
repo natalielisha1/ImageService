@@ -1,4 +1,9 @@
-﻿using ImageService.Communication;
+﻿/**
+ * Names: Ofek Segal & Natalie Elisha
+ * IDs: 315638288 & 209475458
+ * Exercise: Ex3
+ */
+using ImageService.Communication;
 using ImageService.Communication.Interfaces;
 using ImageService.Communication.Model;
 using ImageService.Infrastructure.Enums;
@@ -21,8 +26,15 @@ namespace ImageServiceWEB.Models.Instances
         public string Month { get; set; }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the Photo class.
+        /// </summary>
         public Photo() { }
 
+        /// <summary>
+        /// Initializes a new instance of the Photo class.
+        /// </summary>
+        /// <param name="path">The path of the photo.</param>
         public Photo(string path)
         {
             string[] arr = path.Split('\\');
@@ -30,7 +42,6 @@ namespace ImageServiceWEB.Models.Instances
             Month = arr[arr.Length - 2];
             Name = arr[arr.Length - 1];
             ThumbnailPath = @"\Images\Output\Thumbnails\" + Year + @"\" + Month + @"\" + Name;
-            //ThumbnailPath = HttpContext.Current.Server.MapPath(ThumbnailPath);
             Path = path;
         }
     }

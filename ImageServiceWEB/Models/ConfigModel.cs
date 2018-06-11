@@ -9,21 +9,53 @@ using System.Web;
 
 namespace ImageServiceWEB.Models
 {
+    /// <summary>
+    /// Class ConfigModel.
+    /// </summary>
     public class ConfigModel
     {
         #region Members
+        /// <summary>
+        /// The comm
+        /// </summary>
         private static Communicator comm = Communicator.Instance;
+        /// <summary>
+        /// The wait for update lock
+        /// </summary>
         private static object waitForUpdateLock = new object();
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the handlers.
+        /// </summary>
+        /// <value>The handlers.</value>
         public List<string> Handlers { get; set; }
+        /// <summary>
+        /// Gets or sets the output dir.
+        /// </summary>
+        /// <value>The output dir.</value>
         public string OutputDir { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the source.
+        /// </summary>
+        /// <value>The name of the source.</value>
         public string SourceName { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the log.
+        /// </summary>
+        /// <value>The name of the log.</value>
         public string LogName { get; set; }
+        /// <summary>
+        /// Gets or sets the size of the thumb.
+        /// </summary>
+        /// <value>The size of the thumb.</value>
         public string ThumbSize { get; set; }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the ConfigModel class.
+        /// </summary>
         public ConfigModel()
         {
             Handlers = new List<string>();
@@ -31,6 +63,11 @@ namespace ImageServiceWEB.Models
         }
 
 
+        /// <summary>
+        /// Processes the message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The instance containing the event data, arguments</param>
         public void ProcessMessage(object sender, CommandMessageEventArgs e)
         {
             //Extract the message from the EventArgs
@@ -60,6 +97,7 @@ namespace ImageServiceWEB.Models
                     {
                         Handlers.Add(handler);
                     }
+                    Handlers.RemoveAll(item => String.IsNullOrWhiteSpace(item));
                     lock (waitForUpdateLock)
                     {
                         Monitor.PulseAll(waitForUpdateLock);
@@ -70,6 +108,9 @@ namespace ImageServiceWEB.Models
             }
         }
 
+        /// <summary>
+        /// Updates the configuration.
+        /// </summary>
         public void UpdateConfig()
         {
             if (!comm.Connected)

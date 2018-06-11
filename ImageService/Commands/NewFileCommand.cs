@@ -1,7 +1,7 @@
 ﻿/**
  * Names: Ofek Segal & Natalie Elisha
  * IDs: 315638288 & 209475458
- * Exercise: Ex2
+ * Exercise: Ex3
  */
 using ImageService.Infrastructure;
 using ImageService.Modal;

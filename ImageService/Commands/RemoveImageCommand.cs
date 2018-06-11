@@ -1,7 +1,7 @@
 ﻿/**
  * Names: Ofek Segal & Natalie Elisha
  * IDs: 315638288 & 209475458
- * Exercise: Ex2
+ * Exercise: Ex3
  */
 using ImageService.Communication.Model;
 using ImageService.Infrastructure;
@@ -31,8 +31,6 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            //string path = args[0];
-            //return m_modal.AddFile(path, out result);
             string msgStr = m_modal.RemoveImage(args[0], args[1], args[2], out result);
             CommandMessage msg = new CommandMessage
             {
