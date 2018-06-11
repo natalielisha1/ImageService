@@ -13,6 +13,7 @@ namespace ImageServiceWEB.Models.Instances
         #region Members
         public string Type { get; set; }
         public string Message { get; set; }
+        public string DoubleSlashedMessage { get; set; }
         #endregion
 
         public Log() { }
@@ -20,6 +21,7 @@ namespace ImageServiceWEB.Models.Instances
         public Log(LogMessage logMessage)
         {
             Message = logMessage.Message;
+            DoubleSlashedMessage = Message.Replace("\\", "\\\\");
             switch (logMessage.Type)
             {
                 case LogMessageTypeEnum.INFO:   Type = "INFO";

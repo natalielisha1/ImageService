@@ -11,30 +11,17 @@ namespace ImageServiceWEB.Controllers
 {
     public class LogsController : Controller
     {
-        public List<Log> logs { get; set; }
+        public List<Log> Logs { get; set; }
 
         public ActionResult Index()
         {
-            logs = new List<Log>();
+            Logs = new List<Log>();
             LogModel model = new LogModel();
             foreach (LogMessage log in model.Logs)
             {
-                logs.Add(new Log(log));
+                Logs.Add(new Log(log));
             }
-            return View(logs);
-        }
-
-        public ActionResult Search(string type)
-        {
-            List<Log> newLogs = new List<Log>();
-            foreach (Log log in logs)
-            {
-                if (log.Type == type)
-                {
-                    newLogs.Add(log);
-                }
-            }
-            return View(newLogs);
+            return View(Logs);
         }
     }
 }
