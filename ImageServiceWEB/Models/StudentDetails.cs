@@ -22,6 +22,11 @@ namespace ImageServiceWEB.Models
     {
         public DbSet<StudentDetails> Students { get; set; }
 
+        public StudentDetailsDbContext(): base("Students")
+        {
+            this.Database.CommandTimeout = 60;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer<StudentDetailsDbContext>(new CreateDatabaseIfNotExists<StudentDetailsDbContext>());
