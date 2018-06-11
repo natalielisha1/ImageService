@@ -52,6 +52,9 @@
         <div class="row">
 
             <div>
+				<style>
+				h6 {color:#00004d }
+				</style>
                 <div class="row" style="margin-top:50px">
 				@foreach (var photo in Model)
 				{
@@ -59,15 +62,21 @@
 						<div class="card" style="margin-bottom:20px">
 							<img class="card-img-top rounded-circle" src=@photo.ThumbnailPath alt="">
 							<div class="card-body">
-								<h5 class="card-title">
+								<h6 class="card-title">
+									<b>
 									<a href="#">@photo.Name</a>
-								</h5>
-								<h5>
+									</b>
+								</h6>
+								<h6>
+									<b>
 									Year: @photo.Year
-								</h5>
-								<h5>
+									</b>
+								</h6>
+								<h6>
+									<b>
 									Month: @photo.Month
-								</h5>
+									</b>
+								</h6>
 							</div>
 							<div>
 								<button type="button">

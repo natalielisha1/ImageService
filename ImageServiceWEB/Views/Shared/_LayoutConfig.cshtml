@@ -51,40 +51,58 @@
         @RenderBody()
         
         <div class="row" style="margin-top:50px">
-            <div class="col">
+            <div class="col" style="color:blue;">
+				<b>
                 Output directory:
+				</b>
             </div>
-            <div class="col">
+            <div class="col" style="color:blue;">
+				<i>
                 @ViewBag.OutputDir
+				</i>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" style="color:#33cc33;">
+				<b>
                 Source name:
+				</b>
             </div>
-            <div class="col">
+            <div class="col" style="color:#33cc33;">
+				<i>
                 @ViewBag.SourceName
+				</i>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" style="color:yellow;">
+				<b>
                 Log name:
+				</b>
             </div>
-            <div class="col">
+            <div class="col" style="color:yellow;">
+				<i>
                 @ViewBag.LogName
+				</i>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" style="color:orange;">
+				<b>
                 Thumbnail size:
+				</b>
             </div>
-            <div class="col">
+            <div class="col" style="color:orange;">
+				<i>
                 @ViewBag.ThumbSize
+				</i>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" style="color:red;">
+				<b>
                 Handlers:
+				</b>
             </div>
             <div class="col">
                 @foreach (var item in Model)

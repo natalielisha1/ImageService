@@ -51,16 +51,20 @@
         @RenderBody()
 
         <div class="row" style="margin-top:50px">
-            <div class="col">
+            <div class="col" style="color:blue;">
+				<b>
                 Service status: @ViewBag.Connected
+				</b>
             </div>
             <div class="col"></div>
-            <div class="col">
+            <div class="col" style="color:blue;">
+				<b>
                 Image amount: @ViewBag.ImageAmount
+				</b>
             </div>
         </div>
 
-        <table class="table">
+        <table class="table" style="color:#000066;">
             <tr>
                 <th>
                     ID
