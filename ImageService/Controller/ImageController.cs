@@ -12,6 +12,7 @@ using ImageService.Commands;
 using ImageService.Infrastructure;
 using ImageService.Infrastructure.Enums;
 using ImageService.Modal;
+using ImageService.Communication.Model;
 
 namespace ImageService.Controller
 {
@@ -35,7 +36,8 @@ namespace ImageService.Controller
                 { (int) CommandEnum.GetConfigCommand, new GetConfigCommand(m_modal)},
                 { (int) CommandEnum.LogRequest, new LogCommand(m_modal)},
                 { (int) CommandEnum.RemoveHandler, new RemoveHandlerCommand(m_modal) },
-                { (int) CommandEnum.RemoveImage, new RemoveImageCommand(m_modal) }
+                { (int) CommandEnum.RemoveImage, new RemoveImageCommand(m_modal) },
+                { (int) CommandEnum.NewImageFileCommand, new NewImageFileCommand(m_modal) }
             };
         }
 
@@ -46,7 +48,13 @@ namespace ImageService.Controller
             if (!commands.ContainsKey(commandID))
             {
                 result = false;
-                return "Command not found";
+                CommandMessage msg = new CommandMessage
+                {
+                    Status = false,
+                    Type = CommandEnum.OK,
+                    Message = @"Command not found"
+                };
+                return msg.ToJSONString();
             }
             ICommand command = commands[commandID];
             return command.Execute(args, out result);

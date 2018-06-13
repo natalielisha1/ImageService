@@ -31,8 +31,20 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
+            CommandMessage msg;
+            if (args.Length < 3)
+            {
+                result = false;
+                msg = new CommandMessage
+                {
+                    Status = false,
+                    Type = CommandEnum.OK,
+                    Message = @"Ilegal arguments for command"
+                };
+                return msg.ToJSONString();
+            }
             string msgStr = m_modal.RemoveImage(args[0], args[1], args[2], out result);
-            CommandMessage msg = new CommandMessage
+            msg = new CommandMessage
             {
                 Status = result,
                 Type = CommandEnum.OK,

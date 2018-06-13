@@ -29,6 +29,11 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
+            if (args.Length < 1)
+            {
+                result = false;
+                return "Ilegal arguments for command";
+            }
             string path = args[0];
             return m_modal.AddFile(path, out result);
         }

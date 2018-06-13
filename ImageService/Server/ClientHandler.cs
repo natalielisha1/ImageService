@@ -43,8 +43,10 @@ namespace ImageService.Server
                         string message = client.Read();
                         if (message == null)
                         {
-                            continue;
+                            client.Close();
+                            break;
                         }
+                        long length = message.Length;
                         CommandMessage cmd = CommandMessage.FromJSONString(message);
                         bool result;
                         string newMessage = m_controller.ExecuteCommand((int)cmd.Type, cmd.Args, out result);

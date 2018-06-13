@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.Commands
 {
-    public class RemoveHandlerCommand : ICommand
+    public class NewImageFileCommand : ICommand
     {
         #region Members
         private IImageServiceModal m_modal;
@@ -26,7 +26,7 @@ namespace ImageService.Commands
         /// Constructor for GetConfigCommand class
         /// </summary>
         /// <param name="modal">an Image Service Modal instance</param>
-        public RemoveHandlerCommand(IImageServiceModal modal)
+        public NewImageFileCommand(IImageServiceModal modal)
         {
             //Storing the modal
             m_modal = modal;
@@ -36,7 +36,7 @@ namespace ImageService.Commands
         public string Execute(string[] args, out bool result)
         {
             CommandMessage msg;
-            if (args.Length < 1)
+            if (args.Length < 2)
             {
                 result = false;
                 msg = new CommandMessage
@@ -47,12 +47,12 @@ namespace ImageService.Commands
                 };
                 return msg.ToJSONString();
             }
-            result = m_handlerManager.RemoveHandler(args[0]);
+            result = m_handlerManager.SaveImageFile(args[0], args[1]);
             msg = new CommandMessage
             {
                 Status = result,
                 Type = CommandEnum.OK,
-                Message = @"Sent remove handler request"
+                Message = @"Image File " + args[0] + " saved."
             };
             return msg.ToJSONString();
         }

@@ -13,7 +13,7 @@ namespace ImageService.Infrastructure.Enums
 {
     public enum CommandEnum : int
     {
-        NewFileCommand,
+        NewFileCommand = 0,
         GetConfigCommand,
         CloseServer,
         LogRequest,
@@ -23,6 +23,7 @@ namespace ImageService.Infrastructure.Enums
         AddHandler,
         RemoveHandler,
         RemoveImage,
+        NewImageFileCommand,
         OK
     }
 }

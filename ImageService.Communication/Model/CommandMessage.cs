@@ -67,25 +67,96 @@ namespace ImageService.Communication.Model
                 return new CommandMessage
                 {
                     Status = false,
+                    Type = CommandEnum.OK,
                     Message = "Error while parsing JSON"
                 };
             }
-            JObject jsonMessage = JObject.Parse(str);
-            return new CommandMessage
+
+            JObject jsonMessage;
+            try
             {
-                Status = (bool)jsonMessage["Status"],
+                jsonMessage = JObject.Parse(str);
+            } catch (Exception ex)
+            {
+                return new CommandMessage
+                {
+                    Status = false,
+                    Type = CommandEnum.OK,
+                    Message = "Error while parsing JSON - " + ex.Message
+                };
+            }
+
+            CommandMessage msg = new CommandMessage()
+            {
+                Status = ((bool)jsonMessage["Status"]),
                 Type = (CommandEnum)((int)jsonMessage["Type"]),
-                Message = (string)jsonMessage["Message"],
-                Args = JsonConvert.DeserializeObject<string[]>((string)jsonMessage["Args"]),
-
-                OutputDir = (string)jsonMessage["OutputDir"],
-                LogSource = (string)jsonMessage["LogSource"],
-                LogName = (string)jsonMessage["LogName"],
-                ThumbSize = (int)jsonMessage["ThumbSize"],
-                Handlers = JsonConvert.DeserializeObject<string[]>((string)jsonMessage["Handlers"]),
-
-                LogMessages = JsonConvert.DeserializeObject<List<LogMessage>>((string)jsonMessage["LogMessages"])
+                Message = (string)jsonMessage["Message"]
             };
+
+            try
+            {
+                msg.OutputDir = (string)jsonMessage["OutputDir"];
+            } catch (Exception)
+            {
+                msg.OutputDir = null;
+            }
+
+            try
+            {
+                msg.LogSource = (string)jsonMessage["LogSource"];
+            } catch (Exception)
+            {
+                msg.LogSource = null;
+            }
+
+            try
+            {
+                msg.LogName = (string)jsonMessage["LogName"];
+            } catch (Exception)
+            {
+                msg.LogName = null;
+            }
+
+            try
+            {
+                msg.ThumbSize = (int)jsonMessage["ThumbSize"];
+            } catch (Exception)
+            {
+                msg.ThumbSize = -1;
+            }
+
+            try
+            {
+                msg.Args = JsonConvert.DeserializeObject<string[]>((string)jsonMessage["Args"]);
+            } catch (Exception)
+            {
+                try
+                {
+                    msg.Args = ((JArray)jsonMessage["Args"]).Select(jv => (string)jv).ToArray();
+                }
+                catch (Exception)
+                {
+                    msg.Args = new string[] { };
+                }
+            }
+
+            try
+            {
+                msg.Handlers = JsonConvert.DeserializeObject<string[]>((string)jsonMessage["Handlers"]);
+            } catch (Exception)
+            {
+                msg.Handlers = new string[] { };
+            }
+
+            try
+            {
+                msg.LogMessages = JsonConvert.DeserializeObject<List<LogMessage>>((string)jsonMessage["LogMessages"]);
+            } catch (Exception)
+            {
+                msg.LogMessages = new List<LogMessage>();
+            }
+
+            return msg;
         }
     }
 }

@@ -139,6 +139,42 @@ namespace ImageService.Controller.Handlers
         }
 
         /// <summary>
+        /// This function returns the first working handler
+        /// </summary>
+        /// <returns>a valid handler path (or null, if there isn't one)</returns>
+        public string GetWorkingHandler()
+        {
+            string[] handlers = GetHandlers();
+            foreach (string handler in handlers)
+            {
+                if (System.IO.Directory.Exists(handler))
+                {
+                    return handler;
+                }
+            }
+            return null;
+        }
+
+        public bool SaveImageFile(string fileName, string b64Image)
+        {
+            string handler = GetWorkingHandler();
+            if (string.IsNullOrWhiteSpace(handler))
+            {
+                return false;
+            }
+            try
+            {
+                byte[] imageBytes = Convert.FromBase64String(b64Image);
+                string newImagePath = System.IO.Path.Combine(handler, fileName);
+                System.IO.File.WriteAllBytes(newImagePath, imageBytes);
+            } catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// The Function creates a handler
         /// </summary>
         /// <param name="dir">The directory of the file we want to handle</param>

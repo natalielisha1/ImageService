@@ -53,7 +53,11 @@ namespace ImageService.Communication
                     string lenStr = message.Split('\r')[0];
                     int len = int.Parse(lenStr);
                     char[] buffer = new char[len];
-                    reader.Read(buffer, 0, len);
+                    int readBytes = 0;
+                    while (readBytes < len)
+                    {
+                        readBytes += reader.Read(buffer, readBytes, len - readBytes);
+                    }
                     return new string(buffer);
                 }
             }
