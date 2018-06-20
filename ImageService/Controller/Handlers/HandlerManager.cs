@@ -1,7 +1,7 @@
 ﻿/**
  * Names: Ofek Segal & Natalie Elisha
  * IDs: 315638288 & 209475458
- * Exercise: Ex3
+ * Exercise: Ex4
  */
 using ImageService.Controller;
 using ImageService.Controller.Handlers;
@@ -155,6 +155,12 @@ namespace ImageService.Controller.Handlers
             return null;
         }
 
+        /// <summary>
+        /// Saves the image file.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="b64Image">The B64 image.</param>
+        /// <returns>true if function succeed, false otherwise.</returns>
         public bool SaveImageFile(string fileName, string b64Image)
         {
             string handler = GetWorkingHandler();
